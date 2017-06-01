@@ -13,8 +13,8 @@
         <!--Food Categories-->
         <scene sceneID="I0C-bA-gge">
             <objects>
-                <collectionViewController hidesBottomBarWhenPushed="YES" clearsSelectionOnViewWillAppear="NO" id="0l4-Wv-HR4" userLabel="Food Categories" customClass="FoodCategoriesCollectionViewController" customModule="randomRestaurant" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="RQy-ol-beq">
+                <collectionViewController hidesBottomBarWhenPushed="YES" clearsSelectionOnViewWillAppear="NO" id="0l4-Wv-HR4" userLabel="Food Categories" customClass="FoodCategoriesCollectionViewController" customModule="Goet" customModuleProvider="target" sceneMemberID="viewController">
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="RQy-ol-beq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -25,7 +25,7 @@
                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         </collectionViewFlowLayout>
                         <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="FoodCategoriesCell" id="MjY-Xp-siz" customClass="FoodCategoriesCollectionViewCell" customModule="randomRestaurant" customModuleProvider="target">
+                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="FoodCategoriesCell" id="MjY-Xp-siz" customClass="FoodCategoriesCollectionViewCell" customModule="Goet" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -69,10 +69,10 @@
             </objects>
             <point key="canvasLocation" x="4425" y="754"/>
         </scene>
-        <!--Radius View Controller-->
+        <!--Radius-->
         <scene sceneID="VLU-SB-GI8">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="3fG-Dl-puw" customClass="RadiusViewController" customModule="randomRestaurant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="3fG-Dl-puw" userLabel="Radius" customClass="RadiusViewController" customModule="Goet" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="jgf-hj-81p"/>
                         <viewControllerLayoutGuide type="bottom" id="Mbg-9x-M2c"/>
@@ -135,7 +135,7 @@
         <!--Map-->
         <scene sceneID="ofu-rG-FBP">
             <objects>
-                <viewController hidesBottomBarWhenPushed="YES" id="dqH-Fl-zN4" customClass="GoogleMapsViewController" customModule="randomRestaurant" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController hidesBottomBarWhenPushed="YES" id="dqH-Fl-zN4" customClass="GoogleMapsViewController" customModule="Goet" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="2EY-oo-6ZY"/>
                         <viewControllerLayoutGuide type="bottom" id="UM2-nY-uOj"/>
@@ -162,14 +162,14 @@
         <!--Saved-->
         <scene sceneID="DC5-rs-M54">
             <objects>
-                <tableViewController storyboardIdentifier="Saved" title="Saved" id="9Ww-aC-vSP" customClass="SavedTableViewController" customModule="randomRestaurant" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="Saved" title="Saved" id="9Ww-aC-vSP" customClass="SavedTableViewController" customModule="Goet" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="INi-mj-jl3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="savedCell" rowHeight="50" id="Hdf-NF-CEb" customClass="SavedTableViewCell" customModule="randomRestaurant" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="savedCell" rowHeight="50" id="Hdf-NF-CEb" customClass="SavedTableViewCell" customModule="Goet" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Hdf-NF-CEb" id="YJh-rc-S2K">
@@ -194,7 +194,7 @@
         <!--Main-->
         <scene sceneID="xW4-OC-QZQ">
             <objects>
-                <tableViewController storyboardIdentifier="MainVC" title="Main" clearsSelectionOnViewWillAppear="NO" id="wH5-b3-TbF" customClass="MainTableViewController" customModule="randomRestaurant" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="MainVC" title="Main" clearsSelectionOnViewWillAppear="NO" id="wH5-b3-TbF" customClass="MainTableViewController" customModule="Goet" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" allowsSelection="NO" rowHeight="344" sectionHeaderHeight="28" sectionFooterHeight="28" id="hmm-af-qgW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -202,7 +202,7 @@
                         <gestureRecognizers/>
                         <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="mainCell" rowHeight="44" id="c7P-ll-Ld1" customClass="MainTableViewCell" customModule="randomRestaurant" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="mainCell" rowHeight="44" id="c7P-ll-Ld1" customClass="MainTableViewCell" customModule="Goet" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c7P-ll-Ld1" id="uzd-V5-ivn">
@@ -247,7 +247,7 @@
                 <navigationController title="SavedNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="pVw-sx-tf2" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="CvL-NJ-BRl"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="YiH-Zj-usg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YiH-Zj-usg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -288,7 +288,7 @@
                 <navigationController title="ExploreNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="fMY-P1-Xr7" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="search" id="FZh-3l-B0e"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="w0E-s0-UDt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="w0E-s0-UDt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

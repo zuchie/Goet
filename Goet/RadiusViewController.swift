@@ -30,7 +30,8 @@ class RadiusViewController: UIViewController {
         if sender.state == .recognized {
             let location = sender.location(in: radiuses)
             guard let rad = getRadiusByLocation(location) else {
-                fatalError("Couldn't get radius by location.")
+                print("Couldn't get radius by location.")
+                return
             }
             radius = rad
             guard let name = radiusImgDict[radius!] else {
@@ -43,16 +44,17 @@ class RadiusViewController: UIViewController {
     private func getRadiusByLocation(_ location: CGPoint) -> Int? {
         let center = CGPoint(x: radiuses.frame.width / 2, y: radiuses.frame.height / 2)
         let distance = hypot(location.x - center.x, location.y - center.y)
+        let minRadius = (radiuses.frame.width / 2) * (1 / CGFloat(radiusImgDict.count))
         switch distance {
-        case 0..<25:
+        case 0..<minRadius:
             return 800
-        case 25..<49:
+        case minRadius..<minRadius * 2:
             return 1600
-        case 49..<73:
+        case minRadius * 2..<minRadius * 3:
             return 8000
-        case 73..<97:
+        case minRadius * 3..<minRadius * 4:
             return 16000
-        case 97..<121:
+        case minRadius * 4..<minRadius * 5:
             return 32000
         default:
             return nil

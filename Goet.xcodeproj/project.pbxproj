@@ -25,7 +25,6 @@
 		B93D332C1EA6C84A007EAD5A /* GoetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93D332B1EA6C84A007EAD5A /* GoetUITests.swift */; };
 		B93D33351EA6CAAE007EAD5A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93D33341EA6CAAE007EAD5A /* LocationManager.swift */; };
 		B93D333A1EAAD202007EAD5A /* AlertMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93D33391EAAD202007EAD5A /* AlertMaker.swift */; };
-		B9646F4E1EE029E8000636B6 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B91AC8621D4EAC4600B0476E /* Info.plist */; };
 		B965C9681E5CEF4C0015E2AC /* YelpQueryMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B965C9671E5CEF4C0015E2AC /* YelpQueryMaker.swift */; };
 		B965C9731E601F2E0015E2AC /* Saved.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B965C9711E601F2E0015E2AC /* Saved.xcdatamodeld */; };
 		B965C9801E6777E80015E2AC /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B965C97E1E6777E80015E2AC /* MainTableViewCell.swift */; };
@@ -349,7 +348,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0830;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Zhe Cui";
 				TargetAttributes = {
 					B902484B1E84E40700212F12 = {
@@ -403,7 +402,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B9646F4E1EE029E8000636B6 /* Info.plist in Resources */,
 				B937286E1E82482500B911E5 /* MainTableViewCell.xib in Resources */,
 				B91AC8611D4EAC4600B0476E /* LaunchScreen.storyboard in Resources */,
 				B906DB741D5D80170021B025 /* Default-568h@2x.png in Resources */,
