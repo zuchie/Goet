@@ -34,7 +34,7 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <segue destination="31a-HA-3xd" kind="unwind" identifier="unwindFromCategories" unwindAction="unwindToMainWithSender:" id="tXQ-jF-GZF"/>
+                        <segue destination="31a-HA-3xd" kind="unwind" identifier="unwindFromCategories" unwindAction="unwindToMainWithSender:" id="Zq2-m8-vLx"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Von-9E-3t7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -207,7 +207,7 @@
                     </refreshControl>
                     <connections>
                         <segue destination="3fG-Dl-puw" kind="presentation" identifier="segueToRadius" modalPresentationStyle="fullScreen" id="2xj-lo-4Jz"/>
-                        <segue destination="PZ5-fQ-YE3" kind="presentation" identifier="segueToCategories" id="Wug-Mq-EIa"/>
+                        <segue destination="PZ5-fQ-YE3" kind="show" identifier="segueToCategories" id="Wug-Mq-EIa"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dAG-yp-WnP" userLabel="First Responder" sceneMemberID="firstResponder"/>

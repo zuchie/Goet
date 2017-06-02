@@ -62,23 +62,23 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         //print("most searched: \(String(describing: mostSearched))")
         
         // Configure search controller and search results vc.
-        searchResultsVC = UITableViewController(style: .plain)
-        //searchResultsVC.tableView.register(nib, forCellReuseIdentifier: "savedCell")
-        searchResultsVC.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "categoriesCell")
-        searchResultsVC.tableView.dataSource = self
-        searchResultsVC.tableView.delegate = self
+        //searchResultsVC = UITableViewController(style: .plain)
+        //searchResultsVC = self
+        //searchResultsVC.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "categoriesCell")
+        //searchResultsVC.tableView.dataSource = self
+        //searchResultsVC.tableView.delegate = self
         
-        searchController = UISearchController(searchResultsController: searchResultsVC)
+        searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
-        tableView.tableHeaderView = searchController?.searchBar
-        //navigationItem.titleView = searchController?.searchBar
-        definesPresentationContext = true
+        //tableView.tableHeaderView = searchController?.searchBar
+        navigationItem.titleView = searchController?.searchBar
+        //definesPresentationContext = true
         
         searchController.delegate = self
         
         searchController.hidesNavigationBarDuringPresentation = false
-        searchController.dimsBackgroundDuringPresentation = true
-        searchController.searchBar.searchBarStyle = .default
+        searchController.dimsBackgroundDuringPresentation = false
+        //searchController.searchBar.searchBarStyle = .default
         searchController.searchBar.sizeToFit()
         
         /* [Warning] Attempting to load the view of a view controller while it is deallocating is not allowed and may result in undefined behavior (<UISearchController: 0x10194f3e0>), Bug: UISearchController doesn't load its view until it's be deallocated. Reference: http://www.openradar.me/22250107
@@ -123,7 +123,7 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
                 return $0.name.lowercased().contains(inputText.lowercased())
             }
         }
-        searchResultsVC.tableView.reloadData()
+        tableView.reloadData()
     }
 
     private func addNewCategoryOrUpdateSearchCount(_ category: Category) {
@@ -173,7 +173,7 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        if tableView == self.tableView {
+        if !searchController.isActive {
             if !mostSearched.isEmpty {
                 return 2
             } else {
@@ -186,7 +186,7 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if tableView == self.tableView {
+        if !searchController.isActive {
             if !mostSearched.isEmpty {
                 if section == 0 {
                     return mostSearched.count > 3 ? 3 : mostSearched.count
@@ -205,7 +205,7 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         let cell = tableView.dequeueReusableCell(withIdentifier: "categoriesCell", for: indexPath)
 
         // Configure the cell...
-        if tableView == self.tableView {
+        if !searchController.isActive {
             if !mostSearched.isEmpty {
                 if indexPath.section == 0 {
                     cell.textLabel?.text = mostSearched[indexPath.row].name! + " " +  String(mostSearched[indexPath.row].searchCount)
@@ -223,7 +223,7 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView == self.tableView {
+        if !searchController.isActive {
             if !mostSearched.isEmpty {
                 if indexPath.section == 1 {
                     category = categories[indexPath.row]
@@ -250,7 +250,7 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        if tableView == self.tableView {
+        if !searchController.isActive {
             if !mostSearched.isEmpty {
                 if section == 0 {
                     return "Most searched:"
