@@ -10,64 +10,37 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Food Categories-->
-        <scene sceneID="I0C-bA-gge">
+        <!--Categories-->
+        <scene sceneID="DcX-ul-6iG">
             <objects>
-                <collectionViewController hidesBottomBarWhenPushed="YES" clearsSelectionOnViewWillAppear="NO" id="0l4-Wv-HR4" userLabel="Food Categories" customClass="FoodCategoriesCollectionViewController" customModule="Goet" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" dataMode="prototypes" id="RQy-ol-beq">
+                <tableViewController hidesBottomBarWhenPushed="YES" id="PZ5-fQ-YE3" userLabel="Categories" customClass="CategoriesTableViewController" customModule="Goet" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="hFN-qs-AZK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ahl-X8-p5Q">
-                            <size key="itemSize" width="150" height="150"/>
-                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                        </collectionViewFlowLayout>
-                        <cells>
-                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleAspectFit" reuseIdentifier="FoodCategoriesCell" id="MjY-Xp-siz" customClass="FoodCategoriesCollectionViewCell" customModule="Goet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                                    <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="categoriesCell" id="MeM-Hl-vFx">
+                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MeM-Hl-vFx" id="SOl-w2-6IS">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
-                                    <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="J3d-d8-xhv">
-                                            <rect key="frame" x="0.0" y="121" width="150" height="29"/>
-                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" secondItem="J3d-d8-xhv" secondAttribute="height" multiplier="150:29" id="RYY-3p-uMb"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                    </subviews>
-                                </view>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="J3d-d8-xhv" secondAttribute="trailing" id="A2E-p5-9C3"/>
-                                    <constraint firstItem="J3d-d8-xhv" firstAttribute="leading" secondItem="MjY-Xp-siz" secondAttribute="leading" id="Fg1-Wc-2hf"/>
-                                    <constraint firstAttribute="bottom" secondItem="J3d-d8-xhv" secondAttribute="bottom" id="OjT-Pc-7D5"/>
-                                </constraints>
-                                <connections>
-                                    <outlet property="nameLabel" destination="J3d-d8-xhv" id="yYK-WR-Noe"/>
-                                </connections>
-                            </collectionViewCell>
-                        </cells>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="0l4-Wv-HR4" id="mae-gQ-G3c"/>
-                            <outlet property="delegate" destination="0l4-Wv-HR4" id="MVL-yW-hss"/>
+                            <outlet property="dataSource" destination="PZ5-fQ-YE3" id="pnm-5e-aFf"/>
+                            <outlet property="delegate" destination="PZ5-fQ-YE3" id="LgU-iG-oLM"/>
                         </connections>
-                    </collectionView>
-                    <navigationItem key="navigationItem" id="7jJ-GT-84H"/>
+                    </tableView>
                     <connections>
-                        <segue destination="pFX-W1-tKf" kind="unwind" identifier="unwindFromCategories" unwindAction="unwindToMainWithSender:" id="Skq-FR-zDM"/>
+                        <segue destination="31a-HA-3xd" kind="unwind" identifier="unwindFromCategories" unwindAction="unwindToMainWithSender:" id="tXQ-jF-GZF"/>
                     </connections>
-                </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="f5h-yq-hNL" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="pFX-W1-tKf" userLabel="Exit" sceneMemberID="exit"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Von-9E-3t7" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="31a-HA-3xd" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4425" y="754"/>
+            <point key="canvasLocation" x="4486" y="416"/>
         </scene>
         <!--Radius-->
         <scene sceneID="VLU-SB-GI8">
@@ -233,8 +206,8 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
-                        <segue destination="0l4-Wv-HR4" kind="presentation" identifier="segueToCategories" modalPresentationStyle="fullScreen" id="TTp-UT-Q2J"/>
                         <segue destination="3fG-Dl-puw" kind="presentation" identifier="segueToRadius" modalPresentationStyle="fullScreen" id="2xj-lo-4Jz"/>
+                        <segue destination="PZ5-fQ-YE3" kind="presentation" identifier="segueToCategories" id="Wug-Mq-EIa"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dAG-yp-WnP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -303,6 +276,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="ins-Ya-Y6D"/>
+        <segue reference="feE-3D-h9T"/>
     </inferredMetricsTieBreakers>
 </document>

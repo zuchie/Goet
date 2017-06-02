@@ -25,12 +25,11 @@
 		B93D332C1EA6C84A007EAD5A /* GoetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93D332B1EA6C84A007EAD5A /* GoetUITests.swift */; };
 		B93D33351EA6CAAE007EAD5A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93D33341EA6CAAE007EAD5A /* LocationManager.swift */; };
 		B93D333A1EAAD202007EAD5A /* AlertMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93D33391EAAD202007EAD5A /* AlertMaker.swift */; };
+		B9646F511EE12B80000636B6 /* CategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9646F501EE12B80000636B6 /* CategoriesTableViewController.swift */; };
 		B965C9681E5CEF4C0015E2AC /* YelpQueryMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B965C9671E5CEF4C0015E2AC /* YelpQueryMaker.swift */; };
 		B965C9731E601F2E0015E2AC /* Saved.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B965C9711E601F2E0015E2AC /* Saved.xcdatamodeld */; };
 		B965C9801E6777E80015E2AC /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B965C97E1E6777E80015E2AC /* MainTableViewCell.swift */; };
 		B96AE97E1D8E6EAD00257751 /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96AE97D1D8E6EAD00257751 /* CoreDataTableViewController.swift */; };
-		B9A7605C1DEE56BE005BBA2A /* FoodCategoriesCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A7605B1DEE56BE005BBA2A /* FoodCategoriesCollectionViewController.swift */; };
-		B9A7605E1DEE59D2005BBA2A /* FoodCategoriesCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9A7605D1DEE59D2005BBA2A /* FoodCategoriesCollectionViewCell.swift */; };
 		B9BA66081ED4F92B0081647B /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BA66071ED4F92B0081647B /* ActivityIndicator.swift */; };
 		B9BA660F1ED522C90081647B /* NavItemTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BA660D1ED522C90081647B /* NavItemTitleViewController.swift */; };
 		B9BA66101ED522C90081647B /* NavItemTitleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9BA660E1ED522C90081647B /* NavItemTitleViewController.xib */; };
@@ -83,12 +82,11 @@
 		B93D332D1EA6C84A007EAD5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B93D33341EA6CAAE007EAD5A /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		B93D33391EAAD202007EAD5A /* AlertMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertMaker.swift; sourceTree = "<group>"; };
+		B9646F501EE12B80000636B6 /* CategoriesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewController.swift; sourceTree = "<group>"; };
 		B965C9671E5CEF4C0015E2AC /* YelpQueryMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpQueryMaker.swift; sourceTree = "<group>"; };
 		B965C9721E601F2E0015E2AC /* Saved.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Saved.xcdatamodel; sourceTree = "<group>"; };
 		B965C97E1E6777E80015E2AC /* MainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		B96AE97D1D8E6EAD00257751 /* CoreDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataTableViewController.swift; sourceTree = "<group>"; };
-		B9A7605B1DEE56BE005BBA2A /* FoodCategoriesCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodCategoriesCollectionViewController.swift; sourceTree = "<group>"; };
-		B9A7605D1DEE59D2005BBA2A /* FoodCategoriesCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodCategoriesCollectionViewCell.swift; sourceTree = "<group>"; };
 		B9BA66071ED4F92B0081647B /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		B9BA660D1ED522C90081647B /* NavItemTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavItemTitleViewController.swift; sourceTree = "<group>"; };
 		B9BA660E1ED522C90081647B /* NavItemTitleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NavItemTitleViewController.xib; sourceTree = "<group>"; };
@@ -163,15 +161,6 @@
 			name = Map;
 			sourceTree = "<group>";
 		};
-		B906DB791D66DCCA0021B025 /* FoodCategories */ = {
-			isa = PBXGroup;
-			children = (
-				B9A7605B1DEE56BE005BBA2A /* FoodCategoriesCollectionViewController.swift */,
-				B9A7605D1DEE59D2005BBA2A /* FoodCategoriesCollectionViewCell.swift */,
-			);
-			name = FoodCategories;
-			sourceTree = "<group>";
-		};
 		B906DBDD1D8B32EF0021B025 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,11 +194,11 @@
 		B91AC8551D4EAC4600B0476E /* Goet */ = {
 			isa = PBXGroup;
 			children = (
+				B9646F4F1EE12B49000636B6 /* Categories */,
 				B9BA66111EDD52510081647B /* Radius */,
 				B9C1E3F51ED3B1B0001B04CD /* Helper */,
 				B965C9661E5CEF1B0015E2AC /* YelpQuery */,
 				B9F984EA1E5A8A9900C6CA04 /* Main */,
-				B906DB791D66DCCA0021B025 /* FoodCategories */,
 				B906DB761D5D80F20021B025 /* Map */,
 				B906DB751D5D80B10021B025 /* Saved */,
 				B91AC8561D4EAC4600B0476E /* AppDelegate.swift */,
@@ -229,6 +218,14 @@
 				B93D332D1EA6C84A007EAD5A /* Info.plist */,
 			);
 			path = GoetUITests;
+			sourceTree = "<group>";
+		};
+		B9646F4F1EE12B49000636B6 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				B9646F501EE12B80000636B6 /* CategoriesTableViewController.swift */,
+			);
+			name = Categories;
 			sourceTree = "<group>";
 		};
 		B965C9661E5CEF1B0015E2AC /* YelpQuery */ = {
@@ -485,8 +482,8 @@
 				B9BA660F1ED522C90081647B /* NavItemTitleViewController.swift in Sources */,
 				B9BA66131EDD52890081647B /* RadiusViewController.swift in Sources */,
 				B9D4457A1EBC660700219D91 /* URLRequestMaker.swift in Sources */,
-				B9A7605E1DEE59D2005BBA2A /* FoodCategoriesCollectionViewCell.swift in Sources */,
 				B9BA66081ED4F92B0081647B /* ActivityIndicator.swift in Sources */,
+				B9646F511EE12B80000636B6 /* CategoriesTableViewController.swift in Sources */,
 				B9F984E81E5A7F6700C6CA04 /* MainTableViewController.swift in Sources */,
 				B93D33351EA6CAAE007EAD5A /* LocationManager.swift in Sources */,
 				B93D333A1EAAD202007EAD5A /* AlertMaker.swift in Sources */,
@@ -494,7 +491,6 @@
 				B91AC8571D4EAC4600B0476E /* AppDelegate.swift in Sources */,
 				B906DBA31D727DCA0021B025 /* YelpQueryURLBuilder.swift in Sources */,
 				B906DBAA1D757CC00021B025 /* GoogleMapsViewController.swift in Sources */,
-				B9A7605C1DEE56BE005BBA2A /* FoodCategoriesCollectionViewController.swift in Sources */,
 				B9C1E3F41ED18A3C001B04CD /* Cache.swift in Sources */,
 				B96AE97E1D8E6EAD00257751 /* CoreDataTableViewController.swift in Sources */,
 				B937286B1E7D475900B911E5 /* SavedTableViewCell.swift in Sources */,

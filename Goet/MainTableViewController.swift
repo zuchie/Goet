@@ -52,7 +52,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         var locationChanged = false
         var radiusChanged = false
         
-        var category = "All" {
+        var category = (name: "All", id: "restaurants") {
             didSet { categoryChanged = (category != oldValue) }
         }
         var date = Date() {
@@ -281,12 +281,12 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
     }
     
     // Prepare params and do query
-    fileprivate func getCategoryAndUpdateTitleView(_ category: String) {
+    fileprivate func getCategoryAndUpdateTitleView(_ category: (name: String, id: String)) {
         getCategory(category)
-        updateTitleViewCategoryLabel(category)
+        updateTitleViewCategoryLabel(category.name)
     }
     
-    fileprivate func getCategory(_ category: String) {
+    fileprivate func getCategory(_ category: (name: String, id: String)) {
         queryParams.category = category
     }
     
@@ -348,7 +348,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
             yelpQuery = YelpQuery(
                 latitude: queryParams.location.coordinate.latitude,
                 longitude: queryParams.location.coordinate.longitude,
-                category: queryParams.category,
+                category: queryParams.category.id,
                 radius: queryParams.radius,
                 limit: 5,
                 openAt: Int(queryParams.date.timeIntervalSince1970),
@@ -597,7 +597,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         let sourceVC = sender.source
         switch sender.identifier! {
         case "unwindFromCategories":
-            guard let category = (sourceVC as! FoodCategoriesCollectionViewController).getCategory() else {
+            guard let category = (sourceVC as! CategoriesTableViewController).getCategory() else {
                 fatalError("Couldn't get category.")
             }
             

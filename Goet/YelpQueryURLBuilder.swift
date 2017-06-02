@@ -39,22 +39,8 @@ class YelpQueryURL {
     // MARK: Helper functions
     private func formatParameter(parameter: (Any?, String)) -> String {
         let param = parameter
-        guard var value = param.0 else {
-            // If no category specified, cover all restaurants
-            if param.1 == "categories" {
-                return "&categories=restaurants"
-            }
+        guard let value = param.0 else {
             return ""
-        }
-        // Use Yelp required strings for special cases
-        if value as? String == "All" {
-            value = "restaurants"
-        }
-        if value as? String == "American" {
-            value = "newamerican,tradamerican"
-        }
-        if value as? String == "Indian" {
-            value = "indpak"
         }
         
         return "&\(param.1)=\(value)".lowercased()
