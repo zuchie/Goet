@@ -68,8 +68,14 @@ class GoogleMapsViewController: UIViewController {
         if !markersOnly {
             // Add label.
             let screenBounds = UIScreen.main.bounds
-            let labelWidth: CGFloat = screenBounds.width * 0.5
-            let labelHeight: CGFloat = labelWidth / 9.0
+            let labelWidth: CGFloat
+            let labelHeight: CGFloat
+            if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
+                labelWidth = screenBounds.width * 0.5
+            } else {
+                labelWidth = screenBounds.height * 0.5
+            }
+            labelHeight = labelWidth / 9.0
             
             label.frame = CGRect(x: screenBounds.width / 2.0 - labelWidth / 2.0, y: screenBounds.height - labelHeight , width: labelWidth, height: labelHeight)
             label.backgroundColor = UIColor.lightGray
@@ -83,14 +89,6 @@ class GoogleMapsViewController: UIViewController {
     
     // KVO - Key Value Observer, to observe changes of mapView.myLocation.
     override func viewWillAppear(_ animated: Bool) {
-        /*
-        isNavigationBarHidden = navigationController?.isNavigationBarHidden
-        if isNavigationBarHidden! {
-            navigationController?.isNavigationBarHidden = false
-        }
-        */
-        //tabBarController?.tabBar.isHidden = true
-        
         if markersOnly {
             barButtonItem = navigationItem.rightBarButtonItem
             navigationItem.rightBarButtonItem = nil
@@ -103,16 +101,9 @@ class GoogleMapsViewController: UIViewController {
 
     // Restore navigation bar status.
     override func viewWillDisappear(_ animated: Bool) {
-        /*
-        if isNavigationBarHidden! {
-            navigationController?.isNavigationBarHidden = true
-        }
-        */
         if markersOnly {
             navigationItem.rightBarButtonItem = barButtonItem
         }
-        //tabBarController?.tabBar.isHidden = false
-        //view.removeObserver(self, forKeyPath: "myLocation")
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -122,6 +113,18 @@ class GoogleMapsViewController: UIViewController {
             // Update camera to new bounds.
             let camera = GMSCameraUpdate.fit(self.bounds, with: self.edges)
             self.mapView.animate(with: camera)
+            // Add label.
+            let screenBounds = UIScreen.main.bounds
+            let labelWidth: CGFloat
+            let labelHeight: CGFloat
+            if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
+                labelWidth = screenBounds.width * 0.5
+            } else {
+                labelWidth = screenBounds.height * 0.5
+            }
+            labelHeight = labelWidth / 9.0
+
+            self.label.frame = CGRect(x: screenBounds.width / 2.0 - labelWidth / 2.0, y: screenBounds.height - labelHeight , width: labelWidth, height: labelHeight)
         }
     }
     
@@ -155,7 +158,7 @@ class GoogleMapsViewController: UIViewController {
                 let minLong = coordinates.map({ $0.longitude }).min(by: { Swift.abs($0) < Swift.abs($1) }),
                 let maxLat = coordinates.map({ $0.latitude }).max(by: { Swift.abs($0) < Swift.abs($1) }),
                     let maxLong = coordinates.map({ $0.longitude }).max(by: { Swift.abs($0) < Swift.abs($1) }) else {
-                        fatalError("Could min, max coordinates.")
+                        fatalError("Couldn't get min, max coordinates.")
                 }
                 
                 let northeast = CLLocationCoordinate2DMake(minLat, minLong)
@@ -198,7 +201,6 @@ class GoogleMapsViewController: UIViewController {
                         let camera = GMSCameraUpdate.fit(self.bounds, with: self.edges)
                         
                         self.mapView.animate(with: camera)
-                        
                         self.label.text = "\(distances.first!), \(durationInTraffic)"
                     })
                 }

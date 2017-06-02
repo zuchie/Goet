@@ -110,36 +110,6 @@ class GoogleMapsGetDirection {
                 print("Google Directions returned status: \(String(describing: status))")
                 return
             }
-        }
-        
-        /*
-        let task = URLSession.shared.dataTask(with: request, completionHandler: {
-            data, response, error in
-            
-            if error != nil {
-                print("error while getting Google Directions URL response: \(String(describing: error))")
-                return
-            }
-            
-            guard let convertedJsonIntoDict = data?.jsonToDictionary() else {
-                fatalError("Couldn't process data.")
-            }
-            
-            let status = convertedJsonIntoDict["status"] as? String
-            let routes = convertedJsonIntoDict["routes"] as? [[String: Any]]
-            
-            if status == "OK" {
-                self.getRoutesPoints(routes!)
-                self.getDistancesAndDurations(routes!)
-                self.getViewport(routes!)
-                completionHandler(self.routesPoints, self.distances, self.durationInTraffic, self.viewport)
-            } else {
-                print("Google Directions returned status: \(String(describing: status))")
-                return
-            }
-            
-        })
-        task.resume()
-        */
+        }        
     }
 }
