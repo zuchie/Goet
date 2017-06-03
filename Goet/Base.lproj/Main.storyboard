@@ -34,7 +34,7 @@
                         </connections>
                     </tableView>
                     <connections>
-                        <segue destination="31a-HA-3xd" kind="unwind" identifier="unwindFromCategories" unwindAction="unwindToMainWithSender:" id="Zq2-m8-vLx"/>
+                        <segue destination="31a-HA-3xd" kind="unwind" identifier="unwindFromCategories" animates="NO" unwindAction="unwindToMainWithSender:" id="Zq2-m8-vLx"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Von-9E-3t7" userLabel="First Responder" sceneMemberID="firstResponder"/>

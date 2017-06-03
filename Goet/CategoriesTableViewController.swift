@@ -38,7 +38,6 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         }
     }
     
-    fileprivate var searchResultsVC: UITableViewController!
     fileprivate var searchController: UISearchController!
     //private var leftBarButtonItem: UIBarButtonItem?
 
@@ -54,40 +53,30 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         //leftBarButtonItem = navigationItem.leftBarButtonItem
         //navigationItem.leftBarButtonItem = nil
         
-        tableView.contentInset.top = 20
-        
         moc = appDelegate?.managedObjectContext
         initializeFetchedResultsController()
         mostSearched = fetchedResultsController?.fetchedObjects as! [MostSearchedCategories]
-        //print("most searched: \(String(describing: mostSearched))")
-        
-        // Configure search controller and search results vc.
-        //searchResultsVC = UITableViewController(style: .plain)
-        //searchResultsVC = self
-        //searchResultsVC.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "categoriesCell")
-        //searchResultsVC.tableView.dataSource = self
-        //searchResultsVC.tableView.delegate = self
         
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
-        //tableView.tableHeaderView = searchController?.searchBar
         navigationItem.titleView = searchController?.searchBar
-        //definesPresentationContext = true
+        definesPresentationContext = true
         
         searchController.delegate = self
         
         searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = false
-        //searchController.searchBar.searchBarStyle = .default
         searchController.searchBar.sizeToFit()
         
         /* [Warning] Attempting to load the view of a view controller while it is deallocating is not allowed and may result in undefined behavior (<UISearchController: 0x10194f3e0>), Bug: UISearchController doesn't load its view until it's be deallocated. Reference: http://www.openradar.me/22250107
          */
+        /*
         if #available(iOS 9.0, *) {
             searchController.loadViewIfNeeded()
         } else {
             let _ = searchController.view
         }
+        */
     }
 
     /*
@@ -127,17 +116,13 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
     }
 
     private func addNewCategoryOrUpdateSearchCount(_ category: Category) {
-        print("add new or update==")
         for (index, member) in mostSearched.enumerated() {
             if member.name == category.name {
-                print("update==")
                 mostSearched[index].searchCount += 1
-                print("search count==: \(Int(mostSearched[index].searchCount))")
                 updateSearchCount(for: member.name!, value: Int(mostSearched[index].searchCount))
                 return
             }
         }
-        print("add new==")
         addCategory(name: category.name, id: category.id, searchCount: 1)
         mostSearched = fetchedResultsController?.fetchedObjects as! [MostSearchedCategories]
     }
@@ -152,7 +137,6 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         }
         obj.setValue(Int64(value), forKey: "searchCount")
         
-        print("save updated==")
         appDelegate?.saveContext()
     }
     
@@ -160,12 +144,10 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         guard let obj = NSEntityDescription.insertNewObject(forEntityName: "MostSearchedCategories", into: moc) as? MostSearchedCategories else {
             fatalError("Error adding new category.")
         }
-
         obj.name = name
         obj.id = id
         obj.searchCount = Int64(searchCount)
 
-        print("save newly added==")
         appDelegate?.saveContext()
     }
     
@@ -300,14 +282,17 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
     }
     */
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        /**
+         Force to pop CategoriesTableVC from navigation stack when using unwind segue, otherwise warning: popToViewController:transition: called on <UINavigationController 0x7fcef101b000> while an existing transition or presentation is occurring; the navigation stack will not be updated.
+         */
+        if searchController.isActive {
+            navigationController?.popViewController(animated: true)
+        }
     }
-    */
 
 }

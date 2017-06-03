@@ -15,6 +15,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
     
     // Properties
     var titleVC = NavItemTitleViewController()
+    var category: String?
     
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     var moc: NSManagedObjectContext!
