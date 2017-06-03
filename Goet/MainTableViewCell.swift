@@ -24,6 +24,7 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet weak var reviewCount: UILabel!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var likeButton: UIButton!
+    @IBOutlet weak var yelpButton: UIButton!
     
     
     var yelpUrl: String!
@@ -62,6 +63,9 @@ class MainTableViewCell: UITableViewCell {
         // Initialization code
         likeButton.setImage(emptyStar, for: .normal)
         likeButton.setImage(filledStar, for: .selected)
+        
+        // Yelp 5-star Red logo background color.
+        yelpButton.backgroundColor = UIColor(red: 211 / 255, green: 35 / 255, blue: 35 / 255, alpha: 1.0)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
