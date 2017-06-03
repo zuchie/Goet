@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NavItemTitleViewController" customModule="randomRestaurant" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NavItemTitleViewController" customModule="Goet" customModuleProvider="target">
             <connections>
                 <outlet property="chooseCategory" destination="gbt-5F-3o4" id="4JH-Cc-f0j"/>
                 <outlet property="chooseRadius" destination="pRK-dt-XVw" id="kAy-Pf-3uT"/>

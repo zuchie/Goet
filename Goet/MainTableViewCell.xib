@@ -40,11 +40,11 @@
                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="5zp-dV-NJQ">
                                 <rect key="frame" x="0.0" y="231" width="359" height="132.5"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="zg8-qf-plv">
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="zg8-qf-plv">
                                         <rect key="frame" x="0.0" y="0.0" width="146.5" height="132.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="5Oe-CT-K8m">
-                                                <rect key="frame" x="0.0" y="0.0" width="61" height="3"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="61" height="5"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -96,15 +96,14 @@
                                                     <action selector="handleYelpButton:" destination="B3s-fF-4IS" eventType="touchUpInside" id="5FN-NR-Ppu"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NF9-wW-5fo">
+                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NF9-wW-5fo">
                                                 <rect key="frame" x="53" y="0.0" width="48" height="48"/>
-                                                <color key="backgroundColor" red="0.90085078529999996" green="0.053155081110000002" blue="0.033352433889999998" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
+                                                <color key="backgroundColor" red="0.58259579890000002" green="0.87031659029999997" blue="0.83559545160000004" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="48" id="2f3-Ph-Hq9"/>
                                                     <constraint firstAttribute="width" secondItem="NF9-wW-5fo" secondAttribute="height" multiplier="1:1" id="n2Z-yf-g4u"/>
                                                 </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <state key="normal" title="Route"/>
+                                                <state key="normal" title="Route" image="marker"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                         <integer key="value" value="24"/>
@@ -159,5 +158,6 @@
     <resources>
         <image name="Yelp_burst_negative_RGB" width="360" height="360"/>
         <image name="emptyStar" width="150" height="142"/>
+        <image name="marker" width="225" height="225"/>
     </resources>
 </document>

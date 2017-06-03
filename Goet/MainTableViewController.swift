@@ -42,7 +42,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
     
     var dataSource = [DataSource]()
     
-    fileprivate let yelpStars: [Float: String] = [0.0: "regular_0", 1.0: "regular_1", 1.5: "regular_1_half", 2.0: "regular_2", 2.5: "regular_2_half", 3.0: "regular_3", 3.5: "regular_3_half", 4.0: "regular_4", 4.5: "regular_4_half", 5.0: "regular_5"]
+    fileprivate let yelpStars: [Float: String] = [0.0: "small_0", 1.0: "small_1", 1.5: "small_1_half", 2.0: "small_2", 2.5: "small_2_half", 3.0: "small_3", 3.5: "small_3_half", 4.0: "small_4", 4.5: "small_4_half", 5.0: "small_5"]
     
     struct QueryParams {
         var hasChanged: Bool {
@@ -80,8 +80,11 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
     // Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("MainTableViewController view did load")
+
+        /*
+        let img = UIImage(named: "ic_qu_direction_mylocation")?.withRenderingMode(.alwaysOriginal)
+        navigationItem.rightBarButtonItem?.image = img
+        */
         
         barButtonItem = navigationItem.rightBarButtonItem
         addViewToNavBar()
@@ -176,6 +179,12 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
             startIndicator()
             backFromUnwind = false
         }
+    }
+    */
+    /*
+    override func viewWillAppear(_ animated: Bool) {
+        let img = UIImage(named: "ic_qu_direction_mylocation")?.withRenderingMode(.alwaysOriginal)
+        navigationItem.rightBarButtonItem?.image = img
     }
     */
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
