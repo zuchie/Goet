@@ -75,6 +75,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
     private var everQueried = false
     
     private let metersToMiles: [Int: String] = [800: "0.5 mi", 1600: "1 mi", 8000: "5 mi", 16000: "10 mi", 32000: "20 mi"]
+    private var backFromUnwind = false
 
     // Methods
     override func viewDidLoad() {
@@ -151,7 +152,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
             containerFrame: view.frame,
             color: UIColor.gray.withAlphaComponent(0.8)
         )
-        //startIndicator()
+        startIndicator()
         
         getRadiusAndUpdateTitleView(queryParams.radius)
         getCategoryAndUpdateTitleView(queryParams.category)
@@ -169,7 +170,12 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        startIndicator()
+        // Show activity indicator after view has been loaded. 
+        // View hasn't been loaded in unwindToMain() so indicator would have incorrect frame.
+        if backFromUnwind {
+            startIndicator()
+            backFromUnwind = false
+        }
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -599,6 +605,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
     }
     
     @IBAction func unwindToMain(sender: UIStoryboardSegue) {
+        backFromUnwind = true
         let sourceVC = sender.source
         switch sender.identifier! {
         case "unwindFromCategories":
