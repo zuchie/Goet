@@ -151,7 +151,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
             containerFrame: view.frame,
             color: UIColor.gray.withAlphaComponent(0.8)
         )
-        startIndicator()
+        //startIndicator()
         
         getRadiusAndUpdateTitleView(queryParams.radius)
         getCategoryAndUpdateTitleView(queryParams.category)
@@ -166,6 +166,10 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        startIndicator()
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -602,7 +606,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
                 fatalError("Couldn't get category.")
             }
             
-            startIndicator()
+            //startIndicator()
             
             getCategoryAndUpdateTitleView(category)
             getDate()
@@ -612,7 +616,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
                 fatalError("Couldn't get radiusVC.")
             }
             
-            startIndicator()
+            //startIndicator()
             
             getRadiusAndUpdateTitleView(radius)
             getDate()
