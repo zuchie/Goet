@@ -39,19 +39,16 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
     }
     
     fileprivate var searchController: UISearchController!
-    //private var leftBarButtonItem: UIBarButtonItem?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        print("==category view did load")
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem()
-        //leftBarButtonItem = navigationItem.leftBarButtonItem
-        //navigationItem.leftBarButtonItem = nil
+
+        navigationItem.hidesBackButton = true
         
         moc = appDelegate?.managedObjectContext
         initializeFetchedResultsController()
@@ -70,21 +67,17 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         
         /* [Warning] Attempting to load the view of a view controller while it is deallocating is not allowed and may result in undefined behavior (<UISearchController: 0x10194f3e0>), Bug: UISearchController doesn't load its view until it's be deallocated. Reference: http://www.openradar.me/22250107
          */
-        /*
         if #available(iOS 9.0, *) {
             searchController.loadViewIfNeeded()
         } else {
             let _ = searchController.view
         }
-        */
     }
 
-    /*
-    override func viewDidDisappear(_ animated: Bool) {
-        //navigationItem.titleView = nil
-        //navigationItem.leftBarButtonItem = leftBarButtonItem
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationItem.hidesBackButton = false
     }
-    */
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -291,7 +284,7 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
          Force to pop CategoriesTableVC from navigation stack when using unwind segue, otherwise warning: popToViewController:transition: called on <UINavigationController 0x7fcef101b000> while an existing transition or presentation is occurring; the navigation stack will not be updated.
          */
         if searchController.isActive {
-            navigationController?.popViewController(animated: true)
+            navigationController?.popViewController(animated: false)
         }
     }
 
