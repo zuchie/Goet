@@ -75,7 +75,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
     private var everQueried = false
     
     private let metersToMiles: [Int: String] = [800: "0.5 mi", 1600: "1 mi", 8000: "5 mi", 16000: "10 mi", 32000: "20 mi"]
-    private var backFromUnwind = false
+    //private var backFromUnwind = false
 
     // Methods
     override func viewDidLoad() {
@@ -168,7 +168,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+    /*
     override func viewWillAppear(_ animated: Bool) {
         // Show activity indicator after view has been loaded. 
         // View hasn't been loaded in unwindToMain() so indicator would have incorrect frame.
@@ -177,7 +177,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
             backFromUnwind = false
         }
     }
-
+    */
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
@@ -188,8 +188,29 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
 
     fileprivate func startIndicator() {
         // Center and frame might change from portrait to landscape.
-        indicator.center = CGPoint(x: view.center.x, y: view.center.y - tabBarController!.tabBar.frame.height)
-        indicator.container.frame = view.frame
+        // Width/Height of view might not be consistent with device orientation for now.
+        let viewWidth = view.frame.width
+        let viewHeight = view.frame.height
+        
+        if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
+            if viewWidth <= viewHeight {
+                indicator.container.frame.size.width = viewWidth
+                indicator.container.frame.size.height = viewHeight
+            } else {
+                indicator.container.frame.size.width = viewHeight
+                indicator.container.frame.size.height = viewWidth
+            }
+        } else {
+            if viewWidth >= viewHeight {
+                indicator.container.frame.size.width = viewWidth
+                indicator.container.frame.size.height = viewHeight
+            } else {
+                indicator.container.frame.size.width = viewHeight
+                indicator.container.frame.size.height = viewWidth
+            }
+        }
+        indicator.center = CGPoint(x: indicator.container.center.x, y: indicator.container.center.y - tabBarController!.tabBar.frame.height)
+
         DispatchQueue.main.async {
             // Scroll to top, otherwise the activity indicator may be shown outside the top of the screen.
             self.tableView.setContentOffset(CGPoint(x: 0, y: -self.tableView.contentInset.top), animated: true)
@@ -605,7 +626,6 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
     }
     
     @IBAction func unwindToMain(sender: UIStoryboardSegue) {
-        backFromUnwind = true
         let sourceVC = sender.source
         switch sender.identifier! {
         case "unwindFromCategories":
@@ -613,7 +633,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
                 fatalError("Couldn't get category.")
             }
             
-            //startIndicator()
+            startIndicator()
             
             getCategoryAndUpdateTitleView(category)
             getDate()
@@ -623,7 +643,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
                 fatalError("Couldn't get radiusVC.")
             }
             
-            //startIndicator()
+            startIndicator()
             
             getRadiusAndUpdateTitleView(radius)
             getDate()

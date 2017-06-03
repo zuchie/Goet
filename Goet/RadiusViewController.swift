@@ -13,12 +13,20 @@ class RadiusViewController: UIViewController {
     private(set) var radius: Int? = 1600
     private let radiusImgDict = [800: "globe", 1600: "chinese", 8000: "american", 16000: "japanese", 32000: "mexican"]
     @IBOutlet weak var radiuses: UIImageView!
+    @IBOutlet weak var okButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        navigationController?.navigationBar.isHidden = true
+        
         radiuses.image = UIImage(named: radiusImgDict[radius!]!)
         radiuses.layer.cornerRadius = radiuses.frame.width / 2
+        okButton.layer.cornerRadius = okButton.frame.width / 2
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
     }
     
     override func didReceiveMemoryWarning() {

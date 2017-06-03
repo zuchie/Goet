@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -66,18 +67,13 @@
                                 </connections>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4vB-jy-OVs">
-                                <rect key="frame" x="164" y="573" width="46" height="46"/>
+                                <rect key="frame" x="164" y="571" width="46" height="46"/>
                                 <color key="backgroundColor" red="0.58259579890000002" green="0.87031659029999997" blue="0.83559545160000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="46" id="DJP-HI-Fw8"/>
                                     <constraint firstAttribute="width" secondItem="4vB-jy-OVs" secondAttribute="height" multiplier="1:1" id="Doi-Bs-z4L"/>
                                 </constraints>
                                 <state key="normal" title="OK"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                        <integer key="value" value="23"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <segue destination="beY-Ir-uTc" kind="unwind" identifier="unwindFromRadius" unwindAction="unwindToMainWithSender:" id="bN8-b7-oJz"/>
                                 </connections>
@@ -87,11 +83,12 @@
                         <constraints>
                             <constraint firstItem="4vB-jy-OVs" firstAttribute="centerX" secondItem="0Wa-PP-UdQ" secondAttribute="centerX" id="GiN-kC-oRd"/>
                             <constraint firstItem="7C0-c1-bTa" firstAttribute="centerY" secondItem="0Wa-PP-UdQ" secondAttribute="centerY" id="HiU-TF-Dvh"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="4vB-jy-OVs" secondAttribute="bottom" constant="50" id="K2Y-aJ-PL1"/>
                             <constraint firstItem="7C0-c1-bTa" firstAttribute="centerX" secondItem="0Wa-PP-UdQ" secondAttribute="centerX" id="hmS-pJ-X19"/>
-                            <constraint firstItem="Mbg-9x-M2c" firstAttribute="top" secondItem="4vB-jy-OVs" secondAttribute="bottom" constant="48" id="te4-av-fhh"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="okButton" destination="4vB-jy-OVs" id="Yht-3e-yfQ"/>
                         <outlet property="radiuses" destination="7C0-c1-bTa" id="KjQ-YX-WGP"/>
                     </connections>
                 </viewController>
@@ -146,7 +143,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="50"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" contentMode="center" tableViewCell="Hdf-NF-CEb" id="YJh-rc-S2K">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -179,7 +176,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="c7P-ll-Ld1" id="uzd-V5-ivn">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                                 <connections>
@@ -206,7 +203,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
-                        <segue destination="3fG-Dl-puw" kind="presentation" identifier="segueToRadius" modalPresentationStyle="fullScreen" id="2xj-lo-4Jz"/>
+                        <segue destination="3fG-Dl-puw" kind="show" identifier="segueToRadius" id="2xj-lo-4Jz"/>
                         <segue destination="PZ5-fQ-YE3" kind="show" identifier="segueToCategories" id="Wug-Mq-EIa"/>
                     </connections>
                 </tableViewController>
