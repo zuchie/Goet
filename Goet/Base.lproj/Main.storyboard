@@ -67,7 +67,7 @@
                                 </connections>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4vB-jy-OVs">
-                                <rect key="frame" x="164" y="571" width="46" height="46"/>
+                                <rect key="frame" x="164" y="591" width="46" height="46"/>
                                 <color key="backgroundColor" red="0.58259579890000002" green="0.87031659029999997" blue="0.83559545160000004" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="46" id="DJP-HI-Fw8"/>
@@ -75,7 +75,7 @@
                                 </constraints>
                                 <state key="normal" title="OK"/>
                                 <connections>
-                                    <segue destination="beY-Ir-uTc" kind="unwind" identifier="unwindFromRadius" unwindAction="unwindToMainWithSender:" id="bN8-b7-oJz"/>
+                                    <segue destination="beY-Ir-uTc" kind="unwind" identifier="unwindFromRadius" animates="NO" unwindAction="unwindToMainWithSender:" id="bN8-b7-oJz"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -83,7 +83,7 @@
                         <constraints>
                             <constraint firstItem="4vB-jy-OVs" firstAttribute="centerX" secondItem="0Wa-PP-UdQ" secondAttribute="centerX" id="GiN-kC-oRd"/>
                             <constraint firstItem="7C0-c1-bTa" firstAttribute="centerY" secondItem="0Wa-PP-UdQ" secondAttribute="centerY" id="HiU-TF-Dvh"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="4vB-jy-OVs" secondAttribute="bottom" constant="50" id="K2Y-aJ-PL1"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="4vB-jy-OVs" secondAttribute="bottom" constant="30" id="K2Y-aJ-PL1"/>
                             <constraint firstItem="7C0-c1-bTa" firstAttribute="centerX" secondItem="0Wa-PP-UdQ" secondAttribute="centerX" id="hmS-pJ-X19"/>
                         </constraints>
                     </view>
@@ -203,8 +203,8 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </refreshControl>
                     <connections>
-                        <segue destination="3fG-Dl-puw" kind="show" identifier="segueToRadius" id="2xj-lo-4Jz"/>
-                        <segue destination="PZ5-fQ-YE3" kind="show" identifier="segueToCategories" id="Wug-Mq-EIa"/>
+                        <segue destination="3fG-Dl-puw" kind="show" identifier="segueToRadius" animates="NO" id="2xj-lo-4Jz"/>
+                        <segue destination="PZ5-fQ-YE3" kind="show" identifier="segueToCategories" animates="NO" id="Wug-Mq-EIa"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dAG-yp-WnP" userLabel="First Responder" sceneMemberID="firstResponder"/>
