@@ -353,7 +353,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
             yelpQuery = YelpQuery(
                 latitude: queryParams.location.coordinate.latitude,
                 longitude: queryParams.location.coordinate.longitude,
-                category: queryParams.category.id,
+                category: queryParams.category.id == "" ? queryParams.category.name.lowercased() : queryParams.category.id,
                 radius: queryParams.radius,
                 limit: 5,
                 openAt: Int(queryParams.date.timeIntervalSince1970),
