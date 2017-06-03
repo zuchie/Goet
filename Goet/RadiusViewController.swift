@@ -11,7 +11,7 @@ import UIKit
 class RadiusViewController: UIViewController {
     
     private(set) var radius: Int? = 1600
-    private let radiusImgDict = [800: "globe", 1600: "chinese", 8000: "american", 16000: "japanese", 32000: "mexican"]
+    private let radiusImgDict = [800: "all", 1600: "chinese", 8000: "american", 16000: "japanese", 32000: "mexican"]
     @IBOutlet weak var radiuses: UIImageView!
     @IBOutlet weak var okButton: UIButton!
     
