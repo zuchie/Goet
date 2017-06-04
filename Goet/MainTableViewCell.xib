@@ -122,13 +122,14 @@
                             <constraint firstAttribute="trailing" secondItem="5zp-dV-NJQ" secondAttribute="trailing" id="Q4a-oa-ob5"/>
                         </constraints>
                     </stackView>
-                    <button opaque="NO" alpha="0.80000001192092896" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uya-WO-R1M">
-                        <rect key="frame" x="337" y="8" width="30" height="30"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uya-WO-R1M">
+                        <rect key="frame" x="342" y="8" width="25" height="25"/>
                         <constraints>
-                            <constraint firstAttribute="height" constant="30" id="bsP-zH-vFF"/>
+                            <constraint firstAttribute="height" constant="25" id="bsP-zH-vFF"/>
                             <constraint firstAttribute="width" secondItem="uya-WO-R1M" secondAttribute="height" multiplier="1:1" id="dfl-lF-NpF"/>
                         </constraints>
-                        <state key="normal" title="like" image="emptyStar"/>
+                        <state key="normal" title="like" image="EmptyStar"/>
+                        <state key="selected" image="FilledStar"/>
                         <connections>
                             <action selector="handleLikeButton:" destination="B3s-fF-4IS" eventType="touchUpInside" id="dRb-vf-V4p"/>
                         </connections>
@@ -156,8 +157,9 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="EmptyStar" width="27" height="27"/>
+        <image name="FilledStar" width="27" height="27"/>
         <image name="Route" width="100" height="100"/>
         <image name="Yelp_Burst_Screen_negative_RGB" width="612" height="792"/>
-        <image name="emptyStar" width="150" height="142"/>
     </resources>
 </document>

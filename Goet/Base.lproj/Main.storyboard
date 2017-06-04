@@ -117,7 +117,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Map" id="crp-nu-wRy">
-                        <barButtonItem key="rightBarButtonItem" image="Navigation" id="t6z-g2-Qf1">
+                        <barButtonItem key="rightBarButtonItem" image="Navigation" id="t6z-g2-Qf1" userLabel="Navigation">
                             <connections>
                                 <action selector="StartNavigation:" destination="dqH-Fl-zN4" id="RLx-VM-7sx"/>
                             </connections>
@@ -217,15 +217,11 @@
                 <navigationController title="SavedNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="pVw-sx-tf2" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="CvL-NJ-BRl"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="YiH-Zj-usg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YiH-Zj-usg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="XL2-RF-dH1">
-                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </toolbar>
                     <connections>
                         <segue destination="9Ww-aC-vSP" kind="relationship" relationship="rootViewController" id="zZl-uY-MBO"/>
                     </connections>

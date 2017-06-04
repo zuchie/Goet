@@ -36,8 +36,8 @@ class MainTableViewCell: UITableViewCell {
     
     var delegate: MainTableViewCellDelegate?
     
-    fileprivate let emptyStar = UIImage(named: "emptyStar")
-    fileprivate let filledStar = UIImage(named: "filledStar")
+    //fileprivate let emptyStar = UIImage(named: "EmptyStar")
+    //fileprivate let filledStar = UIImage(named: "FilledStar")
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -61,8 +61,8 @@ class MainTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        likeButton.setImage(emptyStar, for: .normal)
-        likeButton.setImage(filledStar, for: .selected)
+        //likeButton.setImage(emptyStar, for: .normal)
+        //likeButton.setImage(filledStar, for: .selected)
         
         // Yelp 5-star Red logo background color.
         yelpButton.backgroundColor = UIColor(red: 211 / 255, green: 35 / 255, blue: 35 / 255, alpha: 1.0)
