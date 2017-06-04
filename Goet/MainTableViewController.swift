@@ -70,7 +70,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
     var queryParams = QueryParams()
     fileprivate var indicator: IndicatorWithContainer!
     
-    fileprivate var noResultImgView = UIImageView(image: UIImage(named: "nothing_found"))
+    fileprivate var noResultImgView = UIImageView(image: UIImage(named: "NoResults"))
     private var barButtonItem: UIBarButtonItem?
     private var everQueried = false
     
@@ -192,6 +192,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         
         coordinator.animate(alongsideTransition: nil, completion: { _ in
             self.navigationItem.titleView?.frame = self.navigationController!.navigationBar.frame
+            self.noResultImgView.center = self.view.center
         })
     }
 
