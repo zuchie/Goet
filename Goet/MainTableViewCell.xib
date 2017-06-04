@@ -72,21 +72,21 @@
                                         </subviews>
                                     </stackView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="249" horizontalCompressionResistancePriority="749" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="wLo-lL-OnH">
-                                        <rect key="frame" x="146.5" y="0.0" width="111.5" height="132.5"/>
+                                        <rect key="frame" x="146.5" y="0.0" width="122.5" height="132.5"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="LZL-RA-2yI">
-                                        <rect key="frame" x="258" y="0.0" width="101" height="48"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="LZL-RA-2yI">
+                                        <rect key="frame" x="269" y="0.0" width="90" height="44"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GGI-Ot-grO">
-                                                <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="48" id="g05-bn-4Mk"/>
+                                                    <constraint firstAttribute="width" constant="44" id="g05-bn-4Mk"/>
                                                     <constraint firstAttribute="width" secondItem="GGI-Ot-grO" secondAttribute="height" multiplier="1:1" id="s2q-Uo-uJ0"/>
                                                 </constraints>
-                                                <state key="normal" title="Yelp" image="Yelp_burst_negative_RGB"/>
+                                                <state key="normal" title="Yelp" image="Yelp_Burst_Screen_negative_RGB"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                         <integer key="value" value="24"/>
@@ -97,10 +97,9 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NF9-wW-5fo">
-                                                <rect key="frame" x="53" y="0.0" width="48" height="48"/>
-                                                <color key="backgroundColor" red="0.58259579890000002" green="0.87031659029999997" blue="0.83559545160000004" alpha="1" colorSpace="calibratedRGB"/>
+                                                <rect key="frame" x="46" y="0.0" width="44" height="44"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="48" id="2f3-Ph-Hq9"/>
+                                                    <constraint firstAttribute="width" constant="44" id="2f3-Ph-Hq9"/>
                                                     <constraint firstAttribute="width" secondItem="NF9-wW-5fo" secondAttribute="height" multiplier="1:1" id="n2Z-yf-g4u"/>
                                                 </constraints>
                                                 <state key="normal" title="Route" image="marker"/>
@@ -156,7 +155,7 @@
         </tableViewCell>
     </objects>
     <resources>
-        <image name="Yelp_burst_negative_RGB" width="360" height="360"/>
+        <image name="Yelp_Burst_Screen_negative_RGB" width="612" height="792"/>
         <image name="emptyStar" width="150" height="142"/>
         <image name="marker" width="225" height="225"/>
     </resources>

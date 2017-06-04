@@ -191,7 +191,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Main" id="gcO-Ox-xEb">
                         <barButtonItem key="backBarButtonItem" title="Back" id="aVD-fr-j4H"/>
-                        <barButtonItem key="rightBarButtonItem" title="Map" style="plain" id="NHC-FU-teD" userLabel="Map">
+                        <barButtonItem key="rightBarButtonItem" title="Map" id="NHC-FU-teD" userLabel="Map">
                             <connections>
                                 <action selector="handleMapTap:" destination="wH5-b3-TbF" id="hzq-YO-RVi"/>
                                 <segue destination="dqH-Fl-zN4" kind="show" identifier="segueToMap" id="feE-3D-h9T"/>

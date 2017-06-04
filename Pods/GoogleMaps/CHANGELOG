@@ -1,3 +1,47 @@
+Version 2.3.0 - May 2017
+========================
+Improvements:
+  - The internals of the GMSPanoramaView and associated classes have had a
+    significant overhaul. These changes should generally give improved
+    performance.
+  - Dropped support for iOS 7, which enabled the use of modern core data
+    threading models. This means that applications should be able to use
+    -com.apple.CoreData.ConcurrencyDebug 1 when debugging with iOS 10 devices.
+
+Resolved Issues:
+  - Fixed case sensitivity issues with imports in GMSTileLayer.h and
+    GMSPolyline.h.
+
+Note:
+  - The armv7s architecture in the frameworks will be removed in 2.4. Devices
+    which previously used armv7s can continue to be supported using the armv7
+    architecture. All applications using the default architecture settings
+    in any supported version of Xcode shouldn't notice any change.
+
+Version 2.2.0 - February 2017
+=============================
+Features:
+  - Added the `cameraTargetBounds` property to `GMSMapView`.
+    This property restricts the camera target to the specified bounds area.
+    Subsequent gestures are then also restricted to keep the camera target
+    within the specified bounds.
+  - The `userData` property of `GMSMarker` was moved to its parent class
+    `GMSOverlay`. This enables the property to be used with the `GMSPolyline`,
+    `GMSPolygon`, `GMSCircle`, and `GMSGroundOverlay` classes.
+
+Improvements:
+  - Fixes naming of certain enum cases in Swift. The following enums are
+    affected:  `GMSMapViewType`, `GMSFrameRate`, `GMSMarkerAnimation`, and
+    `GMSLengthKind`.
+
+Resolved Issues:
+  - Fixed an issue where the `mapViewSnapshotReady` delegate method was
+    sometimes raised too early.
+
+Note:
+  - iOS 7 support is intended to be dropped starting with 2.3. 2.2.x will be
+    the last release series to support iOS 7.
+
 Version 2.1.1 - November 2016
 =============================
 Resolved Issues:
