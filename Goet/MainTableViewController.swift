@@ -518,9 +518,6 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         var image: UIImage?
         if let value = imgCache.get(by: cell.imageUrl) {
             image = value
-        } else {
-            // TODO: Pick a globe image
-            image = UIImage(named: "globe")
         }
         DispatchQueue.main.async {
             cell.mainImage.image = image
