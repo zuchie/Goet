@@ -11,17 +11,20 @@ import UIKit
 class RadiusViewController: UIViewController {
     
     private(set) var radius: Int? = 1600
-    private let radiusImgDict = [800: "all", 1600: "chinese", 8000: "american", 16000: "japanese", 32000: "mexican"]
+    private let radiusImgDict = [800: "Radius0", 1600: "Radius1", 8000: "Radius2", 16000: "Radius3", 32000: "Radius4"]
     @IBOutlet weak var radiuses: UIImageView!
     @IBOutlet weak var okButton: UIButton!
+    @IBOutlet weak var radiusesWidth: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
         navigationController?.navigationBar.isHidden = true
         
+        radiusesWidth.constant = view.frame.width - view.layoutMargins.left - view.layoutMargins.right
         radiuses.image = UIImage(named: radiusImgDict[radius!]!)
-        radiuses.layer.cornerRadius = radiuses.frame.width / 2
+        //radiuses.layer.cornerRadius = radiuses.frame.width / 2
+        
         okButton.layer.cornerRadius = okButton.frame.width / 2
     }
     
@@ -52,17 +55,19 @@ class RadiusViewController: UIViewController {
     private func getRadiusByLocation(_ location: CGPoint) -> Int? {
         let center = CGPoint(x: radiuses.frame.width / 2, y: radiuses.frame.height / 2)
         let distance = hypot(location.x - center.x, location.y - center.y)
-        let minRadius = (radiuses.frame.width / 2) * (1 / CGFloat(radiusImgDict.count))
+        // Get scaler from radius pdf files.
+        let radius20miToHalfMiRatio: CGFloat = 8.0
+        let minRadius = (radiuses.frame.width / 2) / radius20miToHalfMiRatio
         switch distance {
         case 0..<minRadius:
             return 800
         case minRadius..<minRadius * 2:
             return 1600
-        case minRadius * 2..<minRadius * 3:
+        case minRadius * 2..<minRadius * 4:
             return 8000
-        case minRadius * 3..<minRadius * 4:
+        case minRadius * 4..<minRadius * 6:
             return 16000
-        case minRadius * 4..<minRadius * 5:
+        case minRadius * 6..<minRadius * 8:
             return 32000
         default:
             return nil
