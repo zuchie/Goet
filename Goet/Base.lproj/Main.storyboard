@@ -117,7 +117,7 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Map" id="crp-nu-wRy">
-                        <barButtonItem key="rightBarButtonItem" title="Navigation" id="t6z-g2-Qf1">
+                        <barButtonItem key="rightBarButtonItem" image="Navigation" id="t6z-g2-Qf1">
                             <connections>
                                 <action selector="StartNavigation:" destination="dqH-Fl-zN4" id="RLx-VM-7sx"/>
                             </connections>
@@ -191,7 +191,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="Main" id="gcO-Ox-xEb">
                         <barButtonItem key="backBarButtonItem" title="Back" id="aVD-fr-j4H"/>
-                        <barButtonItem key="rightBarButtonItem" title="Map" id="NHC-FU-teD" userLabel="Map">
+                        <barButtonItem key="rightBarButtonItem" image="Map" id="NHC-FU-teD" userLabel="Map">
                             <connections>
                                 <action selector="handleMapTap:" destination="wH5-b3-TbF" id="hzq-YO-RVi"/>
                                 <segue destination="dqH-Fl-zN4" kind="show" identifier="segueToMap" id="feE-3D-h9T"/>
@@ -272,6 +272,10 @@
             <point key="canvasLocation" x="2760.8000000000002" y="754.27286356821594"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Map" width="27" height="27"/>
+        <image name="Navigation" width="25" height="25"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="feE-3D-h9T"/>
     </inferredMetricsTieBreakers>

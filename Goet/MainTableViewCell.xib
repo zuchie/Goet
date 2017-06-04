@@ -98,11 +98,12 @@
                                             </button>
                                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NF9-wW-5fo">
                                                 <rect key="frame" x="46" y="0.0" width="44" height="44"/>
+                                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="44" id="2f3-Ph-Hq9"/>
                                                     <constraint firstAttribute="width" secondItem="NF9-wW-5fo" secondAttribute="height" multiplier="1:1" id="n2Z-yf-g4u"/>
                                                 </constraints>
-                                                <state key="normal" title="Route" image="marker"/>
+                                                <state key="normal" title="Route" image="Route"/>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
                                                         <integer key="value" value="24"/>
@@ -155,8 +156,8 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="Route" width="100" height="100"/>
         <image name="Yelp_Burst_Screen_negative_RGB" width="612" height="792"/>
         <image name="emptyStar" width="150" height="142"/>
-        <image name="marker" width="225" height="225"/>
     </resources>
 </document>
