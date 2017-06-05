@@ -304,7 +304,7 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         if !searchController.isActive {
             if !mostSearched.isEmpty {
                 if indexPath.section == 0 {
-                    cell.textLabel?.text = mostSearched[indexPath.row].name! + " " +  String(mostSearched[indexPath.row].searchCount)
+                    cell.textLabel?.text = mostSearched[indexPath.row].name!
                 } else {
                     cell.textLabel?.text = categories[indexPath.row].name
                 }
@@ -349,15 +349,15 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         if !searchController.isActive {
             if !mostSearched.isEmpty {
                 if section == 0 {
-                    return "Most searched:"
+                    return "Top 3 searches"
                 } else {
-                    return "Categories:"
+                    return "Categories"
                 }
             } else {
-                return "Categories:"
+                return "Categories"
             }
         } else {
-            return "Filtered:"
+            return "Filtered"
         }
     }
     

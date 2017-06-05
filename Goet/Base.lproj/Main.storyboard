@@ -19,6 +19,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="categoriesCell" id="MeM-Hl-vFx">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -190,7 +191,7 @@
                             <outlet property="delegate" destination="wH5-b3-TbF" id="v4v-m2-4rS"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Main" id="gcO-Ox-xEb">
+                    <navigationItem key="navigationItem" id="gcO-Ox-xEb">
                         <barButtonItem key="backBarButtonItem" title="Back" id="aVD-fr-j4H"/>
                         <barButtonItem key="rightBarButtonItem" image="Map" id="NHC-FU-teD" userLabel="Map">
                             <connections>
@@ -258,6 +259,9 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="w0E-s0-UDt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
