@@ -21,9 +21,8 @@ class RadiusViewController: UIViewController {
     
         navigationController?.navigationBar.isHidden = true
         
-        radiusesWidth.constant = view.frame.width - view.layoutMargins.left - view.layoutMargins.right
+        radiusesWidth.constant = view.frame.width
         radiuses.image = UIImage(named: radiusImgDict[radius!]!)
-        //radiuses.layer.cornerRadius = radiuses.frame.width / 2
         
         okButton.layer.cornerRadius = okButton.frame.width / 2
     }
@@ -56,18 +55,18 @@ class RadiusViewController: UIViewController {
         let center = CGPoint(x: radiuses.frame.width / 2, y: radiuses.frame.height / 2)
         let distance = hypot(location.x - center.x, location.y - center.y)
         // Get scaler from radius pdf files.
-        let radius20miToHalfMiRatio: CGFloat = 8.0
-        let minRadius = (radiuses.frame.width / 2) / radius20miToHalfMiRatio
+        let radiusesWidthToHalfMiRadiusRatio: CGFloat = 180.0 / 30.0
+        let minRadius = (radiuses.frame.width / 2) / radiusesWidthToHalfMiRadiusRatio
         switch distance {
         case 0..<minRadius:
             return 800
         case minRadius..<minRadius * 2:
             return 1600
-        case minRadius * 2..<minRadius * 4:
+        case minRadius * 2..<minRadius * 3:
             return 8000
-        case minRadius * 4..<minRadius * 6:
+        case minRadius * 3..<minRadius * 4:
             return 16000
-        case minRadius * 6..<minRadius * 8:
+        case minRadius * 4..<minRadius * 5:
             return 32000
         default:
             return nil
