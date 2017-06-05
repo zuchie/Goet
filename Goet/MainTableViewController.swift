@@ -175,18 +175,23 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
             startIndicator()
             shouldStartIndicator = false
         }
-        
+        /*
         var longEdge: CGFloat
         var shortEdge: CGFloat
         if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
+            print("portrait")
             longEdge = self.view.frame.height
             shortEdge = self.view.frame.width
         } else {
+            print("landscape")
             longEdge = self.view.frame.width
             shortEdge = self.view.frame.height
         }
         self.noResultImgView.frame = CGRect(x: 0, y: 0, width: shortEdge, height: longEdge)
         self.noResultImgView.center = CGPoint(x: self.view.center.x, y: self.view.center.y - self.view.frame.origin.y)
+        
+        print("frame, center: \(self.noResultImgView.frame, self.noResultImgView.center)")
+        */
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -410,9 +415,10 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
                 self.loadImagesToCache(from: self.dataSource) { cache in
                     self.imgCache = cache
                     DispatchQueue.main.async {
-                        self.tableView.reloadData()
+                        //self.tableView.reloadData()
                         if self.dataSource.count == 0 {
                             if self.noResultImgView.superview == nil {
+                                //print("add no results view")
                                 self.view.addSubview(self.noResultImgView)
                             }
                             if self.navigationItem.rightBarButtonItem != nil {
@@ -427,6 +433,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
                                 self.navigationItem.rightBarButtonItem = self.barButtonItem
                             }
                         }
+                        self.tableView.reloadData()
                     }
                     self.stopRefreshOrIndicator()
                 }
