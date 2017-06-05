@@ -66,14 +66,14 @@
                                     <outletCollection property="gestureRecognizers" destination="Az8-7Y-Ft2" appends="YES" id="Pmf-rH-CHf"/>
                                 </connections>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4vB-jy-OVs">
-                                <rect key="frame" x="164" y="591" width="46" height="46"/>
-                                <color key="backgroundColor" red="0.58259579890000002" green="0.87031659029999997" blue="0.83559545160000004" alpha="1" colorSpace="calibratedRGB"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4vB-jy-OVs">
+                                <rect key="frame" x="162.5" y="587" width="50" height="50"/>
+                                <color key="backgroundColor" red="0.87031659029999997" green="0.87031659029999997" blue="0.87031659029999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="46" id="DJP-HI-Fw8"/>
+                                    <constraint firstAttribute="width" constant="50" id="DJP-HI-Fw8"/>
                                     <constraint firstAttribute="width" secondItem="4vB-jy-OVs" secondAttribute="height" multiplier="1:1" id="Doi-Bs-z4L"/>
                                 </constraints>
-                                <state key="normal" title="OK"/>
+                                <state key="normal" title="OK" image="Check"/>
                                 <connections>
                                     <segue destination="beY-Ir-uTc" kind="unwind" identifier="unwindFromRadius" animates="NO" unwindAction="unwindToMainWithSender:" id="bN8-b7-oJz"/>
                                 </connections>
@@ -218,7 +218,7 @@
                 <navigationController title="SavedNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="pVw-sx-tf2" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="CvL-NJ-BRl"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="YiH-Zj-usg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="YiH-Zj-usg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -255,7 +255,7 @@
                 <navigationController title="ExploreNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="fMY-P1-Xr7" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="search" id="FZh-3l-B0e"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="w0E-s0-UDt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="w0E-s0-UDt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -270,7 +270,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Map" width="27" height="27"/>
+        <image name="Check" width="50" height="50"/>
+        <image name="Map" width="26" height="26"/>
         <image name="Navigation" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
