@@ -10,15 +10,12 @@ import Foundation
 import UIKit
 
 open class IndicatorWithContainer: UIActivityIndicatorView {
-    open var container: UIView!
+    open var container = UIView()
     
-    public init(indicatorframe: CGRect, center: CGPoint, style: UIActivityIndicatorViewStyle, containerFrame: CGRect, color: UIColor) {
-        container = UIView(frame: containerFrame)
-        container.backgroundColor = color
-        
+    public init(indicatorframe: CGRect, style: UIActivityIndicatorViewStyle, containerColor: UIColor) {
         super.init(frame: indicatorframe)
         
-        self.center = center
+        container.backgroundColor = containerColor
         activityIndicatorViewStyle = style
     }
     

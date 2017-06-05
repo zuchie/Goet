@@ -76,6 +76,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
     
     private let metersToMiles: [Int: String] = [800: "0.5 mi", 1600: "1 mi", 8000: "5 mi", 16000: "10 mi", 32000: "20 mi"]
     //private var backFromUnwind = false
+    private var shouldStartIndicator = false
 
     // Methods
     override func viewDidLoad() {
@@ -88,8 +89,6 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         
         barButtonItem = navigationItem.rightBarButtonItem
         addViewToNavBar()
-
-        noResultImgView.frame = view.frame
         
         titleVC.completionForCategoryChoose = {
             self.performSegue(withIdentifier: "segueToCategories", sender: self)
@@ -150,12 +149,11 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         
         indicator = IndicatorWithContainer(
             indicatorframe: CGRect(x: 0, y: 0,  width: 40, height: 40),
-            center: CGPoint(x: view.center.x, y: view.center.y - tabBarController!.tabBar.frame.height),
             style: .whiteLarge,
-            containerFrame: view.frame,
-            color: UIColor.gray.withAlphaComponent(0.8)
+            containerColor: UIColor.gray.withAlphaComponent(0.8)
         )
-        startIndicator()
+        //startIndicator()
+        shouldStartIndicator = true
         
         getRadiusAndUpdateTitleView(queryParams.radius)
         getCategoryAndUpdateTitleView(queryParams.category)
@@ -171,55 +169,52 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    /*
+
     override func viewWillAppear(_ animated: Bool) {
-        // Show activity indicator after view has been loaded. 
-        // View hasn't been loaded in unwindToMain() so indicator would have incorrect frame.
-        if backFromUnwind {
+        if shouldStartIndicator {
             startIndicator()
-            backFromUnwind = false
+            shouldStartIndicator = false
         }
+        
+        var longEdge: CGFloat
+        var shortEdge: CGFloat
+        if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
+            longEdge = self.view.frame.height
+            shortEdge = self.view.frame.width
+        } else {
+            longEdge = self.view.frame.width
+            shortEdge = self.view.frame.height
+        }
+        self.noResultImgView.frame = CGRect(x: 0, y: 0, width: shortEdge, height: longEdge)
+        self.noResultImgView.center = CGPoint(x: self.view.center.x, y: self.view.center.y - self.view.frame.origin.y)
     }
-    */
-    /*
-    override func viewWillAppear(_ animated: Bool) {
-        let img = UIImage(named: "ic_qu_direction_mylocation")?.withRenderingMode(.alwaysOriginal)
-        navigationItem.rightBarButtonItem?.image = img
-    }
-    */
+
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
         coordinator.animate(alongsideTransition: nil, completion: { _ in
             self.navigationItem.titleView?.frame = self.navigationController!.navigationBar.frame
-            self.noResultImgView.center = self.view.center
+            if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
+                self.navigationItem.titleView?.frame.size.height -= self.navigationController!.navigationBar.layoutMargins.top + self.navigationController!.navigationBar.layoutMargins.bottom
+            }
+            
+            var longEdge: CGFloat
+            var shortEdge: CGFloat
+            if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
+                longEdge = self.view.frame.height
+                shortEdge = self.view.frame.width
+            } else {
+                longEdge = self.view.frame.width
+                shortEdge = self.view.frame.height
+            }
+            self.noResultImgView.frame = CGRect(x: 0, y: 0, width: shortEdge, height: longEdge)
+            self.noResultImgView.center = CGPoint(x: self.view.center.x, y: self.view.center.y - self.view.frame.origin.y)
         })
     }
 
     fileprivate func startIndicator() {
-        // Center and frame might change from portrait to landscape.
-        // Width/Height of view might not be consistent with device orientation for now.
-        let viewWidth = view.frame.width
-        let viewHeight = view.frame.height
-        
-        if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
-            if viewWidth <= viewHeight {
-                indicator.container.frame.size.width = viewWidth
-                indicator.container.frame.size.height = viewHeight
-            } else {
-                indicator.container.frame.size.width = viewHeight
-                indicator.container.frame.size.height = viewWidth
-            }
-        } else {
-            if viewWidth >= viewHeight {
-                indicator.container.frame.size.width = viewWidth
-                indicator.container.frame.size.height = viewHeight
-            } else {
-                indicator.container.frame.size.width = viewHeight
-                indicator.container.frame.size.height = viewWidth
-            }
-        }
-        indicator.center = CGPoint(x: indicator.container.center.x, y: indicator.container.center.y - tabBarController!.tabBar.frame.height)
+        indicator.container.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
+        indicator.center = CGPoint(x: indicator.container.center.x, y: indicator.container.center.y)
 
         DispatchQueue.main.async {
             // Scroll to top, otherwise the activity indicator may be shown outside the top of the screen.
@@ -243,6 +238,9 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
     
     fileprivate func addViewToNavBar() {
         titleVC.view.frame = navigationController!.navigationBar.frame
+        if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
+            titleVC.view.frame.size.height -= navigationController!.navigationBar.layoutMargins.top + navigationController!.navigationBar.layoutMargins.bottom
+        }
         navigationItem.titleView = titleVC.view
     }
     
@@ -416,7 +414,6 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
                         if self.dataSource.count == 0 {
                             if self.noResultImgView.superview == nil {
                                 self.view.addSubview(self.noResultImgView)
-                                
                             }
                             if self.navigationItem.rightBarButtonItem != nil {
                                 self.navigationItem.rightBarButtonItem = nil
@@ -424,9 +421,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
                             
                         } else {
                             if self.noResultImgView.superview != nil {
-                                
                                 self.noResultImgView.removeFromSuperview()
-                                
                             }
                             if self.navigationItem.rightBarButtonItem == nil {
                                 self.navigationItem.rightBarButtonItem = self.barButtonItem
@@ -640,7 +635,8 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
                 fatalError("Couldn't get category.")
             }
             
-            startIndicator()
+            shouldStartIndicator = true
+            //startIndicator()
             
             getCategoryAndUpdateTitleView(category)
             getDate()
@@ -650,7 +646,8 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
                 fatalError("Couldn't get radiusVC.")
             }
             
-            startIndicator()
+            shouldStartIndicator = true
+            //startIndicator()
             
             getRadiusAndUpdateTitleView(radius)
             getDate()

@@ -189,8 +189,8 @@ class GoogleMapsViewController: UIViewController {
                         DispatchQueue.main.async(execute: {
                             let path = GMSMutablePath(fromEncodedPath: points)
                             let polyline = GMSPolyline(path: path)
-                            polyline.strokeWidth = 3
-                            
+                            polyline.strokeWidth = 5
+                            polyline.strokeColor = UIColor(red: 88 / 255, green: 130 / 255, blue: 1, alpha: 1)
                             polyline.map = self.mapView
                         })
                     }
