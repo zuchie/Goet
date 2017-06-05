@@ -21,7 +21,11 @@ class RadiusViewController: UIViewController {
     
         navigationController?.navigationBar.isHidden = true
         
-        radiusesWidth.constant = view.frame.width
+        if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
+            radiusesWidth.constant = view.frame.width
+        } else {
+            radiusesWidth.constant = view.frame.height
+        }
         radiuses.image = UIImage(named: radiusImgDict[radius!]!)
         
         okButton.layer.cornerRadius = okButton.frame.width / 2
