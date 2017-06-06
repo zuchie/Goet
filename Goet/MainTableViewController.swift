@@ -327,7 +327,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         guard let chooseCategoryStackView = stackView.arrangedSubviews[1] as? UIStackView else {
             fatalError("Couldn't get category stack view from stack view.")
         }
-        guard let label = chooseCategoryStackView.arrangedSubviews[1] as? UILabel else {
+        guard let label = chooseCategoryStackView.arrangedSubviews[1].subviews[0] as? UILabel else {
             fatalError("Couldn't get label from stack view.")
         }
         label.text = category
@@ -340,7 +340,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         guard let chooseRadiusStackView = stackView.arrangedSubviews[0] as? UIStackView else {
             fatalError("Couldn't get radius stack view from stack view.")
         }
-        guard let label = chooseRadiusStackView.arrangedSubviews[1] as? UILabel else {
+        guard let label = chooseRadiusStackView.arrangedSubviews[1].subviews[0] as? UILabel else {
             fatalError("Couldn't get label from stack view.")
         }
         label.text = metersToMiles[radius]

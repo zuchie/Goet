@@ -15,7 +15,7 @@
         <scene sceneID="DcX-ul-6iG">
             <objects>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="PZ5-fQ-YE3" userLabel="Categories" customClass="CategoriesTableViewController" customModule="Goet" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="hFN-qs-AZK">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="hFN-qs-AZK">
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -52,7 +52,7 @@
                         <viewControllerLayoutGuide type="top" id="jgf-hj-81p"/>
                         <viewControllerLayoutGuide type="bottom" id="Mbg-9x-M2c"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="0Wa-PP-UdQ">
+                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="0Wa-PP-UdQ">
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -68,7 +68,7 @@
                                 </connections>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4vB-jy-OVs">
-                                <rect key="frame" x="162.5" y="474" width="50" height="50"/>
+                                <rect key="frame" x="162.5" y="424" width="50" height="50"/>
                                 <color key="backgroundColor" red="0.87031659029999997" green="0.87031659029999997" blue="0.87031659029999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="DJP-HI-Fw8"/>
@@ -84,7 +84,7 @@
                         <constraints>
                             <constraint firstItem="4vB-jy-OVs" firstAttribute="centerX" secondItem="0Wa-PP-UdQ" secondAttribute="centerX" id="GiN-kC-oRd"/>
                             <constraint firstItem="7C0-c1-bTa" firstAttribute="centerY" secondItem="0Wa-PP-UdQ" secondAttribute="centerY" id="HiU-TF-Dvh"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="4vB-jy-OVs" secondAttribute="bottom" constant="30" id="K2Y-aJ-PL1"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="4vB-jy-OVs" secondAttribute="bottom" constant="80" id="K2Y-aJ-PL1"/>
                             <constraint firstItem="7C0-c1-bTa" firstAttribute="centerX" secondItem="0Wa-PP-UdQ" secondAttribute="centerX" id="hmS-pJ-X19"/>
                         </constraints>
                     </view>
@@ -224,7 +224,7 @@
                 <navigationController title="SavedNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="pVw-sx-tf2" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="CvL-NJ-BRl"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="YiH-Zj-usg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="YiH-Zj-usg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.30473047494888306" green="0.66596442461013794" blue="0.66957086324691772" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -262,7 +262,7 @@
                 <navigationController title="ExploreNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="fMY-P1-Xr7" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="search" id="FZh-3l-B0e"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="w0E-s0-UDt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="w0E-s0-UDt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.30473047494888306" green="0.66596442461013794" blue="0.66957086324691772" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
