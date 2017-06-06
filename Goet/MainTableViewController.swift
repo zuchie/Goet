@@ -615,7 +615,6 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
                 fatalError("Couldn't get category.")
             }
             
-            //shouldStartIndicator = true
             startIndicator()
             
             getCategoryAndUpdateTitleView(category)
@@ -626,7 +625,6 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
                 fatalError("Couldn't get radiusVC.")
             }
             
-            //shouldStartIndicator = true
             startIndicator()
             
             getRadiusAndUpdateTitleView(radius)
