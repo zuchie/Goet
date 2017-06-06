@@ -68,7 +68,7 @@
                                 </connections>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4vB-jy-OVs">
-                                <rect key="frame" x="162.5" y="424" width="50" height="50"/>
+                                <rect key="frame" x="162.5" y="444" width="50" height="50"/>
                                 <color key="backgroundColor" red="0.87031659029999997" green="0.87031659029999997" blue="0.87031659029999997" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="DJP-HI-Fw8"/>
@@ -84,7 +84,7 @@
                         <constraints>
                             <constraint firstItem="4vB-jy-OVs" firstAttribute="centerX" secondItem="0Wa-PP-UdQ" secondAttribute="centerX" id="GiN-kC-oRd"/>
                             <constraint firstItem="7C0-c1-bTa" firstAttribute="centerY" secondItem="0Wa-PP-UdQ" secondAttribute="centerY" id="HiU-TF-Dvh"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="4vB-jy-OVs" secondAttribute="bottom" constant="80" id="K2Y-aJ-PL1"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="4vB-jy-OVs" secondAttribute="bottom" constant="60" id="K2Y-aJ-PL1"/>
                             <constraint firstItem="7C0-c1-bTa" firstAttribute="centerX" secondItem="0Wa-PP-UdQ" secondAttribute="centerX" id="hmS-pJ-X19"/>
                         </constraints>
                     </view>

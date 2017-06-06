@@ -88,6 +88,7 @@ class GoogleMapsViewController: UIViewController {
             label.textAlignment = .center
             label.textColor = UIColor.white
             label.adjustsFontSizeToFitWidth = true
+            label.minimumScaleFactor = 0.5
             
             view.addSubview(label)
         }
