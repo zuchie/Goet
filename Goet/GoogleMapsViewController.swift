@@ -25,7 +25,7 @@ class GoogleMapsViewController: UIViewController {
     var markersOnly = false
     private var barButtonItem: UIBarButtonItem!
     
-    private let edges = UIEdgeInsetsMake(120, 40, 70, 40)
+    private let edges = UIEdgeInsetsMake(40, 40, 70, 40)
     private var bounds: GMSCoordinateBounds!
 
     
@@ -65,19 +65,25 @@ class GoogleMapsViewController: UIViewController {
             }
         }
         
+        view.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.new, context: nil)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if markersOnly {
+            barButtonItem = navigationItem.rightBarButtonItem
+            navigationItem.rightBarButtonItem = nil
+        } else {
+            navigationItem.title = "Route"
+        }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         if !markersOnly {
             // Add label.
-            let screenBounds = UIScreen.main.bounds
-            let labelWidth: CGFloat
-            let labelHeight: CGFloat
-            if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
-                labelWidth = screenBounds.width * 0.5
-            } else {
-                labelWidth = screenBounds.height * 0.5
-            }
-            labelHeight = labelWidth / 9.0
-            
-            label.frame = CGRect(x: screenBounds.width / 2.0 - labelWidth / 2.0, y: screenBounds.height - labelHeight , width: labelWidth, height: labelHeight)
+            let labelWidth: CGFloat = view.bounds.width / 3
+            let labelHeight = labelWidth / 7.0
+            label.bounds = CGRect(x: 0, y: 0, width: labelWidth, height: labelHeight)
+            label.center = CGPoint(x: view.center.x, y: view.bounds.height - labelHeight / 2)
             label.backgroundColor = UIColor.lightGray
             label.textAlignment = .center
             label.textColor = UIColor.white
@@ -86,18 +92,6 @@ class GoogleMapsViewController: UIViewController {
             view.addSubview(label)
         }
     }
-    
-    // KVO - Key Value Observer, to observe changes of mapView.myLocation.
-    override func viewWillAppear(_ animated: Bool) {
-        if markersOnly {
-            barButtonItem = navigationItem.rightBarButtonItem
-            navigationItem.rightBarButtonItem = nil
-        } else {
-            navigationItem.title = "Route"
-        }
-        
-        view.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.new, context: nil)
-    }
 
     // Restore navigation bar status.
     override func viewWillDisappear(_ animated: Bool) {
@@ -105,7 +99,7 @@ class GoogleMapsViewController: UIViewController {
             navigationItem.rightBarButtonItem = barButtonItem
         }
     }
-    
+    /*
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
         
@@ -127,7 +121,7 @@ class GoogleMapsViewController: UIViewController {
             self.label.frame = CGRect(x: screenBounds.width / 2.0 - labelWidth / 2.0, y: screenBounds.height - labelHeight , width: labelWidth, height: labelHeight)
         }
     }
-    
+    */
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
         
         if keyPath == "myLocation" && object is GMSMapView {
@@ -169,7 +163,6 @@ class GoogleMapsViewController: UIViewController {
                     self.bounds = GMSCoordinateBounds(coordinate: northeast, coordinate: southwest)
                     let camera = GMSCameraUpdate.fit(self.bounds, with: self.edges)
                     
-                    //print("update camera")
                     self.mapView.animate(with: camera)
                 }
             } else {
