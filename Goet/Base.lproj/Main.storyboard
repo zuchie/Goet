@@ -69,7 +69,7 @@
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4vB-jy-OVs">
                                 <rect key="frame" x="162.5" y="444" width="50" height="50"/>
-                                <color key="backgroundColor" red="0.87031659029999997" green="0.87031659029999997" blue="0.87031659029999997" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.82352941176470584" green="0.82352941176470584" blue="0.82352941176470584" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="DJP-HI-Fw8"/>
                                     <constraint firstAttribute="width" secondItem="4vB-jy-OVs" secondAttribute="height" multiplier="1:1" id="Doi-Bs-z4L"/>
