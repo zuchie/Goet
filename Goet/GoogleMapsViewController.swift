@@ -25,7 +25,7 @@ class GoogleMapsViewController: UIViewController {
     var markersOnly = false
     private var barButtonItem: UIBarButtonItem!
     
-    private let edges = UIEdgeInsetsMake(40, 40, 70, 40)
+    private let edges = UIEdgeInsetsMake(50, 40, 70, 40)
     private var bounds: GMSCoordinateBounds!
 
     

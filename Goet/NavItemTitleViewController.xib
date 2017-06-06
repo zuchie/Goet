@@ -14,7 +14,7 @@
             <connections>
                 <outlet property="chooseCategory" destination="gbt-5F-3o4" id="4JH-Cc-f0j"/>
                 <outlet property="chooseRadius" destination="pRK-dt-XVw" id="kAy-Pf-3uT"/>
-                <outlet property="view" destination="eeV-1J-WMx" id="UWW-TK-5c6"/>
+                <outlet property="view" destination="eeV-1J-WMx" id="fTM-eB-XW8"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
