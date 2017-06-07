@@ -19,6 +19,7 @@
 		B91AC85C1D4EAC4600B0476E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B91AC85A1D4EAC4600B0476E /* Main.storyboard */; };
 		B91AC85E1D4EAC4600B0476E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B91AC85D1D4EAC4600B0476E /* Assets.xcassets */; };
 		B91AC8611D4EAC4600B0476E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B91AC85F1D4EAC4600B0476E /* LaunchScreen.storyboard */; };
+		B91C59F81EE7A9F400DEB42B /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B91C59F71EE7A9F400DEB42B /* AboutViewController.swift */; };
 		B937286B1E7D475900B911E5 /* SavedTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93728691E7D475900B911E5 /* SavedTableViewCell.swift */; };
 		B937286C1E7D475900B911E5 /* SavedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B937286A1E7D475900B911E5 /* SavedTableViewCell.xib */; };
 		B937286E1E82482500B911E5 /* MainTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = B937286D1E82482500B911E5 /* MainTableViewCell.xib */; };
@@ -30,6 +31,7 @@
 		B965C9731E601F2E0015E2AC /* Saved.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B965C9711E601F2E0015E2AC /* Saved.xcdatamodeld */; };
 		B965C9801E6777E80015E2AC /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B965C97E1E6777E80015E2AC /* MainTableViewCell.swift */; };
 		B96AE97E1D8E6EAD00257751 /* CoreDataTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B96AE97D1D8E6EAD00257751 /* CoreDataTableViewController.swift */; };
+		B9B1DF0E1EE7B3E500B7EA04 /* MoreTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9B1DF0D1EE7B3E500B7EA04 /* MoreTableViewController.swift */; };
 		B9BA66081ED4F92B0081647B /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BA66071ED4F92B0081647B /* ActivityIndicator.swift */; };
 		B9BA660F1ED522C90081647B /* NavItemTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BA660D1ED522C90081647B /* NavItemTitleViewController.swift */; };
 		B9BA66101ED522C90081647B /* NavItemTitleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9BA660E1ED522C90081647B /* NavItemTitleViewController.xib */; };
@@ -74,6 +76,7 @@
 		B91AC85D1D4EAC4600B0476E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B91AC8601D4EAC4600B0476E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B91AC8621D4EAC4600B0476E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B91C59F71EE7A9F400DEB42B /* AboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
 		B93728691E7D475900B911E5 /* SavedTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SavedTableViewCell.swift; sourceTree = "<group>"; };
 		B937286A1E7D475900B911E5 /* SavedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SavedTableViewCell.xib; sourceTree = "<group>"; };
 		B937286D1E82482500B911E5 /* MainTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainTableViewCell.xib; sourceTree = "<group>"; };
@@ -87,6 +90,7 @@
 		B965C9721E601F2E0015E2AC /* Saved.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Saved.xcdatamodel; sourceTree = "<group>"; };
 		B965C97E1E6777E80015E2AC /* MainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
 		B96AE97D1D8E6EAD00257751 /* CoreDataTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataTableViewController.swift; sourceTree = "<group>"; };
+		B9B1DF0D1EE7B3E500B7EA04 /* MoreTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreTableViewController.swift; sourceTree = "<group>"; };
 		B9BA66071ED4F92B0081647B /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		B9BA660D1ED522C90081647B /* NavItemTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavItemTitleViewController.swift; sourceTree = "<group>"; };
 		B9BA660E1ED522C90081647B /* NavItemTitleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NavItemTitleViewController.xib; sourceTree = "<group>"; };
@@ -194,6 +198,8 @@
 		B91AC8551D4EAC4600B0476E /* Goet */ = {
 			isa = PBXGroup;
 			children = (
+				B9B1DF0C1EE7B3CE00B7EA04 /* More */,
+				B91C59F61EE7A9D300DEB42B /* About */,
 				B9646F4F1EE12B49000636B6 /* Categories */,
 				B9BA66111EDD52510081647B /* Radius */,
 				B9C1E3F51ED3B1B0001B04CD /* Helper */,
@@ -209,6 +215,14 @@
 				B91AC8621D4EAC4600B0476E /* Info.plist */,
 			);
 			path = Goet;
+			sourceTree = "<group>";
+		};
+		B91C59F61EE7A9D300DEB42B /* About */ = {
+			isa = PBXGroup;
+			children = (
+				B91C59F71EE7A9F400DEB42B /* AboutViewController.swift */,
+			);
+			name = About;
 			sourceTree = "<group>";
 		};
 		B93D332A1EA6C84A007EAD5A /* GoetUITests */ = {
@@ -235,6 +249,14 @@
 				B906DBA21D727DCA0021B025 /* YelpQueryURLBuilder.swift */,
 			);
 			name = YelpQuery;
+			sourceTree = "<group>";
+		};
+		B9B1DF0C1EE7B3CE00B7EA04 /* More */ = {
+			isa = PBXGroup;
+			children = (
+				B9B1DF0D1EE7B3E500B7EA04 /* MoreTableViewController.swift */,
+			);
+			name = More;
 			sourceTree = "<group>";
 		};
 		B9BA66111EDD52510081647B /* Radius */ = {
@@ -482,6 +504,7 @@
 				B9BA660F1ED522C90081647B /* NavItemTitleViewController.swift in Sources */,
 				B9BA66131EDD52890081647B /* RadiusViewController.swift in Sources */,
 				B9D4457A1EBC660700219D91 /* URLRequestMaker.swift in Sources */,
+				B91C59F81EE7A9F400DEB42B /* AboutViewController.swift in Sources */,
 				B9BA66081ED4F92B0081647B /* ActivityIndicator.swift in Sources */,
 				B9646F511EE12B80000636B6 /* CategoriesTableViewController.swift in Sources */,
 				B9F984E81E5A7F6700C6CA04 /* MainTableViewController.swift in Sources */,
@@ -494,6 +517,7 @@
 				B9C1E3F41ED18A3C001B04CD /* Cache.swift in Sources */,
 				B96AE97E1D8E6EAD00257751 /* CoreDataTableViewController.swift in Sources */,
 				B937286B1E7D475900B911E5 /* SavedTableViewCell.swift in Sources */,
+				B9B1DF0E1EE7B3E500B7EA04 /* MoreTableViewController.swift in Sources */,
 				B906DBB21D863B7B0021B025 /* SavedTableViewController.swift in Sources */,
 				B906DBAC1D76BAF80021B025 /* GoogleMapsGetDirection.swift in Sources */,
 				B965C9681E5CEF4C0015E2AC /* YelpQueryMaker.swift in Sources */,

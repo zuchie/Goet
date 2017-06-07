@@ -25,6 +25,7 @@ extension UIAlertController {
      */
     convenience init(title: String, message: String, actions: [Actions]) {
         self.init(title: title, message: message, preferredStyle: .alert)
+        self.view.tintColor = UIColor(red: 80 / 255, green: 170 / 255, blue: 170 / 255, alpha: 1)
         
         var alertAction: UIAlertAction
         for action in actions {
