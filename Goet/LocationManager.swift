@@ -6,7 +6,6 @@
 //  Copyright © 2017 Zhe Cui. All rights reserved.
 //
 
-//import Foundation
 import CoreLocation
 import UIKit
 
@@ -27,7 +26,6 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
     func requestLocation() {
         print("Requesting location...")
         updateCount = 0
-        //locationManager.requestLocation()
         locationManager.startUpdatingLocation()
     }
     
@@ -70,15 +68,4 @@ class LocationManager: NSObject, CLLocationManagerDelegate {
             completion?(location)
         }
     }
-    /*
-    func locationManagerDidPauseLocationUpdates(_ manager: CLLocationManager) {
-        print("did pause location updating")
-        updateCount = 0
-    }
-    
-    func locationManagerDidResumeLocationUpdates(_ manager: CLLocationManager) {
-        print("did resume location updating")
-        updateCount = 0
-    }
-    */
 }

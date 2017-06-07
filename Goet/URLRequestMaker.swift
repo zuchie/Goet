@@ -23,14 +23,6 @@ extension URLRequest {
             let task = URLSession.shared.dataTask(with: self) { data, response, error in
                 
                 if let err = error {
-                    /*
-                    let alert = UIAlertController(
-                        title: "Error: \(err.localizedDescription)",
-                        message: "Oops, looks like the server is not available now, please try again at a later time.",
-                        actions: [.ok]
-                    )
-                    alert.show()
-                    */
                     completion(err, nil)
                     return
                 }

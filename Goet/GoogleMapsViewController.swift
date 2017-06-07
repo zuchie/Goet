@@ -56,8 +56,8 @@ class GoogleMapsViewController: UIViewController {
         
         drawRoute.completionWithError = { error in
             let alert = UIAlertController(
-                title: "Error: \(String(describing: error?.localizedDescription))",
-                message: "Oops, looks like the Google Maps server is not available now, please try again at a later time.",
+                title: "\(error!.localizedDescription)",
+                message: "There might be some issues with the internet or Google Maps server, please make sure you are connected to the internet or try again at a later time.",
                 actions: [.ok]
             )
             DispatchQueue.main.async {
@@ -140,8 +140,8 @@ class GoogleMapsViewController: UIViewController {
                 } else {
                     print("Couldn't get my location.")
                     let alert = UIAlertController(
-                        title: "Missing your location",
-                        message: "The Google Maps can't get your location, please try again at a later time.",
+                        title: "I cannot find your current location.",
+                        message: "The Google Maps can't get your current location, please try again at a later time.",
                         actions: [.ok]
                     )
                     DispatchQueue.main.async {

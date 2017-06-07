@@ -81,6 +81,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         super.viewDidLoad()
         
         barButtonItem = navigationItem.rightBarButtonItem
+        navigationItem.rightBarButtonItem = nil
         addViewToNavBar()
         
         noResultImgView = UIImageView(image: UIImage(named: "NoResults"))
@@ -118,26 +119,26 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
             switch error._code {
             case CLError.network.rawValue:
                 alert = UIAlertController(
-                    title: "Location Services not available",
-                    message: "Please make sure that your device is connected to the network",
+                    title: "I couldn't find your current location.",
+                    message: "You might be offline, please connect to the internet and try again.",
                     actions: [.ok]
                 )
             case CLError.denied.rawValue:
                 alert = UIAlertController(
-                    title: "Location Access Disabled",
-                    message: "In order to get your current location, please open Settings and set location access of this App to 'While Using the App'.",
+                    title: "Please allow me to have permission to use your current location.",
+                    message: "In order to get your current location, please open Settings and set location access of me to 'While Using the App'.",
                     actions: [.cancel, .openSettings]
                 )
             case CLError.locationUnknown.rawValue:
                 alert = UIAlertController(
-                    title: "Location Unknown",
-                    message: "Couldn't get location, please try again at a later time.",
+                    title: "I cannot determine your current location.",
+                    message: "It might be caused by slow network or server, please try again at a later time.",
                     actions: [.ok]
                 )
             default:
                 alert = UIAlertController(
-                    title: "Bad location services",
-                    message: "Location services got issue, please try again at a later time.",
+                    title: "I cannot find your current location.",
+                    message: "There might be some issues with location services, please try again at a later time.",
                     actions: [.ok]
                 )
             }
@@ -145,7 +146,6 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         }
         
         indicator = IndicatorWithContainer()
-        //startIndicator()
         
         getRadiusAndUpdateTitleView(queryParams.radius)
         getCategoryAndUpdateTitleView(queryParams.category)
@@ -161,45 +161,11 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    /*
-    override func viewWillAppear(_ animated: Bool) {
-        //print("==view will appear frame: \(view.frame)")
-        
-        noResultImgView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-    }
-    */
-    /*
-    override func viewDidAppear(_ animated: Bool) {
-        //print("==view did appear frame: \(view.frame)")
-        
-        if shouldStartIndicator {
-            startIndicator()
-            shouldStartIndicator = false
-        }
-    }
-    */
-    /*
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.viewWillTransition(to: size, with: coordinator)
-        
-        coordinator.animate(alongsideTransition: nil, completion: { _ in
-            self.navigationItem.titleView?.frame = self.navigationController!.navigationBar.frame
-            self.navigationItem.titleView?.frame.size.height -= self.navigationController!.navigationBar.layoutMargins.top + self.navigationController!.navigationBar.layoutMargins.bottom
-            
-            self.noResultImgView.frame = self.view.frame
-            self.noResultImgView.center = self.view.center
-        })
-    }
-    */
-    fileprivate func startIndicator() {
-        //indicator.container.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
-        //indicator.center = indicator.container.center
 
+    fileprivate func startIndicator() {
         DispatchQueue.main.async {
             // Scroll to top, otherwise the activity indicator may be shown outside the top of the screen.
             self.tableView.setContentOffset(CGPoint(x: 0, y: -self.tableView.contentInset.top), animated: true)
-            //self.view.addSubview(self.indicator.container)
-            //self.appDelegate?.window?.addSubview(self.indicator.container)
             self.indicator.start()
         }
     }
@@ -211,7 +177,6 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
             }
             if self.indicator.isAnimating {
                 self.indicator.stop()
-                //self.indicator.container.removeFromSuperview()
             }
         }
     }
@@ -221,7 +186,9 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         titleVC.view.frame = navBar.frame
         titleVC.view.frame.size.height = navBar.frame.height - navBar.layoutMargins.top - navBar.layoutMargins.bottom
 
-        navigationItem.titleView = titleVC.view
+        DispatchQueue.main.async {
+            self.navigationItem.titleView = self.titleVC.view
+        }
     }
     
     // Cache
@@ -320,7 +287,6 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
     }
     
     fileprivate func updateTitleViewCategoryLabel(_ category: String) {
-        //let title = (category == "All" ? "All" : category)
         guard let stackView = titleVC.view.subviews[0] as? UIStackView else {
             fatalError("Couldn't get stack view from view.")
         }
@@ -377,8 +343,8 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
             
             yelpQuery.completionWithError = { error in
                 let alert = UIAlertController(
-                    title: "Error: \(error.localizedDescription)",
-                    message: "Oops, looks like the server is not available now, please try again at a later time.",
+                    title: "\(error.localizedDescription)",
+                    message: "You might be disconnected, please connect to the internet and try again.",
                     actions: [.ok]
                 )
                 self.present(alert, animated: false, completion: { self.stopRefreshOrIndicator(); return })
@@ -560,8 +526,8 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
                 print("Open Yelp URL failed.")
             }
         } else {
-            let alert = UIAlertController(title: "Alert",
-                                          message: "Couldn't find a restaurant.",
+            let alert = UIAlertController(title: "Couldn't find a restaurant.",
+                                          message: "I couldn't find a restaurant from Yelp server, please try again later.",
                                           actions: [.ok]
             )
             self.present(alert, animated: false, completion: { return })
@@ -577,8 +543,8 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
             
             let destinationVC = segue.destination
             if cell.address == "" {
-                let alert = UIAlertController(title: "Alert",
-                                  message: "Couldn't find a restaurant.",
+                let alert = UIAlertController(title: "Couldn't find a restaurant.",
+                                  message: "I couldn't find a restaurant from Yelp server, please try again later.",
                                   actions: [.ok]
                 )
                 self.present(alert, animated: false, completion: { return })

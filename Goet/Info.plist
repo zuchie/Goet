@@ -31,7 +31,7 @@
 	<key>NSLocationUsageDescription</key>
 	<string>Permission for your current location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app would like to use your current location</string>
+	<string>I would like to use your current location to find restaurants near you.</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
