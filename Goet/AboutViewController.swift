@@ -15,12 +15,15 @@ class AboutViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let attribution = GMSServices.openSourceLicenseInfo()
-        text.text = attribution
-        //print("attribution: \(attribution)")
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        let attribution = GMSServices.openSourceLicenseInfo()
+        DispatchQueue.main.async {
+            self.text.text = attribution
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

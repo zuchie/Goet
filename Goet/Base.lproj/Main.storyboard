@@ -141,20 +141,10 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="mSZ-cJ-q1y" userLabel="footer">
-                            <rect key="frame" x="0.0" y="78" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
-                        <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="50" id="Hdf-NF-CEb" customClass="SavedTableViewCell" customModule="Goet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="50"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" contentMode="center" tableViewCell="Hdf-NF-CEb" id="YJh-rc-S2K">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="49.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="9Ww-aC-vSP" id="1FA-ta-X3y"/>
                             <outlet property="delegate" destination="9Ww-aC-vSP" id="5Bt-Yt-rKU"/>
@@ -277,20 +267,10 @@
                         <gestureRecognizers/>
                         <inset key="separatorInset" minX="10" minY="0.0" maxX="10" maxY="0.0"/>
                         <view key="tableFooterView" contentMode="scaleToFill" id="kg3-An-UBA" userLabel="footer">
-                            <rect key="frame" x="0.0" y="372" width="375" height="0.0"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="I73-Y9-GaB" customClass="MainTableViewCell" customModule="Goet" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="375" height="344"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="I73-Y9-GaB" id="ajt-xg-QlE">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="343.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
                         <connections>
                             <outlet property="dataSource" destination="wH5-b3-TbF" id="BQe-JI-IYO"/>
                             <outlet property="delegate" destination="wH5-b3-TbF" id="v4v-m2-4rS"/>
