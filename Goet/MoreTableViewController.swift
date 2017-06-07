@@ -10,7 +10,7 @@ import UIKit
 
 class MoreTableViewController: UITableViewController {
 
-    private let items = ["About"]
+    private let items = ["Google Legal Notice"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,7 +49,7 @@ class MoreTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView.cellForRow(at: indexPath)?.textLabel?.text == "About" {
+        if tableView.cellForRow(at: indexPath)?.textLabel?.text == "Google Legal Notice" {
             performSegue(withIdentifier: "segueToAbout", sender: tableView.cellForRow(at: indexPath))
         }
     }

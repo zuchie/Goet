@@ -79,7 +79,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
     // Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         barButtonItem = navigationItem.rightBarButtonItem
         addViewToNavBar()
         
