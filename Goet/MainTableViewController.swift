@@ -145,7 +145,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         }
         
         indicator = IndicatorWithContainer()
-        startIndicator()
+        //startIndicator()
         
         getRadiusAndUpdateTitleView(queryParams.radius)
         getCategoryAndUpdateTitleView(queryParams.category)
