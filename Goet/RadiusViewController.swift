@@ -59,7 +59,7 @@ class RadiusViewController: UIViewController {
         let center = CGPoint(x: radiuses.frame.width / 2, y: radiuses.frame.height / 2)
         let distance = hypot(location.x - center.x, location.y - center.y)
         // Get scaler from radius pdf files.
-        let radiusesWidthToHalfMiRadiusRatio: CGFloat = 180.0 / 30.0
+        let radiusesWidthToHalfMiRadiusRatio: CGFloat = 300.0 / 50.0
         let minRadius = (radiuses.frame.width / 2) / radiusesWidthToHalfMiRadiusRatio
         switch distance {
         case 0..<minRadius:
