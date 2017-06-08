@@ -184,7 +184,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
     fileprivate func addViewToNavBar() {
         let navBar = navigationController!.navigationBar
         titleVC.view.frame = navBar.frame
-        titleVC.view.frame.size.height = navBar.frame.height - navBar.layoutMargins.top - navBar.layoutMargins.bottom
+        titleVC.view.frame.size.height = navBar.frame.height /*- navBar.layoutMargins.top*/ /*- navBar.layoutMargins.bottom*/
 
         DispatchQueue.main.async {
             self.navigationItem.titleView = self.titleVC.view
