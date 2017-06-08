@@ -7,19 +7,30 @@
 //
 
 import UIKit
+import GoogleMaps
+
 
 class MoreTableViewController: UITableViewController {
 
-    private let items = ["Google Legal Notice"]
+    private enum MoreItems {
+        case aboutApp(String)
+        case legalNotices(String)
+    }
+    
+    private let aboutApp = "About the app..."
+    
+    private var items: [String: MoreItems]!
+    private let dataSource = ["About the Goet App", "Google Maps Legal Notices"]
+    
+    private var aboutAppText: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        items = [
+            dataSource[0]: MoreItems.aboutApp(aboutApp),
+            dataSource[1]: MoreItems.legalNotices(GMSServices.openSourceLicenseInfo())
+        ]
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,22 +47,20 @@ class MoreTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return items.count
+        return dataSource.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "moreCell", for: indexPath)
 
         // Configure the cell...
-        cell.textLabel?.text = items[indexPath.row]
+        cell.textLabel?.text = dataSource[indexPath.row]
 
         return cell
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if tableView.cellForRow(at: indexPath)?.textLabel?.text == "Google Legal Notice" {
-            performSegue(withIdentifier: "segueToAbout", sender: tableView.cellForRow(at: indexPath))
-        }
+        performSegue(withIdentifier: "segueToAbout", sender: tableView.cellForRow(at: indexPath))
     }
     
     /*
@@ -89,14 +98,31 @@ class MoreTableViewController: UITableViewController {
     }
     */
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "segueToAbout" {
+            let vc = segue.destination as! AboutViewController
+            var text = ""
+            guard let cellLabelText = (sender as? UITableViewCell)?.textLabel?.text else {
+                fatalError("Unexpected sender.")
+            }
+
+            guard let item = items[cellLabelText] else {
+                fatalError("Unexpected item.")
+            }
+            switch item {
+            case .aboutApp(let content):
+                text = content
+            case .legalNotices(let content):
+                text = content
+            }
+        
+            vc.getText(title: cellLabelText, text: text)
+        }
     }
-    */
 
 }

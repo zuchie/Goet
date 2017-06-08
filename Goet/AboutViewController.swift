@@ -7,21 +7,18 @@
 //
 
 import UIKit
-import GoogleMaps
 
 class AboutViewController: UIViewController {
 
     @IBOutlet weak var text: UITextView!
+    private var textTitle: String!
+    private var textContent: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        let attribution = GMSServices.openSourceLicenseInfo()
-        DispatchQueue.main.async {
-            self.text.text = attribution
-        }
+        
+        navigationItem.title = textTitle
+        text.text = textContent
     }
     
     override func didReceiveMemoryWarning() {
@@ -30,6 +27,11 @@ class AboutViewController: UIViewController {
     }
     
 
+    func getText(title: String, text: String) {
+        textTitle = title
+        textContent = text
+    }
+    
     /*
     // MARK: - Navigation
 

@@ -247,7 +247,7 @@
                             <constraint firstItem="Uv6-Ng-I14" firstAttribute="leading" secondItem="sXo-S3-gah" secondAttribute="leading" id="sd6-tS-hm2"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Google Legal Notice" id="K2p-uf-Odn"/>
+                    <navigationItem key="navigationItem" title="Google Maps Legal Notices" id="K2p-uf-Odn"/>
                     <connections>
                         <outlet property="text" destination="Uv6-Ng-I14" id="d9x-Hr-aYL"/>
                     </connections>
