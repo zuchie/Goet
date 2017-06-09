@@ -7,7 +7,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,7 +14,7 @@
         <scene sceneID="DcX-ul-6iG">
             <objects>
                 <tableViewController hidesBottomBarWhenPushed="YES" id="PZ5-fQ-YE3" userLabel="Categories" customClass="CategoriesTableViewController" customModule="Goet" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="hFN-qs-AZK">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="hFN-qs-AZK">
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -52,7 +51,7 @@
                         <viewControllerLayoutGuide type="top" id="jgf-hj-81p"/>
                         <viewControllerLayoutGuide type="bottom" id="Mbg-9x-M2c"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="0Wa-PP-UdQ">
+                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="0Wa-PP-UdQ">
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -67,9 +66,8 @@
                                     <outletCollection property="gestureRecognizers" destination="Az8-7Y-Ft2" appends="YES" id="Pmf-rH-CHf"/>
                                 </connections>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4vB-jy-OVs">
-                                <rect key="frame" x="162.5" y="444" width="50" height="50"/>
-                                <color key="backgroundColor" red="0.82352941176470584" green="0.82352941176470584" blue="0.82352941176470584" alpha="1" colorSpace="calibratedRGB"/>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4vB-jy-OVs">
+                                <rect key="frame" x="162.5" y="467" width="50" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="50" id="DJP-HI-Fw8"/>
                                     <constraint firstAttribute="width" secondItem="4vB-jy-OVs" secondAttribute="height" multiplier="1:1" id="Doi-Bs-z4L"/>
@@ -83,8 +81,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="4vB-jy-OVs" firstAttribute="centerX" secondItem="0Wa-PP-UdQ" secondAttribute="centerX" id="GiN-kC-oRd"/>
+                            <constraint firstItem="4vB-jy-OVs" firstAttribute="top" secondItem="7C0-c1-bTa" secondAttribute="bottom" constant="30" id="HGI-ge-709"/>
                             <constraint firstItem="7C0-c1-bTa" firstAttribute="centerY" secondItem="0Wa-PP-UdQ" secondAttribute="centerY" id="HiU-TF-Dvh"/>
-                            <constraint firstAttribute="bottomMargin" secondItem="4vB-jy-OVs" secondAttribute="bottom" constant="60" id="K2Y-aJ-PL1"/>
                             <constraint firstItem="7C0-c1-bTa" firstAttribute="centerX" secondItem="0Wa-PP-UdQ" secondAttribute="centerX" id="hmS-pJ-X19"/>
                         </constraints>
                     </view>
@@ -163,7 +161,7 @@
             <objects>
                 <navigationController title="About" id="bdw-3X-pHw" userLabel="AboutNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="more" id="uoA-mm-tkF"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="ePr-8l-YOd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="ePr-8l-YOd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.30473047494888306" green="0.66596442461013794" blue="0.66957086324691772" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -227,7 +225,7 @@
                         <viewControllerLayoutGuide type="top" id="uZD-eh-RRp"/>
                         <viewControllerLayoutGuide type="bottom" id="5wB-YO-lWH"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="sXo-S3-gah">
+                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="sXo-S3-gah">
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -313,7 +311,7 @@
                 <navigationController title="SavedNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="pVw-sx-tf2" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="CvL-NJ-BRl"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="YiH-Zj-usg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="YiH-Zj-usg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.30473047494888306" green="0.66596442461013794" blue="0.66957086324691772" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -352,7 +350,7 @@
                 <navigationController title="ExploreNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="fMY-P1-Xr7" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="search" id="FZh-3l-B0e"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="w0E-s0-UDt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="w0E-s0-UDt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.30473047494888306" green="0.66596442461013794" blue="0.66957086324691772" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

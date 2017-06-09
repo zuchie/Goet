@@ -49,7 +49,7 @@ class AboutViewController: UIViewController, MFMailComposeViewControllerDelegate
         let emailComposeVC = MFMailComposeViewController()
         emailComposeVC.mailComposeDelegate = self
         
-        emailComposeVC.setToRecipients(["contact@lazyself.io"])
+        emailComposeVC.setToRecipients(["zhe.cui@hotmail.com"])
         emailComposeVC.setSubject("About Goet App.")
         emailComposeVC.setMessageBody("", isHTML: false)
         
