@@ -237,24 +237,43 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Uv6-Ng-I14">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="254"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="po0-Uv-fo0">
+                                <rect key="frame" x="127" y="294" width="120" height="30"/>
+                                <color key="backgroundColor" red="0.30473047494888306" green="0.66596442461013794" blue="0.66957086324691772" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="f2X-4C-f2f"/>
+                                    <constraint firstAttribute="width" constant="120" id="r3l-sD-HBt"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <state key="normal" title="SEND FEEDBACK">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="sendFeedbackButtonTapped:" destination="H7s-Ok-Ju4" eventType="touchUpInside" id="827-Tr-wkl"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Uv6-Ng-I14" secondAttribute="trailing" id="5BC-JQ-VC1"/>
-                            <constraint firstItem="5wB-YO-lWH" firstAttribute="top" secondItem="Uv6-Ng-I14" secondAttribute="bottom" id="6Uq-iu-HZC"/>
+                            <constraint firstItem="5wB-YO-lWH" firstAttribute="top" secondItem="Uv6-Ng-I14" secondAttribute="bottom" constant="300" id="6Uq-iu-HZC"/>
+                            <constraint firstItem="po0-Uv-fo0" firstAttribute="top" secondItem="Uv6-Ng-I14" secondAttribute="bottom" constant="40" id="AyO-DM-ib2"/>
+                            <constraint firstItem="po0-Uv-fo0" firstAttribute="centerX" secondItem="Uv6-Ng-I14" secondAttribute="centerX" id="Ozn-f6-viQ"/>
                             <constraint firstItem="Uv6-Ng-I14" firstAttribute="top" secondItem="uZD-eh-RRp" secondAttribute="bottom" id="c6X-RQ-TA7"/>
                             <constraint firstItem="Uv6-Ng-I14" firstAttribute="leading" secondItem="sXo-S3-gah" secondAttribute="leading" id="sd6-tS-hm2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="K2p-uf-Odn"/>
                     <connections>
+                        <outlet property="sendFeedback" destination="po0-Uv-fo0" id="k9X-K2-34Z"/>
                         <outlet property="text" destination="Uv6-Ng-I14" id="d9x-Hr-aYL"/>
+                        <outlet property="textBottomToBottomLayoutGuideOffset" destination="6Uq-iu-HZC" id="nbd-1k-8JH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mge-GM-vUR" userLabel="First Responder" sceneMemberID="firstResponder"/>

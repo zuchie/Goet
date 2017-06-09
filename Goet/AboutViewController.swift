@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import MessageUI
 
 
-class AboutViewController: UIViewController {
+class AboutViewController: UIViewController, MFMailComposeViewControllerDelegate {
 
     @IBOutlet weak var text: UITextView!
+    @IBOutlet weak var textBottomToBottomLayoutGuideOffset: NSLayoutConstraint!
+    @IBOutlet weak var sendFeedback: UIButton!
+    
     private var textTitle: String!
     private var textContent: String!
     
@@ -19,7 +23,8 @@ class AboutViewController: UIViewController {
         super.viewDidLoad()
         
         if textTitle != "About the App" {
-            navigationItem.rightBarButtonItem = nil
+            sendFeedback = nil
+            textBottomToBottomLayoutGuideOffset.constant = 0
         }
     }
     
@@ -35,7 +40,31 @@ class AboutViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    @IBAction func sendFeedbackButtonTapped(_ sender: Any) {
+        let emailComposeVC = configureEmailComposeVC()
+        if MFMailComposeViewController.canSendMail() {
+            present(emailComposeVC, animated: true, completion: nil)
+        }
+    }
     
+    private func configureEmailComposeVC() -> MFMailComposeViewController {
+        let emailComposeVC = MFMailComposeViewController()
+        emailComposeVC.mailComposeDelegate = self
+        if emailComposeVC.view != nil {
+            emailComposeVC.view.tintColor = UIColor(red: 80 / 255, green: 170 / 255, blue: 170 / 255, alpha: 1)
+        }
+        
+        emailComposeVC.setToRecipients(["zcui7@icloud.com"])
+        emailComposeVC.setSubject("Feedback to the Goet App.")
+        emailComposeVC.setMessageBody("", isHTML: false)
+        
+        return emailComposeVC
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+
     func getText(title: String, text: String) {
         textTitle = title
         textContent = text

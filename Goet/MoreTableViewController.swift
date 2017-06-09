@@ -18,7 +18,11 @@ class MoreTableViewController: UITableViewController, MFMailComposeViewControlle
         case legalNotices(String)
     }
     
-    private let aboutApp = "About the app..."
+    private let aboutApp = "The Goet App is built to let you easily find best restaurants around you.\n\n" +
+                            "With simply filtering the search Radius and Category, 5 top rated open restaurants will be ready for you to choose from.\n\n\n" +
+                            "All data of the restaurants are from Yelp API. Restaurants are given based on the calculation by Yelp server of rating, review count, and other factors.\n\n" +
+                            "All data of Maps and routes are from Google Maps SDK.\n\n\n" +
+                            "Please enjoy the app, and I'd love to hear your thoughts about how it works, what's missing, anything wrong, or how it could be improved."
     
     private var items: [String: MoreItems]!
     private let dataSource = ["About the App", "GoogleMaps Legal Notices"]
