@@ -8,9 +8,10 @@
 
 import UIKit
 import GoogleMaps
+import MessageUI
 
 
-class MoreTableViewController: UITableViewController {
+class MoreTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
 
     private enum MoreItems {
         case aboutApp(String)
@@ -20,7 +21,7 @@ class MoreTableViewController: UITableViewController {
     private let aboutApp = "About the app..."
     
     private var items: [String: MoreItems]!
-    private let dataSource = ["About the Goet App", "Google Maps Legal Notices"]
+    private let dataSource = ["About the App", "GoogleMaps Legal Notices"]
     
     private var aboutAppText: String!
     
@@ -37,7 +38,43 @@ class MoreTableViewController: UITableViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    @IBAction func sendEmailButtonTapped(_ sender: Any) {
+        let emailComposeVC = configureEmailComposeVC()
+        if MFMailComposeViewController.canSendMail() {
+            present(emailComposeVC, animated: true, completion: nil)
+        }
+    }
 
+    private func configureEmailComposeVC() -> MFMailComposeViewController {
+        let emailComposeVC = MFMailComposeViewController()
+        emailComposeVC.mailComposeDelegate = self
+        if emailComposeVC.view != nil {
+            emailComposeVC.view.tintColor = UIColor(red: 80 / 255, green: 170 / 255, blue: 170 / 255, alpha: 1)
+        }
+        
+        emailComposeVC.setToRecipients(["zcui7@icloud.com"])
+        emailComposeVC.setSubject("About the Goet App.")
+        emailComposeVC.setMessageBody("", isHTML: false)
+        
+        return emailComposeVC
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
+    }
+    /*
+     private func showSendEmailErrorAlert() {
+     let alert = UIAlertController(
+     title: "Sorry, email cannot be sent.",
+     message: "Please make sure the email account has been properly configured.",
+     actions: [.ok]
+     )
+     present(alert, animated: false, completion: nil)
+     }
+     */
+
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
