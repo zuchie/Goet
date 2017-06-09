@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MeM-Hl-vFx" id="SOl-w2-6IS">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -198,7 +198,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="3BS-fZ-1FJ" id="McG-Sk-D76">
-                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="44"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </tableViewCellContentView>
                             </tableViewCell>
@@ -237,7 +237,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Uv6-Ng-I14">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="454"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="464"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -262,8 +262,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="Uv6-Ng-I14" secondAttribute="trailing" id="5BC-JQ-VC1"/>
-                            <constraint firstItem="5wB-YO-lWH" firstAttribute="top" secondItem="Uv6-Ng-I14" secondAttribute="bottom" constant="100" id="6Uq-iu-HZC"/>
-                            <constraint firstItem="po0-Uv-fo0" firstAttribute="top" secondItem="Uv6-Ng-I14" secondAttribute="bottom" constant="40" id="AyO-DM-ib2"/>
+                            <constraint firstItem="5wB-YO-lWH" firstAttribute="top" secondItem="Uv6-Ng-I14" secondAttribute="bottom" constant="90" id="6Uq-iu-HZC"/>
+                            <constraint firstItem="po0-Uv-fo0" firstAttribute="top" secondItem="Uv6-Ng-I14" secondAttribute="bottom" constant="30" id="AyO-DM-ib2"/>
                             <constraint firstItem="po0-Uv-fo0" firstAttribute="centerX" secondItem="Uv6-Ng-I14" secondAttribute="centerX" id="Ozn-f6-viQ"/>
                             <constraint firstItem="Uv6-Ng-I14" firstAttribute="top" secondItem="uZD-eh-RRp" secondAttribute="bottom" id="c6X-RQ-TA7"/>
                             <constraint firstItem="Uv6-Ng-I14" firstAttribute="leading" secondItem="sXo-S3-gah" secondAttribute="leading" id="sd6-tS-hm2"/>
