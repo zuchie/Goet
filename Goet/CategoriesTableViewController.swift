@@ -361,6 +361,31 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         }
     }
     
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        return categories.map({ String($0.name.characters.first!) }).unique
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        guard let idx = getIndex(from: categories.map({ $0.name }), by: title.characters.first!) else {
+            fatalError("categories doesn't have a name with the given first letter: \(title)")
+        }
+        //print("title: \(title), index: \(idx)")
+        let indexPath = IndexPath(row: idx, section: 1)
+        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        
+        return -1
+    }
+    
+    private func getIndex(from sorted: [String], by firstLetter: Character) -> Int? {
+        for (index, element) in sorted.enumerated() {
+            if element.characters.first == firstLetter {
+                return index
+            }
+        }
+        return nil
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -409,4 +434,11 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         }
     }
 
+}
+
+extension Sequence where Iterator.Element: Hashable {
+    var unique: [Iterator.Element] {
+        var dict = Dictionary<Iterator.Element, Bool>()
+        return self.filter({ dict.updateValue(true, forKey: $0) == nil })
+    }
 }

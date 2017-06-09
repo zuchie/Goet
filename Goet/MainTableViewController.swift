@@ -74,7 +74,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
     private var barButtonItem: UIBarButtonItem?
     private var everQueried = false
     
-    private let metersToMiles: [Int: String] = [800: "0.5 mi", 1600: "1 mi", 8000: "5 mi", 16000: "10 mi", 32000: "20 mi"]
+    private let metersToMiles: [Int: String] = [800: "0.5", 1600: "1", 8000: "5", 16000: "10", 32000: "20"]
 
     // Methods
     override func viewDidLoad() {
