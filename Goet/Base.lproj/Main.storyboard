@@ -210,7 +210,7 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="More about Goet" id="Iy3-KB-rP6">
                         <barButtonItem key="backBarButtonItem" title="Back" id="77i-0s-z9B"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="compose" id="haL-25-BJV">
+                        <barButtonItem key="rightBarButtonItem" image="Email" id="haL-25-BJV">
                             <connections>
                                 <action selector="sendEmailButtonTapped:" destination="IYb-6S-OHx" id="qFp-mY-BtR"/>
                             </connections>
@@ -371,6 +371,7 @@
     </scenes>
     <resources>
         <image name="Check" width="50" height="50"/>
+        <image name="Email" width="27" height="27"/>
         <image name="Map" width="26" height="26"/>
         <image name="Navigation" width="25" height="25"/>
     </resources>
