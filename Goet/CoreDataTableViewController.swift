@@ -111,6 +111,7 @@ class CoreDataTableViewController: UITableViewController, NSFetchedResultsContro
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.reloadSectionIndexTitles()
         print("table view end updates")
         tableView.endUpdates()
     }

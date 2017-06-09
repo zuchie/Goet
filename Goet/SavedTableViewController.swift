@@ -199,11 +199,9 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
             guard let cell = tableView.cellForRow(at: indexPath) as? SavedTableViewCell else {
                 fatalError("Unexpected indexPath: \(indexPath)")
             }
-            // Remove from DB.
+            // Remove from DB and trigger row deletion.
             updateSaved(cell: cell)
 
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         }
     }
     /*
@@ -219,6 +217,37 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
         // Return false if you do not want the specified item to be editable.
         return true
     }
+    
+    // Add row index.
+    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+        guard let restaurants = fetchedResultsController?.fetchedObjects as? [SavedMO] else {
+            fatalError("Couldn't get Saved restaurants from Core Data")
+        }
+        return restaurants.map({ String($0.name!.characters.first!) }).unique
+    }
+    
+    
+    override func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+        guard let restaurants = fetchedResultsController?.fetchedObjects as? [SavedMO],
+            let idx = getIndex(from: restaurants.map({ $0.name! }), by: title.characters.first!) else {
+            fatalError("Saved restaurants doesn't have a name with the given first letter: \(title)")
+        }
+        //print("title: \(title), index: \(idx)")
+        let indexPath = IndexPath(row: idx, section: 0)
+        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        
+        return -1
+    }
+    
+    private func getIndex(from sorted: [String], by firstLetter: Character) -> Int? {
+        for (index, element) in sorted.enumerated() {
+            if element.characters.first == firstLetter {
+                return index
+            }
+        }
+        return nil
+    }
+
     
     // Method to conform to UISearchResultsUpdating protocol.
     public func updateSearchResults(for searchController: UISearchController) {

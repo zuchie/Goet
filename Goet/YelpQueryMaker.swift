@@ -18,6 +18,10 @@ class YelpQuery {
     
     var completion: ((_ results: [[String: Any]]) -> Void)?
     var completionWithError: ((_ error: Error) -> Void)?
+    enum UnknownError: Error {
+        case unknown
+        case dataSerialization
+    }
     
     private var queryURL: YelpQueryURL!
     
@@ -54,11 +58,15 @@ class YelpQuery {
             
             guard let dat = data,
                 let results = dat.jsonToDictionary() else {
-                fatalError("Didn't get expected results.")
+                print("Didn't get expected results.")
+                self.completionWithError?(UnknownError.dataSerialization)
+                return
             }
             
             guard let businesses = results["businesses"] as? [[String: Any]] else {
-                fatalError("Couldn't get businesses from results.")
+                print("Couldn't get businesses from results.")
+                self.completionWithError?(UnknownError.unknown)
+                return
             }
             
             //print("businesses: \(businesses)")

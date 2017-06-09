@@ -342,11 +342,27 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
             )
             
             yelpQuery.completionWithError = { error in
-                let alert = UIAlertController(
-                    title: "\(error.localizedDescription)",
-                    message: "You might be disconnected, please connect to the internet and try again.",
-                    actions: [.ok]
-                )
+                var alert: UIAlertController
+                switch error {
+                case YelpQuery.UnknownError.unknown:
+                    alert = UIAlertController(
+                        title: "Couldn't get restaurants from Yelp server.",
+                        message: "There might be some issues with the Yelp server, please try again later.",
+                        actions: [.ok]
+                    )
+                case YelpQuery.UnknownError.dataSerialization:
+                    alert = UIAlertController(
+                        title: "Couldn't get the restaurants data.",
+                        message: "There are some issues when processing the restaurants data, please try again.",
+                        actions: [.ok]
+                    )
+                default:
+                    alert = UIAlertController(
+                        title: "\(error.localizedDescription)",
+                        message: "You might be disconnected, please connect to the internet and try again.",
+                        actions: [.ok]
+                    )
+                }
                 self.present(alert, animated: false, completion: { self.stopRefreshOrIndicator(); return })
             }
             yelpQuery.completion = { results in

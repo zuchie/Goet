@@ -361,6 +361,7 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         }
     }
     
+    // Add row index.
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return categories.map({ String($0.name.characters.first!) }).unique
     }
