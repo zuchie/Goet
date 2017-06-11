@@ -160,14 +160,10 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
     }
     
     fileprivate var searchController: UISearchController!
+    private var searchResultsVC: UITableViewController!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Uncomment the following line to preserve selection between presentations
-        // self.clearsSelectionOnViewWillAppear = false
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
 
         navigationItem.hidesBackButton = true
         
@@ -175,7 +171,12 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         initializeFetchedResultsController()
         mostSearched = fetchedResultsController?.fetchedObjects as! [MostSearchedCategories]
         
-        searchController = UISearchController(searchResultsController: nil)
+        searchResultsVC = UITableViewController()
+        searchResultsVC.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "categoriesCell")
+        searchResultsVC.tableView.dataSource = self
+        searchResultsVC.tableView.delegate = self
+        
+        searchController = UISearchController(searchResultsController: searchResultsVC)
         searchController.searchResultsUpdater = self
         navigationItem.titleView = searchController?.searchBar
         definesPresentationContext = true
@@ -183,7 +184,7 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         searchController.delegate = self
         
         searchController.hidesNavigationBarDuringPresentation = false
-        searchController.dimsBackgroundDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = true
         searchController.searchBar.sizeToFit()
         
         /* [Warning] Attempting to load the view of a view controller while it is deallocating is not allowed and may result in undefined behavior (<UISearchController: 0x10194f3e0>), Bug: UISearchController doesn't load its view until it's be deallocated. Reference: http://www.openradar.me/22250107
@@ -226,7 +227,7 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
                 return $0.name.lowercased().contains(inputText.lowercased())
             }
         }
-        tableView.reloadData()
+        searchResultsVC.tableView.reloadData()
     }
 
     private func addNewCategoryOrUpdateSearchCount(_ category: Category) {
@@ -269,7 +270,7 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        if !searchController.isActive {
+        if tableView == self.tableView {
             if !mostSearched.isEmpty {
                 return 2
             } else {
@@ -282,7 +283,7 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        if !searchController.isActive {
+        if tableView == self.tableView {
             if !mostSearched.isEmpty {
                 if section == 0 {
                     return mostSearched.count > 3 ? 3 : mostSearched.count
@@ -301,7 +302,7 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         let cell = tableView.dequeueReusableCell(withIdentifier: "categoriesCell", for: indexPath)
 
         // Configure the cell...
-        if !searchController.isActive {
+        if tableView == self.tableView {
             if !mostSearched.isEmpty {
                 if indexPath.section == 0 {
                     cell.textLabel?.text = mostSearched[indexPath.row].name!
@@ -319,7 +320,7 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if !searchController.isActive {
+        if tableView == self.tableView {
             if !mostSearched.isEmpty {
                 if indexPath.section == 1 {
                     category = categories[indexPath.row]
@@ -346,18 +347,18 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        if !searchController.isActive {
+        if tableView == self.tableView {
             if !mostSearched.isEmpty {
                 if section == 0 {
-                    return "Top 3 searches"
+                    return "TOP 3 SEARCHES"
                 } else {
-                    return "Categories"
+                    return "CATEGORIES"
                 }
             } else {
-                return "Categories"
+                return "CATEGORIES"
             }
         } else {
-            return "Filtered"
+            return "SUGGESTIONS"
         }
     }
     
@@ -368,12 +369,14 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
     
     
     override func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        guard let idx = getIndex(from: categories.map({ $0.name }), by: title.characters.first!) else {
-            fatalError("categories doesn't have a name with the given first letter: \(title)")
+        if tableView == self.tableView {
+            guard let idx = getIndex(from: categories.map({ $0.name }), by: title.characters.first!) else {
+                fatalError("categories doesn't have a name with the given first letter: \(title)")
+            }
+            //print("title: \(title), index: \(idx)")
+            let indexPath = IndexPath(row: idx, section: 1)
+            tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         }
-        //print("title: \(title), index: \(idx)")
-        let indexPath = IndexPath(row: idx, section: 1)
-        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         
         return -1
     }

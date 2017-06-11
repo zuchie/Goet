@@ -228,14 +228,15 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
     
     
     override func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        guard let restaurants = fetchedResultsController?.fetchedObjects as? [SavedMO],
-            let idx = getIndex(from: restaurants.map({ $0.name! }), by: title.characters.first!) else {
-            fatalError("Saved restaurants doesn't have a name with the given first letter: \(title)")
+        if tableView == self.tableView {
+            guard let restaurants = fetchedResultsController?.fetchedObjects as? [SavedMO],
+                let idx = getIndex(from: restaurants.map({ $0.name! }), by: title.characters.first!) else {
+                    fatalError("Saved restaurants doesn't have a name with the given first letter: \(title)")
+            }
+            //print("title: \(title), index: \(idx)")
+            let indexPath = IndexPath(row: idx, section: 0)
+            tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         }
-        //print("title: \(title), index: \(idx)")
-        let indexPath = IndexPath(row: idx, section: 0)
-        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-        
         return -1
     }
     
