@@ -344,7 +344,6 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         performSegue(withIdentifier: "unwindFromCategories", sender: self)
     }
     
-    
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if tableView == self.tableView {
@@ -361,12 +360,27 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
             return "SUGGESTIONS"
         }
     }
+    /*
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let headerView = view as? UITableViewHeaderFooterView else {
+            print("Couldn't get section view.")
+            return
+        }
+        headerView.textLabel?.font.withSize(10)
+        headerView.textLabel?.textColor = UIColor.lightGray
+        headerView.textLabel?.alignmentRectInsets
+    }
+    */
+    /*
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return navigationController!.navigationBar.bounds.height
+    }
+    */
     
     // Add row index.
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         return categories.map({ String($0.name.characters.first!) }).unique
     }
-    
     
     override func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         if tableView == self.tableView {

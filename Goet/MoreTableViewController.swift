@@ -14,27 +14,27 @@ import MessageUI
 class MoreTableViewController: UITableViewController, MFMailComposeViewControllerDelegate {
 
     private enum MoreItems {
-        case aboutApp(String)
+        case aboutTheApp(String)
         case legalNotices(String)
+        case sendFeedback(() -> Void)
     }
     
-    private let aboutApp = "The Goet App is built to let you easily find best restaurants around you.\n\n" +
+    private let aboutTheApp = "The Goet App is built to let you easily find best restaurants around you.\n\n" +
                             "With simply filtering the search Radius and Category, 5 top rated open restaurants will be ready for you to choose from.\n\n\n" +
                             "All data of the restaurants are from Yelp API. Restaurants are given based on the calculation by Yelp server of rating, review count, and other factors.\n\n" +
                             "All data of Maps and routes are from Google Maps SDK.\n\n\n" +
                             "Please enjoy the app, and I'd love to hear your thoughts about how it works, what's missing, anything wrong, or how it could be improved."
     
     private var items: [String: MoreItems]!
-    private let dataSource = ["About the App", "GoogleMaps Legal Notices"]
-    
-    private var aboutAppText: String!
+    private var dataSource = ["About the App", "Legal Notices", "Send Feedback"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         items = [
-            dataSource[0]: MoreItems.aboutApp(aboutApp),
-            dataSource[1]: MoreItems.legalNotices(GMSServices.openSourceLicenseInfo())
+            dataSource[0]: MoreItems.aboutTheApp(aboutTheApp),
+            dataSource[1]: MoreItems.legalNotices(GMSServices.openSourceLicenseInfo()),
+            dataSource[2]: MoreItems.sendFeedback(sendFeedback)
         ]
     }
 
@@ -43,7 +43,7 @@ class MoreTableViewController: UITableViewController, MFMailComposeViewControlle
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func sendEmailButtonTapped(_ sender: Any) {
+    private func sendFeedback() {
         let emailComposeVC = configureEmailComposeVC()
         if MFMailComposeViewController.canSendMail() {
             present(emailComposeVC, animated: true, completion: nil)
@@ -80,7 +80,7 @@ class MoreTableViewController: UITableViewController, MFMailComposeViewControlle
 
     
     // MARK: - Table view data source
-
+    /*
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         return 1
@@ -99,9 +99,24 @@ class MoreTableViewController: UITableViewController, MFMailComposeViewControlle
 
         return cell
     }
-
+    */
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "segueToAbout", sender: tableView.cellForRow(at: indexPath))
+        guard let title = tableView.cellForRow(at: indexPath)?.textLabel?.text,
+            let item = items[title] else {
+            fatalError("Couldn't get text from cell.")
+        }
+        var text = ""
+        switch item {
+        case .aboutTheApp(let content):
+            text = content
+        case .legalNotices(let content):
+            text = content
+        case .sendFeedback(let feedback):
+            feedback()
+        }
+        if !text.isEmpty {
+            performSegue(withIdentifier: "segueToAbout", sender: (title: title, text: text))
+        }
     }
     
     /*
@@ -147,22 +162,10 @@ class MoreTableViewController: UITableViewController, MFMailComposeViewControlle
         // Pass the selected object to the new view controller.
         if segue.identifier == "segueToAbout" {
             let vc = segue.destination as! AboutViewController
-            var text = ""
-            guard let cellLabelText = (sender as? UITableViewCell)?.textLabel?.text else {
-                fatalError("Unexpected sender.")
+            guard let sender = sender as? (title: String, text: String) else {
+                fatalError("Couldn't case sender.")
             }
-
-            guard let item = items[cellLabelText] else {
-                fatalError("Unexpected item.")
-            }
-            switch item {
-            case .aboutApp(let content):
-                text = content
-            case .legalNotices(let content):
-                text = content
-            }
-        
-            vc.getText(title: cellLabelText, text: text)
+            vc.getText(title: sender.title, text: sender.text)
         }
     }
 
