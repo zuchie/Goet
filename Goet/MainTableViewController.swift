@@ -229,7 +229,13 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
             print("Save object")
             let saved = NSEntityDescription.insertNewObject(forEntityName: "Saved", into: moc) as! SavedMO
             
-            saved.name = cell.name.text
+            guard let nameText = cell.name.text else {
+                print("Couldn't get text from cell.")
+                return
+            }
+            let index = nameText.index(nameText.startIndex, offsetBy: 1)
+            saved.name = nameText
+            saved.nameInitial = cell.name.text?.substring(to: index).uppercased()
             saved.categories = cell.category.text
             saved.yelpUrl = cell.yelpUrl
         } else {
@@ -249,7 +255,16 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
             print("Deleted from Saved entity")
         }
         
-        appDelegate?.saveContext()
+        appDelegate?.saveContext { error in
+            if let err = error {
+                let alert = UIAlertController(
+                    title: "\(err)",
+                    message: "Sorry, it appears that this restaurant couldn't be added to the favorite at this time, please try again later.",
+                    actions: [.ok]
+                )
+                present(alert, animated: false, completion: nil)
+            }
+        }
     }
     
     // Is the object already in Saved?

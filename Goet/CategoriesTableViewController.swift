@@ -171,7 +171,7 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         initializeFetchedResultsController()
         mostSearched = fetchedResultsController?.fetchedObjects as! [MostSearchedCategories]
         
-        searchResultsVC = UITableViewController()
+        searchResultsVC = UITableViewController(style: .grouped)
         searchResultsVC.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "categoriesCell")
         searchResultsVC.tableView.dataSource = self
         searchResultsVC.tableView.delegate = self
@@ -252,7 +252,16 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         }
         obj.setValue(Int64(value), forKey: "searchCount")
         
-        appDelegate?.saveContext()
+        appDelegate?.saveContext { error in
+            if let err = error {
+                let alert = UIAlertController(
+                    title: "\(err)",
+                    message: "Sorry, it appears that there are some issues updating this search count. This search won't be counted.",
+                    actions: [.ok]
+                )
+                present(alert, animated: false, completion: nil)
+            }
+        }
     }
     
     private func addCategory(name: String, id: String, searchCount: Int) {
@@ -263,7 +272,16 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         obj.id = id
         obj.searchCount = Int64(searchCount)
 
-        appDelegate?.saveContext()
+        appDelegate?.saveContext { error in
+            if let err = error {
+                let alert = UIAlertController(
+                    title: "\(err)",
+                    message: "Sorry, it appears that this search couldn't be counted and saved, but you can still use the app.",
+                    actions: [.ok]
+                )
+                present(alert, animated: false, completion: nil)
+            }
+        }
     }
     
     // MARK: - Table view data source
@@ -349,15 +367,15 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         if tableView == self.tableView {
             if !mostSearched.isEmpty {
                 if section == 0 {
-                    return "TOP 3 SEARCHES"
+                    return "Top 3 Searches"
                 } else {
-                    return "CATEGORIES"
+                    return "Categories"
                 }
             } else {
-                return "CATEGORIES"
+                return "Categories"
             }
         } else {
-            return "SUGGESTIONS"
+            return "Suggestions"
         }
     }
     /*
@@ -379,18 +397,20 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
     
     // Add row index.
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        return categories.map({ String($0.name.characters.first!) }).unique
+        if tableView == self.tableView {
+            return categories.map({ String($0.name.characters.first!) }).unique
+        }
+        
+        return nil
     }
     
     override func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        if tableView == self.tableView {
-            guard let idx = getIndex(from: categories.map({ $0.name }), by: title.characters.first!) else {
-                fatalError("categories doesn't have a name with the given first letter: \(title)")
-            }
-            //print("title: \(title), index: \(idx)")
-            let indexPath = IndexPath(row: idx, section: 1)
-            tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        guard let idx = getIndex(from: categories.map({ $0.name }), by: title.characters.first!) else {
+            fatalError("categories doesn't have a name with the given first letter: \(title)")
         }
+        //print("title: \(title), index: \(idx)")
+        let indexPath = IndexPath(row: idx, section: 1)
+        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         
         return -1
     }

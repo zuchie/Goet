@@ -86,6 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
+            // TODO
             abort()
         }
         
@@ -102,7 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     // MARK: - Core Data Saving support
     
-    func saveContext () {
+    func saveContext (completionWithError: (_ error: NSError?) -> Void) {
         if managedObjectContext.hasChanges {
             do {
                 try managedObjectContext.save()
@@ -111,8 +112,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
                 let nserror = error as NSError
                 NSLog("Unresolved error \(nserror), \(nserror.userInfo)")
-                // TODO
-                abort()
+                
+                managedObjectContext.undo()
+                completionWithError(nserror)
+                //abort()
             }
         }
     }

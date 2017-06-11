@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Goet/CategoriesTableViewController.swift"
-            timestampString = "518857639.354901"
+            timestampString = "518870972.515866"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "451"
-            endingLineNumber = "451"
+            startingLineNumber = "471"
+            endingLineNumber = "471"
             landmarkName = "prepare(for:sender:)"
             landmarkType = "7">
          </BreakpointContent>

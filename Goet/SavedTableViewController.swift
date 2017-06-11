@@ -53,7 +53,7 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
         let nib = UINib(nibName: "SavedTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "savedCell")
         
-        searchResultsVC = UITableViewController(style: .plain)
+        searchResultsVC = UITableViewController(style: .grouped)
         searchResultsVC.tableView.register(nib, forCellReuseIdentifier: "savedCell")
         searchResultsVC.tableView.dataSource = self
         searchResultsVC.tableView.delegate = self
@@ -87,7 +87,7 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
         let nameSort = NSSortDescriptor(key: "name", ascending: true)
         request.sortDescriptors = [nameSort]
         
-        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: moc, sectionNameKeyPath: nil, cacheName: nil)
+        fetchedResultsController = NSFetchedResultsController(fetchRequest: request, managedObjectContext: moc, sectionNameKeyPath: "nameInitial", cacheName: nil)
     }
     
     fileprivate func updateSaved(cell: SavedTableViewCell) {
@@ -113,7 +113,16 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
             print("Deleted from filtered")
         }
         
-        appDelegate?.saveContext()
+        appDelegate?.saveContext { error in
+            if let err = error {
+                let alert = UIAlertController(
+                    title: "\(err)",
+                    message: "Sorry, it appears that this restaurant couldn't be deleted from the favorite at this time, please try again later.",
+                    actions: [.ok]
+                )
+                present(alert, animated: false, completion: nil)
+            }
+        }
         
         // Update Main table view controller cell like button status.
         guard let nav = tabBarController?.viewControllers?[0] as? UINavigationController else {
@@ -152,8 +161,7 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.tableView {
-            rowCount = fetchedResultsController?.sections?[section].numberOfObjects ?? 0
-            return rowCount
+            return fetchedResultsController?.sections?[section].numberOfObjects ?? 0
         } else {
             return filteredRestaurants.count
         }
@@ -178,7 +186,18 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
         
         return cell
     }
-
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if tableView == self.tableView {
+            guard let sectionInfo = fetchedResultsController?.sections?[section] else {
+                return nil
+            }
+            return sectionInfo.name
+        } else {
+            return "Top Name Matches"
+        }
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? SavedTableViewCell else {
             fatalError("Unexpected indexPath: \(indexPath)")
@@ -220,26 +239,39 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
     
     // Add row index.
     override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        guard let restaurants = fetchedResultsController?.fetchedObjects as? [SavedMO] else {
-            fatalError("Couldn't get Saved restaurants from Core Data")
+        if tableView == self.tableView {
+            /*
+            guard let restaurants = fetchedResultsController?.fetchedObjects as? [SavedMO] else {
+                fatalError("Couldn't get Saved restaurants from Core Data")
+            }
+            return restaurants.map({ String($0.name!.characters.first!) }).unique
+            */
+            
+            return fetchedResultsController?.sectionIndexTitles
         }
-        return restaurants.map({ String($0.name!.characters.first!) }).unique
+        
+        return nil
     }
-    
     
     override func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        if tableView == self.tableView {
-            guard let restaurants = fetchedResultsController?.fetchedObjects as? [SavedMO],
-                let idx = getIndex(from: restaurants.map({ $0.name! }), by: title.characters.first!) else {
-                    fatalError("Saved restaurants doesn't have a name with the given first letter: \(title)")
-            }
-            //print("title: \(title), index: \(idx)")
-            let indexPath = IndexPath(row: idx, section: 0)
-            tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        /*
+        guard let restaurants = fetchedResultsController?.fetchedObjects as? [SavedMO],
+            let idx = getIndex(from: restaurants.map({ $0.name! }), by: title.characters.first!) else {
+                fatalError("Saved restaurants doesn't have a name with the given first letter: \(title)")
         }
+        //print("title: \(title), index: \(idx)")
+        let indexPath = IndexPath(row: idx, section: 0)
+        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        
         return -1
+        */
+        
+        guard let section = fetchedResultsController?.section(forSectionIndexTitle: title, at: index) else {
+            fatalError("Unable to locate section.")
+        }
+        return section
     }
-    
+
     private func getIndex(from sorted: [String], by firstLetter: Character) -> Int? {
         for (index, element) in sorted.enumerated() {
             if element.characters.first == firstLetter {
