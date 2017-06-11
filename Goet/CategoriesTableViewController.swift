@@ -409,7 +409,8 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
             fatalError("categories doesn't have a name with the given first letter: \(title)")
         }
         //print("title: \(title), index: \(idx)")
-        let indexPath = IndexPath(row: idx, section: 1)
+        let section = mostSearched.isEmpty ? 0 : 1
+        let indexPath = IndexPath(row: idx, section: section)
         tableView.scrollToRow(at: indexPath, at: .top, animated: true)
         
         return -1

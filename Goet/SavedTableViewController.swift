@@ -208,6 +208,8 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
         }
         
         UIApplication.shared.openURL(URL(string: url)!)
+        
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
     
@@ -223,6 +225,7 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
 
         }
     }
+    
     /*
     // Customize section header, make sure all the headers are rendered when they are inserted.
     override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
