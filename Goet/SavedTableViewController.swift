@@ -209,7 +209,7 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
             fatalError("Unexpected url: \(cell.yelpUrl)")
         }
         
-        UIApplication.shared.openURL(URL(string: url)!)
+        UIApplication.shared.open(URL(string: url)!, options: [:], completionHandler: nil)
         
         tableView.deselectRow(at: indexPath, animated: false)
     }

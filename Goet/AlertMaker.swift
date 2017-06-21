@@ -38,7 +38,7 @@ extension UIAlertController {
                 alertAction = UIAlertAction(title: "Open Settings", style: .default) { _ in
                     if let url = URL(string: UIApplicationOpenSettingsURLString) {
                         DispatchQueue.main.async {
-                            UIApplication.shared.openURL(url)
+                            UIApplication.shared.open(url, options: [:], completionHandler: nil)
                         }
                     }
                 }

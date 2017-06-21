@@ -253,7 +253,7 @@ class GoogleMapsViewController: UIViewController {
             let directionsRequest = "comgooglemaps-x-callback://" +
                 "?daddr=\(bizLat!),\(bizlng!)" + "&x-success=sourceapp://?resume=true&x-source=AirApp";
             let directionsURL = URL(string: directionsRequest)
-            UIApplication.shared.openURL(directionsURL!)
+            UIApplication.shared.open(directionsURL!, options: [:], completionHandler: nil)
         } else {
             NSLog("Can't use comgooglemaps-x-callback:// on this device.");
         }
