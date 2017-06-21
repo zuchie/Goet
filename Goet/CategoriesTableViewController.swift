@@ -165,7 +165,9 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.hidesBackButton = true
+        //navigationItem.hidesBackButton = true
+        
+        //tableView.sectionIndexMinimumDisplayRowCount
         
         moc = appDelegate?.managedObjectContext
         initializeFetchedResultsController()
@@ -178,7 +180,10 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         
         searchController = UISearchController(searchResultsController: searchResultsVC)
         searchController.searchResultsUpdater = self
-        navigationItem.titleView = searchController?.searchBar
+        //navigationItem.titleView = searchController?.searchBar
+        tableView.tableHeaderView = searchController?.searchBar
+        // Avoid section index strip overlaps on header view.
+        tableView.tableHeaderView?.layer.zPosition = 99
         definesPresentationContext = true
         
         searchController.delegate = self
@@ -189,17 +194,19 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         
         /* [Warning] Attempting to load the view of a view controller while it is deallocating is not allowed and may result in undefined behavior (<UISearchController: 0x10194f3e0>), Bug: UISearchController doesn't load its view until it's be deallocated. Reference: http://www.openradar.me/22250107
          */
+        /*
         if #available(iOS 9.0, *) {
             searchController.loadViewIfNeeded()
         } else {
             let _ = searchController.view
         }
+        */
     }
-
+    /*
     override func viewWillDisappear(_ animated: Bool) {
         navigationItem.hidesBackButton = false
     }
-
+    */
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

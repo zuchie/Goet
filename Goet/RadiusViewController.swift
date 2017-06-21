@@ -15,26 +15,30 @@ class RadiusViewController: UIViewController {
     @IBOutlet weak var radiuses: UIImageView!
     @IBOutlet weak var okButton: UIButton!
     @IBOutlet weak var radiusesWidth: NSLayoutConstraint!
+    @IBOutlet weak var radiusesCenterY: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        navigationController?.navigationBar.isHidden = true
-        
+        //navigationController?.navigationBar.isHidden = true
+        /*
         if UIInterfaceOrientationIsPortrait(UIApplication.shared.statusBarOrientation) {
             radiusesWidth.constant = view.frame.width
         } else {
             radiusesWidth.constant = view.frame.height
         }
+        */
+        radiusesWidth.constant = view.frame.width
+        radiusesCenterY.constant -= navigationController!.navigationBar.bounds.height
         radiuses.image = UIImage(named: radiusImgDict[radius!]!)
         
         okButton.layer.cornerRadius = okButton.frame.width / 2
     }
-    
+    /*
     override func viewWillDisappear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = false
     }
-    
+    */
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

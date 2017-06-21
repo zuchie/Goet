@@ -18,7 +18,7 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
     
     fileprivate var searchResultsVC: UITableViewController!
     fileprivate var searchController: UISearchController!
-    
+    /*
     fileprivate var rowCount = 0 {
         willSet {
             if newValue == 0 {
@@ -37,7 +37,7 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
             }
         }
     }
-    
+    */
     fileprivate let appDelegate = UIApplication.shared.delegate as? AppDelegate
     fileprivate var moc: NSManagedObjectContext!
     
@@ -60,8 +60,10 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
         
         searchController = UISearchController(searchResultsController: searchResultsVC)
         searchController.searchResultsUpdater = self
-        //tableView.tableHeaderView = searchController?.searchBar
-        navigationItem.titleView = searchController?.searchBar
+        tableView.tableHeaderView = searchController?.searchBar
+        // Avoid section index strip overlaps on header view.
+        tableView.tableHeaderView?.layer.zPosition = 99
+        //navigationItem.titleView = searchController?.searchBar
         definesPresentationContext = true
         
         searchController.delegate = self
@@ -73,13 +75,13 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
         
         /* [Warning] Attempting to load the view of a view controller while it is deallocating is not allowed and may result in undefined behavior (<UISearchController: 0x10194f3e0>), Bug: UISearchController doesn't load its view until it's be deallocated. Reference: http://www.openradar.me/22250107
         */
-        /*
+        
         if #available(iOS 9.0, *) {
             searchController.loadViewIfNeeded()
         } else {
             let _ = searchController.view
         }
-        */
+        
     }
     
     fileprivate func initializeFetchedResultsController() {
@@ -194,7 +196,7 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
             }
             return sectionInfo.name
         } else {
-            return "Top Name Matches"
+            return "Top Matches"
         }
     }
     
