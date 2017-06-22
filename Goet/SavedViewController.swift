@@ -1,57 +1,73 @@
 //
-//  SavedTableViewController.swift
+//  SavedViewController.swift
 //  Goet
 //
-//  Created by Zhe Cui on 9/11/16.
-//  Copyright © 2016 Zhe Cui. All rights reserved.
+//  Created by Zhe Cui on 6/21/17.
+//  Copyright © 2017 Zhe Cui. All rights reserved.
 //
 
 import UIKit
 import CoreData
-import CoreLocation
 
+class SavedViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchResultsUpdating, UISearchControllerDelegate, NSFetchedResultsControllerDelegate {
 
-class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpdating, UISearchControllerDelegate {
-    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBarContainer: UIView!
+
     fileprivate var savedRestaurants = [SavedMO]()
     fileprivate var filteredRestaurants = [SavedMO]()
     
     fileprivate var searchResultsVC: UITableViewController!
     fileprivate var searchController: UISearchController!
-    /*
-    fileprivate var rowCount = 0 {
-        willSet {
-            if newValue == 0 {
-                //setEditing(false, animated: false)
-                //editButtonItem.isEnabled = false
-                navigationItem.rightBarButtonItem = nil
-                navigationItem.titleView = nil
-            } else {
-                //editButtonItem.isEnabled = true
-                if navigationItem.rightBarButtonItem == nil {
-                    navigationItem.rightBarButtonItem = editButtonItem
-                }
-                if navigationItem.titleView == nil {
-                    navigationItem.titleView = searchController?.searchBar
+    fileprivate let appDelegate = UIApplication.shared.delegate as? AppDelegate
+    fileprivate var moc: NSManagedObjectContext!
+    // Retrieve the initial data to be displayed, and start monitoring moc for changes.
+    var fetchedResultsController: NSFetchedResultsController<NSFetchRequestResult>? {
+        didSet {
+            if let frc = fetchedResultsController {
+                frc.delegate = self
+                do {
+                    try frc.performFetch()
+                } catch {
+                    print("Failed to initialize FetchedResultsController: \(error)")
                 }
             }
         }
     }
-    */
-    fileprivate let appDelegate = UIApplication.shared.delegate as? AppDelegate
-    fileprivate var moc: NSManagedObjectContext!
+    
+    private var isTableEmpty: Bool = true {
+        willSet {
+            if newValue == true {
+                setEditing(false, animated: true)
+                navigationItem.rightBarButtonItem = nil
+            } else {
+                navigationItem.rightBarButtonItem = editButtonItem
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         moc = appDelegate?.managedObjectContext
         
+        //navigationController!.navigationBar.isTranslucent = false
+        // The navigation bar's shadowImage is set to a transparent image.  In
+        // addition to providing a custom background image, this removes
+        // the grey hairline at the bottom of the navigation bar.  The
+        // ExtendedNavBarView will draw its own hairline.
+        //navigationController!.navigationBar.shadowImage = #imageLiteral(resourceName: "TransparentPixel")
+        // "Pixel" is a solid white 1x1 image.
+        //navigationController!.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "Pixel"), for: .default)
+        
         navigationItem.rightBarButtonItem = editButtonItem
-
+        
         initializeFetchedResultsController()
         
         let nib = UINib(nibName: "SavedTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "savedCell")
+        tableView.dataSource = self
+        tableView.delegate = self
         
         searchResultsVC = UITableViewController(style: .grouped)
         searchResultsVC.tableView.register(nib, forCellReuseIdentifier: "savedCell")
@@ -60,30 +76,33 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
         
         searchController = UISearchController(searchResultsController: searchResultsVC)
         searchController.searchResultsUpdater = self
-        tableView.tableHeaderView = searchController?.searchBar
-        // Avoid section index strip overlaps on header view.
-        tableView.tableHeaderView?.layer.zPosition = 99
-        //navigationItem.titleView = searchController?.searchBar
-        definesPresentationContext = true
-        
         searchController.delegate = self
         
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.dimsBackgroundDuringPresentation = true
         searchController.searchBar.searchBarStyle = .default
-        searchController.searchBar.sizeToFit()
+        //searchController.searchBar.sizeToFit()
+        searchController.searchBar.placeholder = "Search names, categories..."
+        searchController.searchBar.isTranslucent = false
+        searchController.searchBar.barTintColor = UIColor(red: 80 / 255, green: 170 / 255, blue: 170 / 255, alpha: 1.0)
+        searchBarContainer.addSubview(searchController.searchBar)
+        
+        searchController.hidesNavigationBarDuringPresentation = true
+        searchController.dimsBackgroundDuringPresentation = true
+        definesPresentationContext = true
+        //extendedLayoutIncludesOpaqueBars = true
         
         /* [Warning] Attempting to load the view of a view controller while it is deallocating is not allowed and may result in undefined behavior (<UISearchController: 0x10194f3e0>), Bug: UISearchController doesn't load its view until it's be deallocated. Reference: http://www.openradar.me/22250107
-        */
+         */
+        /*
+         if #available(iOS 9.0, *) {
+         searchController.loadViewIfNeeded()
+         } else {
+         let _ = searchController.view
+         }
+         */
         
-        if #available(iOS 9.0, *) {
-            searchController.loadViewIfNeeded()
-        } else {
-            let _ = searchController.view
-        }
-        
+        //tableView.reloadData()
     }
-    
+
     fileprivate func initializeFetchedResultsController() {
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Saved")
         let nameSort = NSSortDescriptor(key: "name", ascending: true)
@@ -143,7 +162,54 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
             }
         }
     }
-        
+    
+    // Edit tableView when editButtonItem is tapped.
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.setEditing(editing, animated: animated)
+    }
+    
+    // MARK: NSFetchedResultsControllerDelegate
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        print("table view begin updates")
+        tableView.beginUpdates()
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
+        switch type {
+        case .insert: tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+        print("insert section: \(sectionIndex)")
+        case .delete: tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+        print("delete section: \(sectionIndex)")
+        default: break
+        }
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
+            print("insert row \((newIndexPath! as NSIndexPath).row)")
+        case .delete:
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+            print("delete row \((indexPath! as NSIndexPath).row)")
+        case .update:
+            tableView.reloadRows(at: [indexPath!], with: .fade)
+            print("update row \((indexPath! as NSIndexPath).row)")
+        case .move:
+            print("move row \((indexPath! as NSIndexPath).row) to row \((newIndexPath! as NSIndexPath).row)")
+            tableView.deleteRows(at: [indexPath!], with: .fade)
+            tableView.insertRows(at: [newIndexPath!], with: .fade)
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.reloadSectionIndexTitles()
+        print("table view end updates")
+        tableView.endUpdates()
+    }
+    
+    
     // MARK: - Table view data source
     
     fileprivate func configureCell(_ cell: SavedTableViewCell, _ object: SavedMO) {
@@ -152,24 +218,26 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
         cell.categories.text = object.categories
         cell.yelpUrl = object.yelpUrl
     }
-
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         if tableView == self.tableView {
-            return fetchedResultsController?.sections?.count ?? 0
+            let sectionCount = fetchedResultsController?.sections?.count ?? 0
+            isTableEmpty = (sectionCount == 0) ? true : false
+            return sectionCount
         } else {
             return 1
         }
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.tableView {
             return fetchedResultsController?.sections?[section].numberOfObjects ?? 0
         } else {
             return filteredRestaurants.count
         }
     }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let restaurant: SavedMO
         
         // Configure the cell...
@@ -189,7 +257,7 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if tableView == self.tableView {
             guard let sectionInfo = fetchedResultsController?.sections?[section] else {
                 return nil
@@ -200,7 +268,7 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
         }
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? SavedTableViewCell else {
             fatalError("Unexpected indexPath: \(indexPath)")
         }
@@ -216,7 +284,7 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
     
     
     // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle:  UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle:  UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         
         if editingStyle == .delete {
             guard let cell = tableView.cellForRow(at: indexPath) as? SavedTableViewCell else {
@@ -224,59 +292,32 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
             }
             // Remove from DB and trigger row deletion.
             updateSaved(cell: cell)
-
+            
         }
     }
     
-    /*
-    // Customize section header, make sure all the headers are rendered when they are inserted.
-    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        view.tintColor = UIColor.lightGray
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.textColor = UIColor.white
-    }
-    */
     // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
     
     // Add row index.
-    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         if tableView == self.tableView {
-            /*
-            guard let restaurants = fetchedResultsController?.fetchedObjects as? [SavedMO] else {
-                fatalError("Couldn't get Saved restaurants from Core Data")
-            }
-            return restaurants.map({ String($0.name!.characters.first!) }).unique
-            */
-            
             return fetchedResultsController?.sectionIndexTitles
         }
         
         return nil
     }
     
-    override func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
-        /*
-        guard let restaurants = fetchedResultsController?.fetchedObjects as? [SavedMO],
-            let idx = getIndex(from: restaurants.map({ $0.name! }), by: title.characters.first!) else {
-                fatalError("Saved restaurants doesn't have a name with the given first letter: \(title)")
-        }
-        //print("title: \(title), index: \(idx)")
-        let indexPath = IndexPath(row: idx, section: 0)
-        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
-        
-        return -1
-        */
-        
+    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         guard let section = fetchedResultsController?.section(forSectionIndexTitle: title, at: index) else {
             fatalError("Unable to locate section.")
         }
         return section
     }
-
+    
     private func getIndex(from sorted: [String], by firstLetter: Character) -> Int? {
         for (index, element) in sorted.enumerated() {
             if element.characters.first == firstLetter {
@@ -285,7 +326,7 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
         }
         return nil
     }
-
+    
     
     // Method to conform to UISearchResultsUpdating protocol.
     public func updateSearchResults(for searchController: UISearchController) {
@@ -295,11 +336,11 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
             filteredRestaurants = savedRestaurants.filter {
                 guard let name = $0.name,
                     let categories = $0.categories else {
-                    print("No restaurant found")
-                    return false
+                        print("No restaurant found")
+                        return false
                 }
                 return (name.lowercased().contains(inputText.lowercased()) || categories.lowercased().contains(inputText.lowercased()))
-             }
+            }
         }
         searchResultsVC.tableView.reloadData()
     }
@@ -316,34 +357,15 @@ class SavedTableViewController: CoreDataTableViewController, UISearchResultsUpda
     func willDismissSearchController(_ searchController: UISearchController) {
         navigationItem.rightBarButtonItem = editButtonItem
     }
- 
+
     /*
-    func didDismissSearchController(_ searchController: UISearchController) {
-        self.navigationItem.rightBarButtonItem = self.editButtonItem
-    }
-    */
-    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toMap" {
-
-            guard let cell = sender as? MainAndSavedTableViewCell else {
-                fatalError("Unexpected sender: \(sender)")
-            }
-            let destinationVC = segue.destination
-
-            if cell.address == "" {
-                alert()
-            } else {
-                if let mapVC = destinationVC as? GoogleMapViewController {
-                    
-                    mapVC.setBizLocation(cell.address)
-                    mapVC.setBizCoordinate2D(CLLocationCoordinate2DMake(cell.latitude
-                        , cell.longitude))
-                    mapVC.setBizName(cell.name.text!)
-                    mapVC.setDepartureTime(Int(Date().timeIntervalSince1970))
-                }
-            }
-        }
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
     }
     */
+
 }
