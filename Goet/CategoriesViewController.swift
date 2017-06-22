@@ -9,7 +9,10 @@
 import UIKit
 import CoreData
 
-class CategoriesTableViewController: UITableViewController, UISearchControllerDelegate, UISearchResultsUpdating, NSFetchedResultsControllerDelegate {
+class CategoriesViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchControllerDelegate, UISearchResultsUpdating, NSFetchedResultsControllerDelegate {
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var searchBarContainer: UIView!
     
     typealias Category = (name: String, id: String)
     
@@ -170,8 +173,20 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         //tableView.sectionIndexMinimumDisplayRowCount
         
         moc = appDelegate?.managedObjectContext
+        
+        // The navigation bar's shadowImage is set to a transparent image.  In
+        // addition to providing a custom background image, this removes
+        // the grey hairline at the bottom of the navigation bar.  The
+        // ExtendedNavBarView will draw its own hairline.
+        navigationController!.navigationBar.shadowImage = #imageLiteral(resourceName: "TransparentPixel")
+        // "Pixel" is a solid white 1x1 image.
+        navigationController!.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "Pixel"), for: .default)
+
         initializeFetchedResultsController()
         mostSearched = fetchedResultsController?.fetchedObjects as! [MostSearchedCategories]
+        
+        tableView.dataSource = self
+        tableView.delegate = self
         
         searchResultsVC = UITableViewController(style: .grouped)
         searchResultsVC.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "categoriesCell")
@@ -180,33 +195,24 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         
         searchController = UISearchController(searchResultsController: searchResultsVC)
         searchController.searchResultsUpdater = self
-        //navigationItem.titleView = searchController?.searchBar
-        tableView.tableHeaderView = searchController?.searchBar
-        // Avoid section index strip overlaps on header view.
-        tableView.tableHeaderView?.layer.zPosition = 99
-        definesPresentationContext = true
-        
         searchController.delegate = self
         
-        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.searchBar.barStyle = .default
+        searchController.searchBar.placeholder = "Search categories..."
+        searchController.searchBar.isTranslucent = false
+        searchController.searchBar.setBackgroundImage(#imageLiteral(resourceName: "Pixel"), for: .any, barMetrics: .default)
+        searchController.searchBar.barTintColor = UIColor(red: 80 / 255, green: 170 / 255, blue: 170 / 255, alpha: 1.0)
+        searchBarContainer.addSubview(searchController.searchBar)
+        
+        searchController.hidesNavigationBarDuringPresentation = true
         searchController.dimsBackgroundDuringPresentation = true
-        searchController.searchBar.sizeToFit()
+        definesPresentationContext = true
         
         /* [Warning] Attempting to load the view of a view controller while it is deallocating is not allowed and may result in undefined behavior (<UISearchController: 0x10194f3e0>), Bug: UISearchController doesn't load its view until it's be deallocated. Reference: http://www.openradar.me/22250107
          */
-        /*
-        if #available(iOS 9.0, *) {
-            searchController.loadViewIfNeeded()
-        } else {
-            let _ = searchController.view
-        }
-        */
+        searchController.loadViewIfNeeded()
     }
-    /*
-    override func viewWillDisappear(_ animated: Bool) {
-        navigationItem.hidesBackButton = false
-    }
-    */
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -225,7 +231,13 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         print("return category: \(String(describing: category))")
         return category
     }
-    
+
+    // Edit tableView when editButtonItem is tapped.
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: animated)
+        tableView.setEditing(editing, animated: animated)
+    }
+
     public func updateSearchResults(for searchController: UISearchController) {
         if let searchText = searchController.searchBar.text {
             let inputText = searchText.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
@@ -290,10 +302,30 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
             }
         }
     }
-    
+    /*
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if velocity.y > 0 {
+            UIView.animate(
+                withDuration: 0.8,
+                animations: {
+                    self.navigationController?.setNavigationBarHidden(true, animated: true)
+                    self.searchBarContainer.frame.origin.y = 0
+                },
+                completion: nil)
+        } else {            
+            UIView.animate(
+                withDuration: 0.8,
+                animations: {
+                    self.navigationController?.setNavigationBarHidden(false, animated: true)
+                    self.searchBarContainer.frame.origin.y = self.navigationController!.navigationBar.bounds.height
+                },
+                completion: nil)
+        }
+    }
+    */
     // MARK: - Table view data source
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
         if tableView == self.tableView {
             if !mostSearched.isEmpty {
@@ -306,7 +338,7 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         }
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if tableView == self.tableView {
             if !mostSearched.isEmpty {
@@ -323,7 +355,7 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         }
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "categoriesCell", for: indexPath)
 
         // Configure the cell...
@@ -344,7 +376,7 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         return cell
     }
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == self.tableView {
             if !mostSearched.isEmpty {
                 if indexPath.section == 1 {
@@ -369,7 +401,7 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         performSegue(withIdentifier: "unwindFromCategories", sender: self)
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if tableView == self.tableView {
             if !mostSearched.isEmpty {
@@ -403,7 +435,7 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
     */
     
     // Add row index.
-    override func sectionIndexTitles(for tableView: UITableView) -> [String]? {
+    func sectionIndexTitles(for tableView: UITableView) -> [String]? {
         if tableView == self.tableView {
             return categories.map({ String($0.name.characters.first!) }).unique
         }
@@ -411,14 +443,14 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
         return nil
     }
     
-    override func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
+    func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
         guard let idx = getIndex(from: categories.map({ $0.name }), by: title.characters.first!) else {
             fatalError("categories doesn't have a name with the given first letter: \(title)")
         }
         //print("title: \(title), index: \(idx)")
         let section = mostSearched.isEmpty ? 0 : 1
         let indexPath = IndexPath(row: idx, section: section)
-        tableView.scrollToRow(at: indexPath, at: .top, animated: true)
+        tableView.scrollToRow(at: indexPath, at: .top, animated: false)
         
         return -1
     }
@@ -473,9 +505,13 @@ class CategoriesTableViewController: UITableViewController, UISearchControllerDe
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         /**
-         Force to pop CategoriesTableVC from navigation stack when using unwind segue, otherwise warning: popToViewController:transition: called on <UINavigationController 0x7fcef101b000> while an existing transition or presentation is occurring; the navigation stack will not be updated.
+         Force to pop CategoriesVC from navigation stack when using unwind segue, otherwise warning: popToViewController:transition: called on <UINavigationController 0x7fcef101b000> while an existing transition or presentation is occurring; the navigation stack will not be updated.
          */
         if searchController.isActive {
+            if navigationController!.navigationBar.isHidden {
+                //navigationController!.navigationBar.isHidden = false
+                navigationController!.setNavigationBarHidden(false, animated: false)
+            }
             navigationController?.popViewController(animated: false)
         }
     }

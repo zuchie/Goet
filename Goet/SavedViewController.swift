@@ -98,9 +98,7 @@ class SavedViewController: UIViewController, UITableViewDataSource, UITableViewD
          } else {
          let _ = searchController.view
          }
-         */
-        
-        //tableView.reloadData()
+        */
     }
 
     fileprivate func initializeFetchedResultsController() {

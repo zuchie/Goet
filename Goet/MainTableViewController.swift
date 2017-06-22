@@ -80,6 +80,11 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        guard let statusBar = UIApplication.shared.value(forKeyPath: "statusBarWindow.statusBar") as? UIView else {
+            return
+        }
+        statusBar.backgroundColor = UIColor(red: 80 / 255, green: 170 / 255, blue: 170 / 255, alpha: 1.0)
+
         barButtonItem = navigationItem.rightBarButtonItem
         navigationItem.rightBarButtonItem = nil
         addViewToNavBar()
@@ -614,10 +619,9 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         let sourceVC = sender.source
         switch sender.identifier! {
         case "unwindFromCategories":
-            guard let category = (sourceVC as! CategoriesTableViewController).getCategory() else {
+            guard let category = (sourceVC as! CategoriesViewController).getCategory() else {
                 fatalError("Couldn't get category.")
             }
-            
             startIndicator()
             
             getCategoryAndUpdateTitleView(category)

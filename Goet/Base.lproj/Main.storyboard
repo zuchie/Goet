@@ -11,38 +11,62 @@
     </dependencies>
     <scenes>
         <!--Categories-->
-        <scene sceneID="DcX-ul-6iG">
+        <scene sceneID="6dI-Nj-KLN">
             <objects>
-                <tableViewController hidesBottomBarWhenPushed="YES" id="PZ5-fQ-YE3" userLabel="Categories" customClass="CategoriesTableViewController" customModule="Goet" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="hFN-qs-AZK">
+                <viewController id="ToW-DI-2rL" customClass="CategoriesViewController" customModule="Goet" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Uaq-yM-U0O"/>
+                        <viewControllerLayoutGuide type="bottom" id="HYx-4k-qSu"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="DVS-jU-4aM">
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                        <color key="sectionIndexColor" red="0.30473047494888306" green="0.66596442461013794" blue="0.66957086324691772" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="categoriesCell" id="MeM-Hl-vFx">
-                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask"/>
-                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MeM-Hl-vFx" id="SOl-w2-6IS">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </tableViewCellContentView>
-                            </tableViewCell>
-                        </prototypes>
-                        <connections>
-                            <outlet property="dataSource" destination="PZ5-fQ-YE3" id="pnm-5e-aFf"/>
-                            <outlet property="delegate" destination="PZ5-fQ-YE3" id="LgU-iG-oLM"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Categories" id="Jgr-qd-aSL"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vX3-1C-15B" customClass="ExtendedNavBarView" customModule="Goet" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="aBs-Ve-6lP"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="wCg-5a-dCE">
+                                <rect key="frame" x="0.0" y="44" width="375" height="510"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                                <color key="sectionIndexColor" red="0.30473047494888306" green="0.66596442461013794" blue="0.66957086324691772" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="categoriesCell" id="OyI-o8-YGI">
+                                        <rect key="frame" x="0.0" y="56" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="OyI-o8-YGI" id="X87-ju-MaT">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="vX3-1C-15B" secondAttribute="trailing" id="284-82-Fec"/>
+                            <constraint firstItem="vX3-1C-15B" firstAttribute="leading" secondItem="DVS-jU-4aM" secondAttribute="leading" id="57i-4d-V2V"/>
+                            <constraint firstItem="wCg-5a-dCE" firstAttribute="top" secondItem="vX3-1C-15B" secondAttribute="bottom" id="G7E-uu-EY5"/>
+                            <constraint firstItem="HYx-4k-qSu" firstAttribute="top" secondItem="wCg-5a-dCE" secondAttribute="bottom" id="MOq-dc-p6k"/>
+                            <constraint firstAttribute="trailing" secondItem="wCg-5a-dCE" secondAttribute="trailing" id="jDm-5E-wOB"/>
+                            <constraint firstItem="vX3-1C-15B" firstAttribute="top" secondItem="Uaq-yM-U0O" secondAttribute="bottom" id="lS3-yW-2G9"/>
+                            <constraint firstItem="wCg-5a-dCE" firstAttribute="leading" secondItem="DVS-jU-4aM" secondAttribute="leading" id="wP5-xc-DEo"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Categories" id="vPr-w6-T7Y"/>
                     <connections>
-                        <segue destination="31a-HA-3xd" kind="unwind" identifier="unwindFromCategories" animates="NO" unwindAction="unwindToMainWithSender:" id="Zq2-m8-vLx"/>
+                        <outlet property="searchBarContainer" destination="vX3-1C-15B" id="x0D-gt-aXA"/>
+                        <outlet property="tableView" destination="wCg-5a-dCE" id="NVS-0l-EbZ"/>
+                        <segue destination="idC-Rj-L5g" kind="unwind" identifier="unwindFromCategories" animates="NO" unwindAction="unwindToMainWithSender:" id="ctF-t9-sb0"/>
                     </connections>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Von-9E-3t7" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="31a-HA-3xd" userLabel="Exit" sceneMemberID="exit"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="TSY-EX-I8t" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="idC-Rj-L5g" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="4486" y="416"/>
+            <point key="canvasLocation" x="4489" y="424"/>
         </scene>
         <!--Radius-->
         <scene sceneID="VLU-SB-GI8">
@@ -52,7 +76,7 @@
                         <viewControllerLayoutGuide type="top" id="jgf-hj-81p"/>
                         <viewControllerLayoutGuide type="bottom" id="Mbg-9x-M2c"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="0Wa-PP-UdQ">
+                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="0Wa-PP-UdQ">
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -87,6 +111,7 @@
                             <constraint firstItem="7C0-c1-bTa" firstAttribute="centerX" secondItem="0Wa-PP-UdQ" secondAttribute="centerX" id="hmS-pJ-X19"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Search Radius" id="8iy-J7-32w"/>
                     <connections>
                         <outlet property="okButton" destination="4vB-jy-OVs" id="Yht-3e-yfQ"/>
                         <outlet property="radiuses" destination="7C0-c1-bTa" id="KjQ-YX-WGP"/>
@@ -129,7 +154,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tA0-Tj-M8I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4937" y="1469"/>
+            <point key="canvasLocation" x="4519" y="1469"/>
         </scene>
         <!--Favorites-->
         <scene sceneID="ql3-DK-g7f">
@@ -143,7 +168,14 @@
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelectionDuringEditing="YES" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NgD-B1-zJU">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4bg-pw-kg8" customClass="ExtendedNavBarView" customModule="Goet" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="qGg-ke-x2r"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NgD-B1-zJU">
                                 <rect key="frame" x="0.0" y="44" width="375" height="510"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexColor" red="0.30473047494888306" green="0.66596442461013794" blue="0.66957086324691772" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -153,13 +185,6 @@
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4bg-pw-kg8">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="qGg-ke-x2r"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -187,7 +212,7 @@
             <objects>
                 <navigationController title="About" id="bdw-3X-pHw" userLabel="AboutNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="more" id="uoA-mm-tkF"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="ePr-8l-YOd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="ePr-8l-YOd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.30473047494888306" green="0.66596442461013794" blue="0.66957086324691772" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -301,7 +326,7 @@
                         <viewControllerLayoutGuide type="top" id="uZD-eh-RRp"/>
                         <viewControllerLayoutGuide type="bottom" id="5wB-YO-lWH"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="sXo-S3-gah">
+                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="sXo-S3-gah">
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -386,8 +411,8 @@
                     </refreshControl>
                     <connections>
                         <segue destination="3fG-Dl-puw" kind="show" identifier="segueToRadius" animates="NO" id="2xj-lo-4Jz"/>
-                        <segue destination="PZ5-fQ-YE3" kind="show" identifier="segueToCategories" animates="NO" id="Wug-Mq-EIa"/>
                         <segue destination="dqH-Fl-zN4" kind="show" identifier="segueToRoute" id="9Jj-P8-hfL"/>
+                        <segue destination="ToW-DI-2rL" kind="show" identifier="segueToCategories" animates="NO" id="fOd-Xk-9uR"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dAG-yp-WnP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -400,7 +425,7 @@
                 <navigationController title="SavedNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="pVw-sx-tf2" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="CvL-NJ-BRl"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="YiH-Zj-usg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="YiH-Zj-usg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.30473047494888306" green="0.66596442461013794" blue="0.66957086324691772" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -442,7 +467,7 @@
                 <navigationController title="ExploreNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="fMY-P1-Xr7" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="search" id="FZh-3l-B0e"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="w0E-s0-UDt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="w0E-s0-UDt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.30473047494888306" green="0.66596442461013794" blue="0.66957086324691772" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

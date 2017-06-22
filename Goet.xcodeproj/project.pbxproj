@@ -27,7 +27,7 @@
 		B93D332C1EA6C84A007EAD5A /* GoetUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93D332B1EA6C84A007EAD5A /* GoetUITests.swift */; };
 		B93D33351EA6CAAE007EAD5A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93D33341EA6CAAE007EAD5A /* LocationManager.swift */; };
 		B93D333A1EAAD202007EAD5A /* AlertMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B93D33391EAAD202007EAD5A /* AlertMaker.swift */; };
-		B9646F511EE12B80000636B6 /* CategoriesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9646F501EE12B80000636B6 /* CategoriesTableViewController.swift */; };
+		B9646F511EE12B80000636B6 /* CategoriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9646F501EE12B80000636B6 /* CategoriesViewController.swift */; };
 		B965C9681E5CEF4C0015E2AC /* YelpQueryMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B965C9671E5CEF4C0015E2AC /* YelpQueryMaker.swift */; };
 		B965C9731E601F2E0015E2AC /* Saved.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B965C9711E601F2E0015E2AC /* Saved.xcdatamodeld */; };
 		B965C9801E6777E80015E2AC /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B965C97E1E6777E80015E2AC /* MainTableViewCell.swift */; };
@@ -86,7 +86,7 @@
 		B93D332D1EA6C84A007EAD5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B93D33341EA6CAAE007EAD5A /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		B93D33391EAAD202007EAD5A /* AlertMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertMaker.swift; sourceTree = "<group>"; };
-		B9646F501EE12B80000636B6 /* CategoriesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesTableViewController.swift; sourceTree = "<group>"; };
+		B9646F501EE12B80000636B6 /* CategoriesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoriesViewController.swift; sourceTree = "<group>"; };
 		B965C9671E5CEF4C0015E2AC /* YelpQueryMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpQueryMaker.swift; sourceTree = "<group>"; };
 		B965C9721E601F2E0015E2AC /* Saved.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Saved.xcdatamodel; sourceTree = "<group>"; };
 		B965C97E1E6777E80015E2AC /* MainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewCell.swift; sourceTree = "<group>"; };
@@ -147,11 +147,10 @@
 		B906DB751D5D80B10021B025 /* Saved */ = {
 			isa = PBXGroup;
 			children = (
+				B93CF09E1EFB418600F96F1B /* SavedViewController.swift */,
 				B93728691E7D475900B911E5 /* SavedTableViewCell.swift */,
 				B937286A1E7D475900B911E5 /* SavedTableViewCell.xib */,
 				B906DBDD1D8B32EF0021B025 /* Core Data */,
-				B93CF09E1EFB418600F96F1B /* SavedViewController.swift */,
-				B93CF0A01EFB5F8800F96F1B /* ExtendedNavBarView.swift */,
 			);
 			name = Saved;
 			sourceTree = "<group>";
@@ -237,7 +236,7 @@
 		B9646F4F1EE12B49000636B6 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				B9646F501EE12B80000636B6 /* CategoriesTableViewController.swift */,
+				B9646F501EE12B80000636B6 /* CategoriesViewController.swift */,
 			);
 			name = Categories;
 			sourceTree = "<group>";
@@ -276,6 +275,7 @@
 				B9D445791EBC660700219D91 /* URLRequestMaker.swift */,
 				B9BA66071ED4F92B0081647B /* ActivityIndicator.swift */,
 				B906DBA71D756B820021B025 /* AddressBuilder.swift */,
+				B93CF0A01EFB5F8800F96F1B /* ExtendedNavBarView.swift */,
 			);
 			name = Helper;
 			sourceTree = "<group>";
@@ -506,7 +506,7 @@
 				B9D4457A1EBC660700219D91 /* URLRequestMaker.swift in Sources */,
 				B91C59F81EE7A9F400DEB42B /* AboutViewController.swift in Sources */,
 				B9BA66081ED4F92B0081647B /* ActivityIndicator.swift in Sources */,
-				B9646F511EE12B80000636B6 /* CategoriesTableViewController.swift in Sources */,
+				B9646F511EE12B80000636B6 /* CategoriesViewController.swift in Sources */,
 				B9F984E81E5A7F6700C6CA04 /* MainTableViewController.swift in Sources */,
 				B93D33351EA6CAAE007EAD5A /* LocationManager.swift in Sources */,
 				B93D333A1EAAD202007EAD5A /* AlertMaker.swift in Sources */,
