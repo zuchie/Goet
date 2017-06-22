@@ -204,9 +204,10 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
         searchController.searchBar.barTintColor = UIColor(red: 80 / 255, green: 170 / 255, blue: 170 / 255, alpha: 1.0)
         searchBarContainer.addSubview(searchController.searchBar)
         
-        searchController.hidesNavigationBarDuringPresentation = true
+        searchController.hidesNavigationBarDuringPresentation = false
         searchController.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
+        extendedLayoutIncludesOpaqueBars = true
         
         /* [Warning] Attempting to load the view of a view controller while it is deallocating is not allowed and may result in undefined behavior (<UISearchController: 0x10194f3e0>), Bug: UISearchController doesn't load its view until it's be deallocated. Reference: http://www.openradar.me/22250107
          */
@@ -236,6 +237,21 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
     override func setEditing(_ editing: Bool, animated: Bool) {
         super.setEditing(editing, animated: animated)
         tableView.setEditing(editing, animated: animated)
+    }
+    
+    func willPresentSearchController(_ searchController: UISearchController) {
+        if navigationItem.title != "Search Categories..." {
+           navigationItem.title = "Search Categories..."
+        }
+        if navigationController!.navigationBar.isHidden {
+            navigationController!.setNavigationBarHidden(false, animated: false)
+        }
+    }
+    
+    func willDismissSearchController(_ searchController: UISearchController) {
+        if navigationItem.title != "Categories" {
+            navigationItem.title = "Categories"
+        }
     }
 
     public func updateSearchResults(for searchController: UISearchController) {
@@ -302,27 +318,27 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
             }
         }
     }
-    /*
+    
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if velocity.y > 0 {
+        if velocity.y > 0.5 {
             UIView.animate(
                 withDuration: 0.8,
                 animations: {
                     self.navigationController?.setNavigationBarHidden(true, animated: true)
-                    self.searchBarContainer.frame.origin.y = 0
                 },
-                completion: nil)
+                completion: nil
+            )
         } else {            
             UIView.animate(
                 withDuration: 0.8,
                 animations: {
                     self.navigationController?.setNavigationBarHidden(false, animated: true)
-                    self.searchBarContainer.frame.origin.y = self.navigationController!.navigationBar.bounds.height
                 },
-                completion: nil)
+                completion: nil
+            )
         }
     }
-    */
+    
     // MARK: - Table view data source
 
     func numberOfSections(in tableView: UITableView) -> Int {

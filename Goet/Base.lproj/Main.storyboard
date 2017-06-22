@@ -45,7 +45,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.30473047494888306" green="0.66596442461013794" blue="0.66957086324691772" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="vX3-1C-15B" secondAttribute="trailing" id="284-82-Fec"/>
                             <constraint firstItem="vX3-1C-15B" firstAttribute="leading" secondItem="DVS-jU-4aM" secondAttribute="leading" id="57i-4d-V2V"/>
