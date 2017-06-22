@@ -51,14 +51,13 @@ class SavedViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         moc = appDelegate?.managedObjectContext
         
-        //navigationController!.navigationBar.isTranslucent = false
         // The navigation bar's shadowImage is set to a transparent image.  In
         // addition to providing a custom background image, this removes
         // the grey hairline at the bottom of the navigation bar.  The
         // ExtendedNavBarView will draw its own hairline.
-        //navigationController!.navigationBar.shadowImage = #imageLiteral(resourceName: "TransparentPixel")
+        navigationController!.navigationBar.shadowImage = #imageLiteral(resourceName: "TransparentPixel")
         // "Pixel" is a solid white 1x1 image.
-        //navigationController!.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "Pixel"), for: .default)
+        navigationController!.navigationBar.setBackgroundImage(#imageLiteral(resourceName: "Pixel"), for: .default)
         
         navigationItem.rightBarButtonItem = editButtonItem
         
@@ -82,6 +81,7 @@ class SavedViewController: UIViewController, UITableViewDataSource, UITableViewD
         //searchController.searchBar.sizeToFit()
         searchController.searchBar.placeholder = "Search names, categories..."
         searchController.searchBar.isTranslucent = false
+        searchController.searchBar.setBackgroundImage(#imageLiteral(resourceName: "Pixel"), for: .any, barMetrics: .default)
         searchController.searchBar.barTintColor = UIColor(red: 80 / 255, green: 170 / 255, blue: 170 / 255, alpha: 1.0)
         searchBarContainer.addSubview(searchController.searchBar)
         
