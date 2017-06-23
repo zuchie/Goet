@@ -170,7 +170,8 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
     fileprivate func startIndicator() {
         DispatchQueue.main.async {
             // Scroll to top, otherwise the activity indicator may be shown outside the top of the screen.
-            self.tableView.setContentOffset(CGPoint(x: 0, y: -self.tableView.contentInset.top), animated: true)
+            //self.tableView.setContentOffset(CGPoint(x: 0, y: -self.tableView.contentInset.top), animated: false)
+            self.tableView.setContentOffset(CGPoint.zero, animated: false)
             self.indicator.start()
         }
     }
