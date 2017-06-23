@@ -13,11 +13,12 @@ class SavedViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBarContainer: UIView!
+    @IBOutlet weak var count: UILabel!
 
     fileprivate var savedRestaurants = [SavedMO]()
     fileprivate var filteredRestaurants = [SavedMO]()
     
-    fileprivate var searchResultsVC: UITableViewController!
+    //fileprivate var searchResultsVC: UITableViewController!
     fileprivate var searchController: UISearchController!
     fileprivate let appDelegate = UIApplication.shared.delegate as? AppDelegate
     fileprivate var moc: NSManagedObjectContext!
@@ -67,13 +68,13 @@ class SavedViewController: UIViewController, UITableViewDataSource, UITableViewD
         tableView.register(nib, forCellReuseIdentifier: "savedCell")
         tableView.dataSource = self
         tableView.delegate = self
-        
+        /*
         searchResultsVC = UITableViewController(style: .grouped)
         searchResultsVC.tableView.register(nib, forCellReuseIdentifier: "savedCell")
         searchResultsVC.tableView.dataSource = self
         searchResultsVC.tableView.delegate = self
-        
-        searchController = UISearchController(searchResultsController: searchResultsVC)
+        */
+        searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.delegate = self
         
@@ -86,7 +87,7 @@ class SavedViewController: UIViewController, UITableViewDataSource, UITableViewD
         searchBarContainer.addSubview(searchController.searchBar)
         
         searchController.hidesNavigationBarDuringPresentation = true
-        searchController.dimsBackgroundDuringPresentation = true
+        searchController.dimsBackgroundDuringPresentation = false
         definesPresentationContext = true
         //extendedLayoutIncludesOpaqueBars = true
         
@@ -128,7 +129,7 @@ class SavedViewController: UIViewController, UITableViewDataSource, UITableViewD
         
         if let index = filteredRestaurants.index(of: obj) {
             filteredRestaurants.remove(at: index)
-            searchResultsVC.tableView.reloadData()
+            tableView.reloadData()
             print("Deleted from filtered")
         }
         
@@ -207,6 +208,35 @@ class SavedViewController: UIViewController, UITableViewDataSource, UITableViewD
         tableView.endUpdates()
     }
     
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if Swift.abs(velocity.y) > 0.8 {
+            let isHidden = scrollView.panGestureRecognizer.translation(in: view).y < 0 ? true : false
+            moveNavBar(hide: isHidden, animate: true)()
+        }
+    }
+    
+    private func moveNavBar(hide: Bool, animate: Bool) -> () -> Void {
+        guard let bar = navigationController?.navigationBar else {
+            fatalError("Couldn't get nav bar.")
+        }
+        func hideBar() {
+            if bar.isHidden { return }
+            UIView.animate(
+                withDuration: animate ? 0.3 : 0,
+                animations: { self.navigationController?.setNavigationBarHidden(true, animated: true) },
+                completion: nil
+            )
+        }
+        func showBar() {
+            if !bar.isHidden { return }
+            UIView.animate(
+                withDuration: animate ? 0.3 : 0,
+                animations: { self.navigationController?.setNavigationBarHidden(false, animated: true) },
+                completion: nil
+            )
+        }
+        return hide ? hideBar : showBar
+    }
     
     // MARK: - Table view data source
     
@@ -218,20 +248,23 @@ class SavedViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        if tableView == self.tableView {
+        if searchController.isActive && searchController.searchBar.text != "" {
+            count.text = ""
+            return 1
+        } else {
             let sectionCount = fetchedResultsController?.sections?.count ?? 0
             isTableEmpty = (sectionCount == 0) ? true : false
+            let total = fetchedResultsController?.fetchedObjects?.count ?? 0
+            count.text = String(describing: total) + " favorites"
             return sectionCount
-        } else {
-            return 1
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if tableView == self.tableView {
-            return fetchedResultsController?.sections?[section].numberOfObjects ?? 0
-        } else {
+        if searchController.isActive && searchController.searchBar.text != "" {
             return filteredRestaurants.count
+        } else {
+            return fetchedResultsController?.sections?[section].numberOfObjects ?? 0
         }
     }
     
@@ -239,13 +272,13 @@ class SavedViewController: UIViewController, UITableViewDataSource, UITableViewD
         let restaurant: SavedMO
         
         // Configure the cell...
-        if tableView == self.tableView {
+        if searchController.isActive && searchController.searchBar.text != "" {
+            restaurant = filteredRestaurants[indexPath.row]
+        } else {
             guard let object = fetchedResultsController?.object(at: indexPath) as? SavedMO else {
                 fatalError("Unexpected object in FetchedResultsController")
             }
             restaurant = object
-        } else {
-            restaurant = filteredRestaurants[indexPath.row]
         }
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "savedCell", for: indexPath) as! SavedTableViewCell
@@ -256,13 +289,13 @@ class SavedViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if tableView == self.tableView {
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return "Top Matches"
+        } else {
             guard let sectionInfo = fetchedResultsController?.sections?[section] else {
                 return nil
             }
             return sectionInfo.name
-        } else {
-            return "Top Matches"
         }
     }
     
@@ -302,11 +335,10 @@ class SavedViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     // Add row index.
     func sectionIndexTitles(for tableView: UITableView) -> [String]? {
-        if tableView == self.tableView {
-            return fetchedResultsController?.sectionIndexTitles
+        if searchController.isActive && searchController.searchBar.text != "" {
+            return nil
         }
-        
-        return nil
+        return fetchedResultsController?.sectionIndexTitles
     }
     
     func tableView(_ tableView: UITableView, sectionForSectionIndexTitle title: String, at index: Int) -> Int {
@@ -340,7 +372,12 @@ class SavedViewController: UIViewController, UITableViewDataSource, UITableViewD
                 return (name.lowercased().contains(inputText.lowercased()) || categories.lowercased().contains(inputText.lowercased()))
             }
         }
-        searchResultsVC.tableView.reloadData()
+        // Scroll table to top. Otherwise search results might be overlapped by search bar.
+        if tableView.contentOffset != CGPoint.zero {
+            tableView.setContentOffset(CGPoint.zero, animated: false)
+        }
+
+        tableView.reloadData()
     }
     
     // Notifications to remove/add bar button item.

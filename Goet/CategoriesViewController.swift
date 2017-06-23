@@ -363,27 +363,8 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
         }
         return hide ? hideBar : showBar
     }
-    /*
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if velocity.y > 0 {
-            UIView.animate(
-                withDuration: 0.8,
-                animations: {
-                    self.navigationController?.setNavigationBarHidden(true, animated: true)
-                },
-                completion: nil
-            )
-        } else {            
-            UIView.animate(
-                withDuration: 0.8,
-                animations: {
-                    self.navigationController?.setNavigationBarHidden(false, animated: true)
-                },
-                completion: nil
-            )
-        }
-    }
-    */
+
+    
     // MARK: - Table view data source
 
     func numberOfSections(in tableView: UITableView) -> Int {
