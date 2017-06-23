@@ -164,6 +164,8 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
     
     fileprivate var searchController: UISearchController!
     //private var searchResultsVC: UITableViewController!
+    
+    private let tintColor = UIColor(red: 80 / 255, green: 170 / 255, blue: 170 / 255, alpha: 1.0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -206,7 +208,12 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
         searchController.searchBar.placeholder = "Search categories..."
         searchController.searchBar.isTranslucent = false
         searchController.searchBar.setBackgroundImage(#imageLiteral(resourceName: "Pixel"), for: .any, barMetrics: .default)
-        searchController.searchBar.barTintColor = UIColor(red: 80 / 255, green: 170 / 255, blue: 170 / 255, alpha: 1.0)
+        searchController.searchBar.barTintColor = tintColor
+        let views = searchController.searchBar.subviews[0].subviews
+        for view in views {
+            if view is UITextField { view.tintColor = tintColor }
+        }
+        
         //searchController.searchBar.delegate = self
         searchBarContainer.addSubview(searchController.searchBar)
         

@@ -47,6 +47,8 @@ class SavedViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
     
+    private let tintColor = UIColor(red: 80 / 255, green: 170 / 255, blue: 170 / 255, alpha: 1.0)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -83,7 +85,12 @@ class SavedViewController: UIViewController, UITableViewDataSource, UITableViewD
         searchController.searchBar.placeholder = "Search names, categories..."
         searchController.searchBar.isTranslucent = false
         searchController.searchBar.setBackgroundImage(#imageLiteral(resourceName: "Pixel"), for: .any, barMetrics: .default)
-        searchController.searchBar.barTintColor = UIColor(red: 80 / 255, green: 170 / 255, blue: 170 / 255, alpha: 1.0)
+        searchController.searchBar.barTintColor = tintColor
+        let views = searchController.searchBar.subviews[0].subviews
+        for view in views {
+            if view is UITextField { view.tintColor = tintColor }
+        }
+
         searchBarContainer.addSubview(searchController.searchBar)
         
         searchController.hidesNavigationBarDuringPresentation = true
