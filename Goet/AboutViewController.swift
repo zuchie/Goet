@@ -43,7 +43,7 @@ class AboutViewController: UIViewController, MFMailComposeViewControllerDelegate
     @IBAction func sendFeedbackButtonTapped(_ sender: Any) {
         let emailComposeVC = configureEmailComposeVC()
         if MFMailComposeViewController.canSendMail() {
-            present(emailComposeVC, animated: true, completion: nil)
+            present(emailComposeVC, animated: false, completion: nil)
         }
     }
     
@@ -55,14 +55,14 @@ class AboutViewController: UIViewController, MFMailComposeViewControllerDelegate
         }
         
         emailComposeVC.setToRecipients(["zcui7@icloud.com"])
-        emailComposeVC.setSubject("Feedback to the Goet App.")
+        emailComposeVC.setSubject("Feedback to Goet.")
         emailComposeVC.setMessageBody("", isHTML: false)
         
         return emailComposeVC
     }
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true, completion: nil)
+        controller.dismiss(animated: false, completion: nil)
     }
 
     func getText(title: String, text: String) {

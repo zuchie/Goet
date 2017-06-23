@@ -342,9 +342,11 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if Swift.abs(velocity.y) > 0.8 {
-            let isHidden = scrollView.panGestureRecognizer.translation(in: view).y < 0 ? true : false
-            moveNavBar(hide: isHidden, animate: true)()
+        if !searchController.isActive {
+            if Swift.abs(velocity.y) > 0.8 {
+                let isHidden = scrollView.panGestureRecognizer.translation(in: view).y < 0 ? true : false
+                moveNavBar(hide: isHidden, animate: true)()
+            }
         }
     }
     

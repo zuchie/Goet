@@ -20,10 +20,10 @@ class MoreTableViewController: UITableViewController, MFMailComposeViewControlle
     }
     
     private let aboutTheApp = "The Goet App is built to let you easily find best restaurants around you.\n\n" +
-                            "With simply filtering the search Radius and Category, 5 top rated open restaurants will be ready for you to choose from.\n\n\n" +
-                            "All data of the restaurants are from Yelp API. Restaurants are given based on the calculation by Yelp server of rating, review count, and other factors.\n\n" +
-                            "All data of Maps and routes are from Google Maps SDK.\n\n\n" +
-                            "Please enjoy the app, and I'd love to hear your thoughts about how it works, what's missing, anything wrong, or how it could be improved."
+                            "With simply filtering the search Radius and Category, 5 top rated open restaurants will be ready for you to choose from.\n\n" +
+                            "The recommended restaurants are given by Yelp based on the calculation of rating, review count, and other factors.\n\n" +
+                            "The Maps and routes are from Google Maps.\n\n" +
+                            "Please enjoy the app, also I'd love to hear your thoughts about how it works, what's missing, anything wrong, or how it could be improved."
     
     private var items: [String: MoreItems]!
     private var dataSource = ["About the App", "Legal Notices", "Send Feedback"]
@@ -46,7 +46,7 @@ class MoreTableViewController: UITableViewController, MFMailComposeViewControlle
     private func sendFeedback() {
         let emailComposeVC = configureEmailComposeVC()
         if MFMailComposeViewController.canSendMail() {
-            present(emailComposeVC, animated: true, completion: nil)
+            present(emailComposeVC, animated: false, completion: nil)
         }
     }
 
@@ -58,14 +58,14 @@ class MoreTableViewController: UITableViewController, MFMailComposeViewControlle
         }
         
         emailComposeVC.setToRecipients(["zcui7@icloud.com"])
-        emailComposeVC.setSubject("About the Goet App.")
+        emailComposeVC.setSubject("Feedback to Goet.")
         emailComposeVC.setMessageBody("", isHTML: false)
         
         return emailComposeVC
     }
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        controller.dismiss(animated: true, completion: nil)
+        controller.dismiss(animated: false, completion: nil)
     }
     /*
      private func showSendEmailErrorAlert() {
