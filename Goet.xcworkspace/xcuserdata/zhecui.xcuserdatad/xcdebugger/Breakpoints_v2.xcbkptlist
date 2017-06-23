@@ -255,11 +255,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Goet/CategoriesViewController.swift"
-            timestampString = "519870216.350866"
+            timestampString = "519872004.737895"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "360"
-            endingLineNumber = "360"
+            startingLineNumber = "390"
+            endingLineNumber = "390"
             landmarkName = "numberOfSections(in:)"
             landmarkType = "7">
          </BreakpointContent>

@@ -335,6 +335,36 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if Swift.abs(velocity.y) > 0.8 {
+            let isHidden = scrollView.panGestureRecognizer.translation(in: view).y < 0 ? true : false
+            moveNavBar(hide: isHidden, animate: true)()
+        }
+    }
+    
+    private func moveNavBar(hide: Bool, animate: Bool) -> () -> Void {
+        guard let bar = navigationController?.navigationBar else {
+            fatalError("Couldn't get nav bar.")
+        }
+        func hideBar() {
+            if bar.isHidden { return }
+            UIView.animate(
+                withDuration: animate ? 0.3 : 0,
+                animations: { self.navigationController?.setNavigationBarHidden(true, animated: true) },
+                completion: nil
+            )
+        }
+        func showBar() {
+            if !bar.isHidden { return }
+            UIView.animate(
+                withDuration: animate ? 0.3 : 0,
+                animations: { self.navigationController?.setNavigationBarHidden(false, animated: true) },
+                completion: nil
+            )
+        }
+        return hide ? hideBar : showBar
+    }
+    /*
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         if velocity.y > 0 {
             UIView.animate(
                 withDuration: 0.8,
@@ -353,7 +383,7 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
             )
         }
     }
- 
+    */
     // MARK: - Table view data source
 
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -534,15 +564,15 @@ class CategoriesViewController: UIViewController, UITableViewDataSource, UITable
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        //navigationController!.hidesBarsOnSwipe = false
+        if navigationController!.navigationBar.isHidden {
+            //navigationController!.navigationBar.isHidden = false
+            navigationController!.setNavigationBarHidden(false, animated: false)
+        }
+        
         /**
          Force to pop CategoriesVC from navigation stack when using unwind segue, otherwise warning: popToViewController:transition: called on <UINavigationController 0x7fcef101b000> while an existing transition or presentation is occurring; the navigation stack will not be updated.
          */
         if searchController.isActive {
-            if navigationController!.navigationBar.isHidden {
-                //navigationController!.navigationBar.isHidden = false
-                navigationController!.setNavigationBarHidden(false, animated: false)
-            }
             navigationController?.popViewController(animated: false)
         }
     }
