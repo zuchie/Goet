@@ -16,8 +16,8 @@ class YelpQuery {
     //private var httpRequest: URLRequest!
     private let accessToken = "BYJYCVjjgIOuchrzOPICryariCWPw8OMD9aZqE1BsYTsah8NX1TQbv5O-kVbMWEmQUxFHegLlZPPR5Vi38fUH0MXV74MhDVhzTgSm6PM7e3IA-VE46HkB126lFmJWHYx"
     
-    var completion: ((_ results: [[String: Any]]) -> Void)?
-    var completionWithError: ((_ error: Error) -> Void)?
+    var completion: (([[String: Any]]) -> Void)?
+    var completionWithError: ((Error) -> Void)?
     enum UnknownError: Error {
         case unknown
         case dataSerialization

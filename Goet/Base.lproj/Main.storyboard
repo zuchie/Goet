@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="JGr-2B-Arw">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="JGr-2B-Arw">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -239,7 +239,7 @@
             <objects>
                 <navigationController title="About" id="bdw-3X-pHw" userLabel="AboutNavigationController" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="more" id="uoA-mm-tkF"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="ePr-8l-YOd">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="ePr-8l-YOd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.30473047494888306" green="0.66596442461013794" blue="0.66957086324691772" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -353,7 +353,7 @@
                         <viewControllerLayoutGuide type="top" id="uZD-eh-RRp"/>
                         <viewControllerLayoutGuide type="bottom" id="5wB-YO-lWH"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" misplaced="YES" id="sXo-S3-gah">
+                    <view key="view" contentMode="scaleToFill" id="sXo-S3-gah">
                         <rect key="frame" x="0.0" y="64" width="375" height="554"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -452,7 +452,7 @@
                 <navigationController title="SavedNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="pVw-sx-tf2" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="CvL-NJ-BRl"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="YiH-Zj-usg">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="YiH-Zj-usg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.30473047494888306" green="0.66596442461013794" blue="0.66957086324691772" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -494,7 +494,7 @@
                 <navigationController title="ExploreNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="fMY-P1-Xr7" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" systemItem="search" id="FZh-3l-B0e"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" translucent="NO" id="w0E-s0-UDt">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="w0E-s0-UDt">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.30473047494888306" green="0.66596442461013794" blue="0.66957086324691772" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

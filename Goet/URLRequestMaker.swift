@@ -11,7 +11,7 @@ import UIKit
 
 extension URLRequest {
     
-    public func makeRequest(completion: @escaping (_ error: Error?, _ data: Data?) -> Void) {
+    public func makeRequest(completion: @escaping (Error?, Data?) -> Void) {
         if let cachedResponse = URLCache.shared.cachedResponse(for: self) {
             print("Cached response.")
             print("Disk usage/capacity: \(URLCache.shared.currentDiskUsage)/\(URLCache.shared.diskCapacity), memory usage/capacity: \(URLCache.shared.currentMemoryUsage)/\(URLCache.shared.memoryCapacity)")

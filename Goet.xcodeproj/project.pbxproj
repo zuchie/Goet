@@ -36,7 +36,6 @@
 		B9BA660F1ED522C90081647B /* NavItemTitleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BA660D1ED522C90081647B /* NavItemTitleViewController.swift */; };
 		B9BA66101ED522C90081647B /* NavItemTitleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9BA660E1ED522C90081647B /* NavItemTitleViewController.xib */; };
 		B9BA66131EDD52890081647B /* RadiusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BA66121EDD52890081647B /* RadiusViewController.swift */; };
-		B9C1E3F41ED18A3C001B04CD /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9C1E3F31ED18A3C001B04CD /* Cache.swift */; };
 		B9D4457A1EBC660700219D91 /* URLRequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D445791EBC660700219D91 /* URLRequestMaker.swift */; };
 		B9F984E81E5A7F6700C6CA04 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F984E71E5A7F6700C6CA04 /* MainTableViewController.swift */; };
 /* End PBXBuildFile section */
@@ -95,9 +94,9 @@
 		B9BA660D1ED522C90081647B /* NavItemTitleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavItemTitleViewController.swift; sourceTree = "<group>"; };
 		B9BA660E1ED522C90081647B /* NavItemTitleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NavItemTitleViewController.xib; sourceTree = "<group>"; };
 		B9BA66121EDD52890081647B /* RadiusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadiusViewController.swift; sourceTree = "<group>"; };
-		B9C1E3F31ED18A3C001B04CD /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		B9D445791EBC660700219D91 /* URLRequestMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLRequestMaker.swift; sourceTree = "<group>"; };
 		B9F984E71E5A7F6700C6CA04 /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
+		B9FD59171F00D7CB00D955F0 /* Goet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Goet.entitlements; sourceTree = "<group>"; };
 		C251D9DAB2DB42D0428127A0 /* libPods-Goet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Goet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -197,6 +196,7 @@
 		B91AC8551D4EAC4600B0476E /* Goet */ = {
 			isa = PBXGroup;
 			children = (
+				B9FD59171F00D7CB00D955F0 /* Goet.entitlements */,
 				B9B1DF0C1EE7B3CE00B7EA04 /* More */,
 				B91C59F61EE7A9D300DEB42B /* About */,
 				B9646F4F1EE12B49000636B6 /* Categories */,
@@ -270,7 +270,6 @@
 			isa = PBXGroup;
 			children = (
 				B93D33391EAAD202007EAD5A /* AlertMaker.swift */,
-				B9C1E3F31ED18A3C001B04CD /* Cache.swift */,
 				B93D33341EA6CAAE007EAD5A /* LocationManager.swift */,
 				B9D445791EBC660700219D91 /* URLRequestMaker.swift */,
 				B9BA66071ED4F92B0081647B /* ActivityIndicator.swift */,
@@ -380,6 +379,11 @@
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = TYA2375JGG;
 						LastSwiftMigration = 0820;
+						SystemCapabilities = {
+							com.apple.iCloud = {
+								enabled = 0;
+							};
+						};
 					};
 					B93D33281EA6C84A007EAD5A = {
 						CreatedOnToolsVersion = 8.3;
@@ -514,7 +518,6 @@
 				B91AC8571D4EAC4600B0476E /* AppDelegate.swift in Sources */,
 				B906DBA31D727DCA0021B025 /* YelpQueryURLBuilder.swift in Sources */,
 				B906DBAA1D757CC00021B025 /* GoogleMapsViewController.swift in Sources */,
-				B9C1E3F41ED18A3C001B04CD /* Cache.swift in Sources */,
 				B937286B1E7D475900B911E5 /* SavedTableViewCell.swift in Sources */,
 				B9B1DF0E1EE7B3E500B7EA04 /* MoreTableViewController.swift in Sources */,
 				B906DBAC1D76BAF80021B025 /* GoogleMapsGetDirection.swift in Sources */,

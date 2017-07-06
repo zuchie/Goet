@@ -25,7 +25,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
     fileprivate var yelpQuery: YelpQuery!
     
     fileprivate var restaurants = [[String: Any]]()
-    fileprivate var imgCache = Cache<String, UIImage>()
+    fileprivate var imgCache = [String: UIImage]()
     
     struct DataSource {
         var imageUrl: String?
@@ -197,18 +197,28 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         }
     }
     
-    // Cache
-    fileprivate func loadImagesToCache(from dataSource: [DataSource], completion: @escaping (_ cache: Cache<String, UIImage>) -> Void) {
-        var cache = Cache<String, UIImage>()
+    enum ImageDownloadingError: Error {
+        case noDownloadingUrl
+        case invalidImageUrl
+    }
+    
+    // Download images from given urls.
+    // TODO: Unit test.
+    private func downloadImages(with imageUrls: [String], completionHandler: @escaping ([UIImage]?, ImageDownloadingError?) -> Void) {
+        if imageUrls.isEmpty {
+            completionHandler(nil, ImageDownloadingError.noDownloadingUrl)
+            return
+        }
         
-        if dataSource.count == 0 { completion(cache) }
+        var cache = [UIImage]()
+        let downloadImageGroup = DispatchGroup()
         
-        for member in dataSource {
-            guard let imgUrl = member.imageUrl,
-                let urlString = URL(string: imgUrl) else {
-                    fatalError("Unexpected url string while loading image: \(String(describing: member.imageUrl))")
+        for url in imageUrls {
+            guard let urlString = URL(string: url) else {
+                completionHandler(nil, ImageDownloadingError.invalidImageUrl)
+                return
             }
-            
+            downloadImageGroup.enter()
             URLSession.shared.dataTask(with: urlString) { data, response, error in
                 guard error == nil, let imageData = data else {
                     print("Error while getting image url response: \(String(describing: error?.localizedDescription))")
@@ -220,11 +230,14 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
                     return
                 }
                 
-                cache.add(key: imgUrl, value: image)
-                if cache.count == dataSource.count {
-                    completion(cache)
-                }
+                cache.append(image)
+                downloadImageGroup.leave()
+                
             }.resume()
+        }
+        
+        downloadImageGroup.notify(queue: DispatchQueue.main) {
+            completionHandler(cache, nil)
         }
 
     }
@@ -386,32 +399,60 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
                 }
                 self.present(alert, animated: false, completion: { self.stopRefreshOrIndicator(); return })
             }
+            
             yelpQuery.completion = { results in
                 print("Query completed")
-                self.restaurants = results
-                self.dataSource = self.processDataSource(from: self.restaurants)
-                self.loadImagesToCache(from: self.dataSource) { cache in
-                    self.imgCache = cache
-                    DispatchQueue.main.async {
-                        if self.dataSource.count == 0 {
-                            if self.noResultImgView.superview == nil {
-                                self.view.addSubview(self.noResultImgView)
-                            }
-                            if self.navigationItem.rightBarButtonItem != nil {
-                                self.navigationItem.rightBarButtonItem = nil
-                            }
-                            
-                        } else {
-                            if self.noResultImgView.superview != nil {
-                                self.noResultImgView.removeFromSuperview()
-                            }
-                            if self.navigationItem.rightBarButtonItem == nil {
-                                self.navigationItem.rightBarButtonItem = self.barButtonItem
+                if results.isEmpty {
+                    if self.noResultImgView.superview == nil {
+                        DispatchQueue.main.async {
+                            self.view.addSubview(self.noResultImgView)
+                        }
+                    }
+                    if self.navigationItem.rightBarButtonItem != nil {
+                        DispatchQueue.main.async {
+                            self.navigationItem.rightBarButtonItem = nil
+                        }
+                    }
+                } else {
+                    self.restaurants = results
+                    self.dataSource = self.processDataSource(from: self.restaurants)
+                    var imageUrls = [String]()
+                    for member in self.dataSource {
+                        guard let url = member.imageUrl else {
+                            return
+                        }
+                        imageUrls.append(url)
+                    }
+                    self.downloadImages(with: imageUrls) { images, error in
+                        if let err = error {
+                            switch err {
+                            case ImageDownloadingError.noDownloadingUrl:
+                                print("No downloading image url.")
+                                return
+                            case ImageDownloadingError.invalidImageUrl:
+                                print("Invalid Image url.")
+                                return
                             }
                         }
+                        
+                        guard let imgs = images else {
+                            print("No imgages got.")
+                            return
+                        }
+                        
+                        for (idx, url) in imageUrls.enumerated() {
+                            self.imgCache.updateValue(imgs[idx], forKey: url)
+                        }
+                        
+                        if self.noResultImgView.superview != nil {
+                            self.noResultImgView.removeFromSuperview()
+                        }
+                        if self.navigationItem.rightBarButtonItem == nil {
+                            self.navigationItem.rightBarButtonItem = self.barButtonItem
+                        }
                         self.tableView.reloadData()
+                        self.stopRefreshOrIndicator()
                     }
-                    self.stopRefreshOrIndicator()
                 }
             }
 
@@ -495,7 +536,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         let data = dataSource[indexPath.row]
         cell.imageUrl = data.imageUrl
         var image: UIImage?
-        if let value = imgCache.get(by: cell.imageUrl) {
+        if let value = imgCache[cell.imageUrl] {
             image = value
         }
         DispatchQueue.main.async {
