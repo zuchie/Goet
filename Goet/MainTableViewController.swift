@@ -17,6 +17,8 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
     var titleVC = NavItemTitleViewController()
     var category: String?
     
+    let countLimit = 5
+    
     let appDelegate = UIApplication.shared.delegate as? AppDelegate
     var moc: NSManagedObjectContext!
 
@@ -37,7 +39,6 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         var yelpUrl: String?
         var location: CLLocationCoordinate2D?
         var address: String?
-        
     }
     
     var dataSource = [DataSource]()
@@ -62,7 +63,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         var location = CLLocation() {
             didSet { locationChanged = (location != oldValue) }
         }
-        var radius = 1600 {
+        var radius = 1609 {
             didSet { radiusChanged = (radius != oldValue) }
         }
     }
@@ -74,7 +75,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
     private var barButtonItem: UIBarButtonItem?
     private var everQueried = false
     
-    private let metersToMiles: [Int: String] = [800: "0.5", 1600: "1", 8000: "5", 16000: "10", 32000: "20"]
+    private let metersToMiles: [Int: String] = [805: "0.5", 1609: "1", 8045: "5", 16090: "10", 32180: "20"]
 
     // Methods
     override func viewDidLoad() {
@@ -370,7 +371,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
                 longitude: queryParams.location.coordinate.longitude,
                 category: queryParams.category.id == "" ? queryParams.category.name.lowercased() : queryParams.category.id,
                 radius: queryParams.radius,
-                limit: 5,
+                limit: countLimit,
                 openAt: Int(queryParams.date.timeIntervalSince1970),
                 sortBy: "rating"
             )
@@ -414,44 +415,61 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
                         }
                     }
                 } else {
+                    //print("results: \(results)")
                     self.restaurants = results
-                    self.dataSource = self.processDataSource(from: self.restaurants)
-                    var imageUrls = [String]()
-                    for member in self.dataSource {
-                        guard let url = member.imageUrl else {
-                            return
-                        }
-                        imageUrls.append(url)
-                    }
-                    self.downloadImages(with: imageUrls) { images, error in
-                        if let err = error {
-                            switch err {
-                            case ImageDownloadingError.noDownloadingUrl:
-                                print("No downloading image url.")
-                                return
-                            case ImageDownloadingError.invalidImageUrl:
-                                print("Invalid Image url.")
-                                return
+                    self.processDataSource(from: self.restaurants) { dataSource in
+                        self.dataSource = dataSource
+                        
+                        if self.dataSource.isEmpty {
+                            if self.noResultImgView.superview == nil {
+                                DispatchQueue.main.async {
+                                    self.view.addSubview(self.noResultImgView)
+                                }
+                            }
+                            if self.navigationItem.rightBarButtonItem != nil {
+                                DispatchQueue.main.async {
+                                    self.navigationItem.rightBarButtonItem = nil
+                                }
+                            }
+                        } else {
+                            var imageUrls = [String]()
+                            for member in self.dataSource {
+                                guard let url = member.imageUrl else {
+                                    return
+                                }
+                                imageUrls.append(url)
+                            }
+                            self.downloadImages(with: imageUrls) { images, error in
+                                if let err = error {
+                                    switch err {
+                                    case ImageDownloadingError.noDownloadingUrl:
+                                        print("No downloading image url.")
+                                        return
+                                    case ImageDownloadingError.invalidImageUrl:
+                                        print("Invalid Image url.")
+                                        return
+                                    }
+                                }
+                                
+                                guard let imgs = images else {
+                                    print("No imgages got.")
+                                    return
+                                }
+                                
+                                for (idx, url) in imageUrls.enumerated() {
+                                    self.imgCache.updateValue(imgs[idx], forKey: url)
+                                }
+                                
+                                if self.noResultImgView.superview != nil {
+                                    self.noResultImgView.removeFromSuperview()
+                                }
+                                if self.navigationItem.rightBarButtonItem == nil {
+                                    self.navigationItem.rightBarButtonItem = self.barButtonItem
+                                }
+                                self.tableView.reloadData()
+                                self.stopRefreshOrIndicator()
                             }
                         }
-                        
-                        guard let imgs = images else {
-                            print("No imgages got.")
-                            return
-                        }
-                        
-                        for (idx, url) in imageUrls.enumerated() {
-                            self.imgCache.updateValue(imgs[idx], forKey: url)
-                        }
-                        
-                        if self.noResultImgView.superview != nil {
-                            self.noResultImgView.removeFromSuperview()
-                        }
-                        if self.navigationItem.rightBarButtonItem == nil {
-                            self.navigationItem.rightBarButtonItem = self.barButtonItem
-                        }
-                        self.tableView.reloadData()
-                        self.stopRefreshOrIndicator()
                     }
                 }
             }
@@ -474,7 +492,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
             return dict[key]
         case "coordinates":
             guard let coordinate = dict[key] as? [String: Double] else {
-                fatalError("Couldn't get coordinate.")
+                fatalError("Couldn't get coordinate from \(dict[key]!)")
             }
             guard let lat = coordinate["latitude"],
                 let long = coordinate["longitude"] else {
@@ -502,8 +520,28 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         }
     }
     
-    fileprivate func processDataSource(from data: [[String: Any]]) -> [DataSource] {
+    private func getDistance(_ origin: CLLocationCoordinate2D, _ dest: CLLocationCoordinate2D, _ time: Int, completion: @escaping (Double) -> Void) {
+        let getDistance = GoogleMapsGetDirection()
+        var distance = 0.0
+        
+        getDistance.makeGoogleDirectionsUrl(
+            "https://maps.googleapis.com/maps/api/directions/json?",
+            origin: origin,
+            dest: dest,
+            depart: time,
+            key: "AIzaSyA-vPWnAEHdO3V4TwUbedRuJO1mDEgIjr0"
+        )
+        
+        getDistance.makeUrlRequest() { _, distances, _, _ in
+            distance = Double(distances.first!.components(separatedBy: " ").first!) ?? -1
+            completion(distance)
+        }
+    }
+
+    fileprivate func processDataSource(from data: [[String: Any]], completionHandler: @escaping ([DataSource]) -> Void) {
         var processedData = [DataSource]()
+        let getDistanceGroup = DispatchGroup()
+        
         for member in data {
             let data = DataSource(
                 imageUrl: process(dict: member, key: "image_url") as? String,
@@ -516,9 +554,19 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
                 location: process(dict: member, key: "coordinates") as? CLLocationCoordinate2D,
                 address: process(dict: member, key: "location") as? String
             )
-            processedData.append(data)
+            getDistanceGroup.enter()
+            getDistance(queryParams.location.coordinate, data.location!, Int(queryParams.date.timeIntervalSince1970)) { distance in
+                print("**distance: \(distance)")
+                if distance < Double(self.queryParams.radius) / 1609.34 {
+                    processedData.append(data)
+                }
+                getDistanceGroup.leave()
+            }
         }
-        return processedData
+        
+        getDistanceGroup.notify(queue: DispatchQueue.main) {
+            completionHandler(processedData)
+        }
     }
     
     fileprivate func getRatingStar(from rating: Float) -> UIImage {
@@ -539,9 +587,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         if let value = imgCache[cell.imageUrl] {
             image = value
         }
-        DispatchQueue.main.async {
-            cell.mainImage.image = image
-        }
+        cell.mainImage.image = image
         cell.name.text = data.name
         cell.category.text = data.category
         cell.rating = data.rating

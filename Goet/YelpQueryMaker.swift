@@ -46,6 +46,7 @@ class YelpQuery {
         guard let urlObj = URL(string: url) else {
             fatalError("Couldn't make an URL object from url string: \(url).")
         }
+        print("request url: \(urlObj)")
         var request = URLRequest(url: urlObj)
         request.httpMethod = "GET"
         request.addValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")

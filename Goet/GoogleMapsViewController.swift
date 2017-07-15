@@ -48,7 +48,8 @@ class GoogleMapsViewController: UIViewController {
 
     func setDepartureTime(_ time: Int) {
         // Convert back from local time to UTC for Google Maps API departure_time use.
-        self.departureTime = time - NSTimeZone.local.secondsFromGMT()
+        //self.departureTime = time - NSTimeZone.local.secondsFromGMT()
+        self.departureTime = time
     }
     
     override func viewDidLoad() {

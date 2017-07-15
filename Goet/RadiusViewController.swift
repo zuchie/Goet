@@ -10,8 +10,8 @@ import UIKit
 
 class RadiusViewController: UIViewController {
     
-    private(set) var radius: Int? = 1600
-    private let radiusImgDict = [800: "Radius0", 1600: "Radius1", 8000: "Radius2", 16000: "Radius3", 32000: "Radius4"]
+    private(set) var radius: Int? = 1609
+    private let radiusImgDict = [805: "Radius0", 1609: "Radius1", 8045: "Radius2", 16090: "Radius3", 32180: "Radius4"]
     @IBOutlet weak var radiuses: UIImageView!
     @IBOutlet weak var okButton: UIButton!
     @IBOutlet weak var radiusesWidth: NSLayoutConstraint!
@@ -55,15 +55,15 @@ class RadiusViewController: UIViewController {
         let minRadius = (radiuses.frame.width / 2) / radiusesWidthToHalfMiRadiusRatio
         switch distance {
         case 0..<minRadius:
-            return 800
+            return 805
         case minRadius..<minRadius * 2:
-            return 1600
+            return 1609
         case minRadius * 2..<minRadius * 3:
-            return 8000
+            return 8045
         case minRadius * 3..<minRadius * 4:
-            return 16000
+            return 16090
         case minRadius * 4..<minRadius * 5:
-            return 32000
+            return 32180
         default:
             return nil
         }
