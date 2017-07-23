@@ -37,6 +37,7 @@
 		B9BA66101ED522C90081647B /* NavItemTitleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B9BA660E1ED522C90081647B /* NavItemTitleViewController.xib */; };
 		B9BA66131EDD52890081647B /* RadiusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9BA66121EDD52890081647B /* RadiusViewController.swift */; };
 		B9D4457A1EBC660700219D91 /* URLRequestMaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D445791EBC660700219D91 /* URLRequestMaker.swift */; };
+		B9D4DBAD1F2487D900E6A27F /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9D4DBAC1F2487D900E6A27F /* DetailsViewController.swift */; };
 		B9F984E81E5A7F6700C6CA04 /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B9F984E71E5A7F6700C6CA04 /* MainTableViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +96,7 @@
 		B9BA660E1ED522C90081647B /* NavItemTitleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NavItemTitleViewController.xib; sourceTree = "<group>"; };
 		B9BA66121EDD52890081647B /* RadiusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RadiusViewController.swift; sourceTree = "<group>"; };
 		B9D445791EBC660700219D91 /* URLRequestMaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLRequestMaker.swift; sourceTree = "<group>"; };
+		B9D4DBAC1F2487D900E6A27F /* DetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		B9F984E71E5A7F6700C6CA04 /* MainTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
 		B9FD59171F00D7CB00D955F0 /* Goet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Goet.entitlements; sourceTree = "<group>"; };
 		C251D9DAB2DB42D0428127A0 /* libPods-Goet.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Goet.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -196,6 +198,7 @@
 		B91AC8551D4EAC4600B0476E /* Goet */ = {
 			isa = PBXGroup;
 			children = (
+				B9D4DBAB1F2487A600E6A27F /* Details */,
 				B9FD59171F00D7CB00D955F0 /* Goet.entitlements */,
 				B9B1DF0C1EE7B3CE00B7EA04 /* More */,
 				B91C59F61EE7A9D300DEB42B /* About */,
@@ -277,6 +280,14 @@
 				B93CF0A01EFB5F8800F96F1B /* ExtendedNavBarView.swift */,
 			);
 			name = Helper;
+			sourceTree = "<group>";
+		};
+		B9D4DBAB1F2487A600E6A27F /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				B9D4DBAC1F2487D900E6A27F /* DetailsViewController.swift */,
+			);
+			name = Details;
 			sourceTree = "<group>";
 		};
 		B9F984EA1E5A8A9900C6CA04 /* Main */ = {
@@ -508,6 +519,7 @@
 				B9BA660F1ED522C90081647B /* NavItemTitleViewController.swift in Sources */,
 				B9BA66131EDD52890081647B /* RadiusViewController.swift in Sources */,
 				B9D4457A1EBC660700219D91 /* URLRequestMaker.swift in Sources */,
+				B9D4DBAD1F2487D900E6A27F /* DetailsViewController.swift in Sources */,
 				B91C59F81EE7A9F400DEB42B /* AboutViewController.swift in Sources */,
 				B9BA66081ED4F92B0081647B /* ActivityIndicator.swift in Sources */,
 				B9646F511EE12B80000636B6 /* CategoriesViewController.swift in Sources */,

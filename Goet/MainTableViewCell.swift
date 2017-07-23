@@ -33,12 +33,10 @@ class MainTableViewCell: UITableViewCell {
     var address: String!
     var rating: Float!
     var imageUrl: String!
+    var id: String!
     
     var delegate: MainTableViewCellDelegate?
-    
-    //fileprivate let emptyStar = UIImage(named: "EmptyStar")
-    //fileprivate let filledStar = UIImage(named: "FilledStar")
-    
+        
     override func prepareForReuse() {
         super.prepareForReuse()
         self.delegate = nil

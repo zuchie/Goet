@@ -39,6 +39,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         var yelpUrl: String?
         var location: CLLocationCoordinate2D?
         var address: String?
+        var id: String?
     }
     
     var dataSource = [DataSource]()
@@ -488,7 +489,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
     
     fileprivate func process(dict: [String: Any], key: String) -> Any? {
         switch key {
-        case "image_url", "name", "price", "url", "rating":
+        case "image_url", "name", "price", "url", "rating", "id":
             return dict[key]
         case "coordinates":
             guard let coordinate = dict[key] as? [String: Double] else {
@@ -552,7 +553,8 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
                 price: process(dict: member, key: "price") as? String,
                 yelpUrl: process(dict: member, key: "url") as? String,
                 location: process(dict: member, key: "coordinates") as? CLLocationCoordinate2D,
-                address: process(dict: member, key: "location") as? String
+                address: process(dict: member, key: "location") as? String,
+                id: process(dict: member, key: "id") as? String
             )
             getDistanceGroup.enter()
             getDistance(queryParams.location.coordinate, data.location!, Int(queryParams.date.timeIntervalSince1970)) { distance in
@@ -598,6 +600,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         cell.latitude = data.location?.latitude
         cell.longitude = data.location?.longitude
         cell.address = data.address
+        cell.id = data.id
         cell.likeButton.isSelected = objectSaved(url: cell.yelpUrl)
         cell.delegate = self
 
@@ -624,6 +627,10 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
         return dataSource.count == 0 ? 0 : 380.0
     }
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "segueToDetails", sender: tableView.cellForRow(at: indexPath))
+    }
+    
     // MARK: - Navigation
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if (identifier == "segueToMap" || identifier == "segueToRoute"), ((sender is MainTableViewCell) || (sender is UIBarButtonItem)) {
@@ -636,7 +643,7 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
     @IBAction func handleMapTap(_ sender: UIBarButtonItem) {
         performSegue(withIdentifier: "segueToMap", sender: sender)
     }
-
+    
     // Segue to Map view controller
     func showMap(cell: MainTableViewCell) {
         performSegue(withIdentifier: "segueToRoute", sender: cell)
@@ -700,6 +707,18 @@ class MainTableViewController: UITableViewController, MainTableViewCellDelegate 
                 fatalError("Couldn't show Radius VC.")
             }
             vc.getRadius(radius: queryParams.radius)
+        }
+        
+        if segue.identifier == "segueToDetails", sender is MainTableViewCell {
+            guard let vc = segue.destination as? DetailsViewController else {
+                print("Could show Details VC.")
+                return
+            }
+            guard let cell = sender as? MainTableViewCell else {
+                print("Couldn't get cell from sender")
+                return
+            }
+            vc.getID(cell.id)
         }
     }
     
