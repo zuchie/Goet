@@ -1,4 +1,9 @@
 source 'https://github.com/CocoaPods/Specs.git'
-target ‘Goet’ do
+
+platform :ios, '10.0'
+
+target 'Goet' do
+    
   pod 'GoogleMaps'
+  
 end

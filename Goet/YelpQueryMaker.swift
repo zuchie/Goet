@@ -14,7 +14,7 @@ class YelpQuery {
     // Properties.
     private var url: String
     //private var httpRequest: URLRequest!
-    private let accessToken = "BYJYCVjjgIOuchrzOPICryariCWPw8OMD9aZqE1BsYTsah8NX1TQbv5O-kVbMWEmQUxFHegLlZPPR5Vi38fUH0MXV74MhDVhzTgSm6PM7e3IA-VE46HkB126lFmJWHYx"
+    private let accessToken = "HDVTeZl9wQLIQ2Thf2MW9vEIyxtiIrKtVi_Ka4v0iZWsbUqpCjgVRjnUmg6FkEGNRmAKRgOrjDwszdSJYcp1qGw4dvWiYd7UVgUlGbK88qGbaavVxRIOSFpK-VF6WXYx"
     
     var completion: ((_ results: [[String: Any]]) -> Void)?
     var completionWithError: ((_ error: Error) -> Void)?
